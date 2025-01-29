@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünler - Mağaza Adı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html">Favorilerim</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="products-container">
+        <aside class="filters">
+            <div class="filter-group">
+                <h3>Kategoriler</h3>
+                <div class="filter-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="banyo">
+                        <span class="checkmark"></span>
+                        Banyo Bataryaları
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="mutfak">
+                        <span class="checkmark"></span>
+                        Mutfak Bataryaları
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="dus">
+                        <span class="checkmark"></span>
+                        Duş Sistemleri
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Fiyat Aralığı</h3>
+                <div class="price-filter">
+                    <input type="text" placeholder="Min" class="price-input">
+                    <span>-</span>
+                    <input type="text" placeholder="Max" class="price-input">
+                    <button class="filter-btn">Uygula</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Sıralama</h3>
+                <select class="sort-select">
+                    <option value="popular">En Popüler</option>
+                    <option value="price-low">En Düşük Fiyat</option>
+                    <option value="price-high">En Yüksek Fiyat</option>
+                    <option value="new">En Yeniler</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/product1.jpg" alt="Eca Niobe Eviye Bataryası">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Eca Niobe Eviye Bataryası</h3>
+                    <p class="product-description">Modern tasarım, yüksek kalite</p>
+                    <div class="product-price">499.99 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="1" 
+                            data-name="Eca Niobe Eviye Bataryası" 
+                            data-price="499.99" 
+                            data-image="images/product1.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+            <!-- Additional product cards with same structure -->
+        </main>
+    </div>
+
+    <div class="pagination">
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">...</button>
+        <button class="pagination-btn">10</button>
+    </div>
+
+    <div id="footer"></div>
+    <script src="scripts.js"></script>
+</body>
+</html>
