@@ -42,8 +42,8 @@ h1 {
 }
 
 .profile-img {
-    width: 180px;
-    height: 180px;
+    width: 500px; /* Fotoğrafı 500px x 500px olarak ayarladık */
+    height: 500px;
     border-radius: 50%;
     border: 5px solid #4CAF50;
     margin-bottom: 20px;
@@ -79,7 +79,7 @@ footer p {
     }
 
     .profile-img {
-        width: 150px;
-        height: 150px;
+        width: 300px;  /* Mobilde fotoğraf boyutunu biraz küçültüyoruz */
+        height: 300px;
     }
 }
