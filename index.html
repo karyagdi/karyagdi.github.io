@@ -3,142 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mağaza Adı - Ana Sayfa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Benim Kişisel Web Sayfam</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header buraya yüklenecek -->
-    <div id="header"></div>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="kategoriler.html">Kategoriler</a></li>
-            <li><a href="urunler.html">Ürünler</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
-            <li><a href="favoriler.html">Favorilerim</a></li>
-            <!-- Tema Değiştirme Düğmesi -->
-            <li class="theme-switch-wrapper">
-                <label class="theme-switch" for="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
-                    <div class="theme-slider">
-                        <div class="slider-circle">
-                            <span class="theme-slider-icon sun">☀️</span>
-                            <span class="theme-slider-icon moon">🌙</span>
-                        </div>
-                    </div>
-                </label>
-            </li>
-        </ul>
-    </nav>
-
-    <section class="banner">
-        <div class="banner-content">
-            <h2>Yeni Sezon Ürünleri</h2>
-            <p>En yeni ürünlerimizle tarzınızı yansıtın. Özel indirimleri kaçırmayın!</p>
-            <a href="kategoriler.html" class="btn">Keşfet</a>
-        </div>
-    </section>
-
-    <section class="featured-products">
-        <h2>Öne Çıkan Ürünler</h2>
-        <div class="product-grid">
-            <!-- Ürün 1 -->
-            <div class="product">
-                <a href="product1.html">
-                    <img src="images/product1.jpg" alt="Eca Niobe Eviye Bataryası">
-                </a>
-                <h3><a href="product1.html">Eca Niobe Eviye Bataryası</a></h3>
-                <p>Eca Niobe Eviye Bataryası, şık tasarımı ve yüksek performansıyla mutfaklarınıza değer katıyor.</p>
-                <div class="product-footer">
-                    <div class="price-container">
-                        <span class="price">499.99 TL</span>
-                    </div>
-                    <div class="button-container">
-                        <button class="add-to-cart-btn" data-id="1" data-name="Eca Niobe Eviye Bataryası" data-price="499.99" data-image="images/product1.jpg">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ürün 2 -->
-            <div class="product">
-                <a href="product2.html">
-                    <img src="images/product2.jpg" alt="Eca Spylos Spiralli Eviye Bataryası">
-                </a>
-                <h3><a href="product2.html">Eca Spylos Spiralli Eviye Bataryası</a></h3>
-                <p>Eca Spylos Spiralli Eviye Bataryası, mutfaklarınıza modern bir dokunuş katıyor.</p>
-                <div class="product-footer">
-                    <div class="price-container">
-                        <span class="price">799.99 TL</span>
-                    </div>
-                    <div class="button-container">
-                        <button class="add-to-cart-btn" data-id="2" data-name="Eca Spylos Spiralli Eviye Bataryası" data-price="799.99" data-image="images/product2.jpg">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ürün 3 -->
-            <div class="product">
-                <a href="product3.html">
-                    <img src="images/product3.jpg" alt="Eca Ar Liona Spiralli Eviye Bataryası">
-                </a>
-                <h3><a href="product3.html">Eca Ar Liona Spiralli Eviye Bataryası</a></h3>
-                <p>Eca Ar Liona Spiralli Eviye Bataryası, zarif tasarımı ve pratik kullanımı bir araya getiriyor.</p>
-                <div class="product-footer">
-                    <div class="price-container">
-                        <span class="price">649.99 TL</span>
-                    </div>
-                    <div class="button-container">
-                        <button class="add-to-cart-btn" data-id="3" data-name="Eca Ar Liona Spiralli Eviye Bataryası" data-price="649.99" data-image="images/product3.jpg">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ürün 4 -->
-            <div class="product">
-                <a href="product4.html">
-                    <img src="images/product4.jpg" alt="Eca Tiera Eviye Bataryası">
-                </a>
-                <h3><a href="product4.html">Eca Tiera Eviye Bataryası</a></h3>
-                <p>Eca Tiera Eviye Bataryası, şık ve minimalist tasarımıyla mutfaklarınıza modern bir dokunuş katıyor.</p>
-                <div class="product-footer">
-                    <div class="price-container">
-                        <span class="price">549.99 TL</span>
-                    </div>
-                    <div class="button-container">
-                        <button class="add-to-cart-btn" data-id="4" data-name="Eca Tiera Eviye Bataryası" data-price="549.99" data-image="images/product4.jpg">Sepete Ekle</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="categories">
-        <h2>Kategoriler</h2>
-        <div class="category-grid">
-            <div class="category">
-                <img src="images/category1.jpg" alt="Kategori 1">
-                <h3>Kategori 1</h3>
-                <a href="kategoriler.html" class="btn">Görüntüle</a>
-            </div>
-            <div class="category">
-                <img src="images/category2.jpg" alt="Kategori 2">
-                <h3>Kategori 2</h3>
-                <a href="kategoriler.html" class="btn">Görüntüle</a>
-            </div>
-            <div class="category">
-                <img src="images/category3.jpg" alt="Kategori 3">
-                <h3>Kategori 3</h3>
-                <a href="kategoriler.html" class="btn">Görüntüle</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer buraya yüklenecek -->
-    <div id="footer"></div>
-
-    <script src="scripts.js"></script>
+    <div class="container">
+        <header>
+            <h1>Merhaba, Benim Adım [Adınız]</h1>
+        </header>
+        
+        <section class="bio">
+            <img src="fotoğraf.jpg" alt="Benim Fotoğrafım" class="profile-img">
+            <p>Benim hakkımda kısa bir açıklama. Burada kendinizle ilgili bilgiler verebilirsiniz.</p>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 [Adınız]. Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
 </body>
 </html>
