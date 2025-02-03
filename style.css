@@ -42,7 +42,7 @@ h1 {
 }
 
 .profile-img {
-    width: 500px; /* Fotoğrafı 500px x 500px olarak ayarladık */
+    width: 500px;
     height: 500px;
     border-radius: 50%;
     border: 5px solid #4CAF50;
@@ -63,10 +63,35 @@ footer {
     color: white;
     padding: 15px;
     border-radius: 0 0 10px 10px;
+    margin-top: 40px;
 }
 
 footer p {
     font-size: 0.9em;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-icon {
+    font-size: 2em;
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+.instagram:hover {
+    color: #E1306C; /* Instagram kırmızı-pembe rengi */
+}
+
+.facebook:hover {
+    color: #1877F2; /* Facebook mavi rengi */
 }
 
 @media (max-width: 768px) {
@@ -79,7 +104,7 @@ footer p {
     }
 
     .profile-img {
-        width: 300px;  /* Mobilde fotoğraf boyutunu biraz küçültüyoruz */
+        width: 300px;
         height: 300px;
     }
 }
