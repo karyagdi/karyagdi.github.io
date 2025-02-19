@@ -1,4 +1,3 @@
-contact.html -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -9,26 +8,22 @@ contact.html -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-            padding: 0 2rem;
-        }
-        
-        .map-controls {
+         .map-container {
+        position: relative;
+        height: 400px;
+        margin-top: 220px; /* Header + top-bar yüksekliği için yeterli margin */
+        margin-bottom: 40px;
+        border-radius: 10px;
+        overflow: visible;
+    }
+    
+    .map-controls {
         position: absolute;
         top: 10px;
         right: 10px;
-        z-index: 999; /* Reduced from 1000 to stay below header */
-        }
+        z-index: 900; /* Header'ın altında kalması için düşük z-index */
+    }
 
-        .leaflet-top,
-        .leaflet-bottom {
-        z-index: 998 !important; /* Force Leaflet controls below header */
-        }
-       
         .map-switch-btn {
             background: white;
             border: 2px solid rgba(0,0,0,0.2);
@@ -40,37 +35,55 @@ contact.html -->
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
         }
         
         .map-switch-btn:hover {
             background: #f4f4f4;
+            transform: translateY(-1px);
         }
         
         .map-switch-btn i {
             font-size: 16px;
             color: #555;
         }
-        
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        #map {
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-        .map-container {
-            position: relative;
-            height: 400px;
-            margin-bottom: 40px;
+        @media (max-width: 768px) {
+            .map-container {
+                height: 300px;
+                margin-top: 180px;
+            }
+            
+            .map-controls {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .map-switch-btn {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="contact-info">
-                <a href="tel:+905426182663">
+                <a href="tel:03121234567">
                     <i class="fas fa-phone"></i>
-                    +90 542 618 26 63
+                    0 (312) 123 45 67
+                </a>
+                <a href="mailto:info@sutciftligi.com">
+                    <i class="fas fa-envelope"></i>
+                    info@sutciftligi.com
                 </a>
                 <a href="https://maps.google.com/?q=Afyon+Bolvadin" target="_blank">
                     <i class="fas fa-map-marker-alt"></i>
@@ -84,40 +97,59 @@ contact.html -->
                 <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
+                <a href="https://www.youtube.com/yourchannel" target="_blank">
                     <i class="fab fa-youtube"></i>
                 </a>
             </div>
         </div>
     </div>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo.png" alt="Şirket Logosu" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li><a href="index.html#products">Ürünlerimiz</a></li>
-                <li><a href="index.html#about">Hakkımızda</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Header -->
+    
+        <header>
+            <div class="logo-container">
+                <img src="logo.png" alt="Şirket Logosu" class="logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li class="dropdown">
+                        <a href="#products">
+                            Faaliyet Alanlarımız
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li><a href="otel.html">Onur Otel</a></li>
+                                <li><a href="insaat.html">Onur İnşaat</a></li>
+                                <li><a href="usak-seramik.html">Uşak Seramik</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="about.html">Hakkımızda</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">İletişim</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
     
     <main>
-        <section id="contact">
-            <div class="map-container">
-                <div id="map"></div>
-                <div class="map-controls">
-                    <button onclick="switchToSatellite()" class="map-switch-btn">
-                        <i class="fas fa-satellite"></i> Uydu Görüntüsü
-                    </button>
-                    <button onclick="switchToMap()" class="map-switch-btn">
-                        <i class="fas fa-map"></i> Normal Harita
-                    </button>
-                </div>
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="map-controls">
+                <button onclick="switchToSatellite()" class="map-switch-btn">
+                    <i class="fas fa-satellite"></i> Uydu Görüntüsü
+                </button>
+                <button onclick="switchToMap()" class="map-switch-btn">
+                    <i class="fas fa-map"></i> Normal Harita
+                </button>
             </div>
+        </div>
+        
+        <section id="contact">
             <div class="contact-grid">
                 <div class="contact-info-container">
                     <h2>Bize Ulaşın</h2>
@@ -127,98 +159,109 @@ contact.html -->
                         <p><i class="fas fa-phone"></i> Telefon: 0 (312) 123 45 67</p>
                         <p><i class="fas fa-map-marker-alt"></i> Adres: Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin</p>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=38.734306,31.033806" 
-   target="_blank" 
-   class="directions-button">
-    <i class="fas fa-directions"></i> Yol Tarifi Al
-</a>
+                           target="_blank" 
+                           class="directions-button">
+                            <i class="fas fa-directions"></i> Yol Tarifi Al
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
     
+    <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>Süt Çiftliği</h3>
-                <p>Telefon: 0 (312) 123 45 67</p>
+        
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Süt Çiftliği</h3>
+                    <p>Telefon: 0 (312) 123 45 67</p>
+                </div>
+                <div class="footer-contact">
+                    <p>Email: info@sutciftligi.com</p>
+                    <p>Adres: Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
             </div>
-            <div class="footer-contact">
-                <p>Email: info@sutciftligi.com</p>
-                <p>Adres: Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin</p>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-        </div>
-        <p>&copy; 2025 Süt Çiftliği. Tüm hakları saklıdır.</p>
-    </footer>
+            <p>&copy; 2025 Süt Çiftliği. Tüm hakları saklıdır.</p>
+        </footer>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        let lastScroll = 0;
-    const header = document.querySelector('header');
-    const topBar = document.querySelector('.top-bar');
+<script>
+       // Scroll handler
+let lastScroll = 0;
+const header = document.querySelector('header');
+const topBar = document.querySelector('.top-bar');
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll <= 0) {
-            topBar.classList.remove('top-bar-hidden');
-            header.classList.remove('header-scrolled');
-        }
-        
-        if (currentScroll > lastScroll && currentScroll > 50) {
-            topBar.classList.add('top-bar-hidden');
-            header.classList.add('header-scrolled');
-        }
-        
-        if (currentScroll < lastScroll) {
-            topBar.classList.remove('top-bar-hidden');
-            header.classList.remove('header-scrolled');
-        }
-        
-        lastScroll = currentScroll;
-    });
-        var map = L.map('map', {
-            zoom: 15,
-            minZoom: 3,
-            maxZoom: 22 // Increased max zoom for better satellite view
-        }).setView([38.734306, 31.033806], 15);
-        
-        var standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 19
-        }).addTo(map);
-        
-        var satelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-            attribution: '&copy; Google',
-            maxZoom: 22
-        });
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
     
-        // Update marker position
-        L.marker([38.734306, 31.033806]).addTo(map)
-            .bindPopup('Süt Çiftliği<br>Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin')
-            .openPopup();
-        
-        function switchToSatellite() {
-            map.removeLayer(standardMap);
-            map.addLayer(satelliteMap);
-        }
-        
-        function switchToMap() {
-            map.removeLayer(satelliteMap);
-            map.addLayer(standardMap);
-        }
-    </script>
+    if (currentScroll <= 0) {
+        topBar.classList.remove('top-bar-hidden');
+        header.classList.remove('header-scrolled');
+    }
+    
+    if (currentScroll > lastScroll && currentScroll > 50) {
+        topBar.classList.add('top-bar-hidden');
+        header.classList.add('header-scrolled');
+    }
+    
+    if (currentScroll < lastScroll) {
+        topBar.classList.remove('top-bar-hidden');
+        header.classList.remove('header-scrolled');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Initialize map once
+const map = L.map('map', {
+    zoom: 15,
+    minZoom: 3,
+    maxZoom: 22
+}).setView([38.734306, 31.033806], 15);
+
+// Create tile layers
+const satelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    attribution: '&copy; Google',
+    maxZoom: 22
+});
+
+const standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+});
+
+// Add satellite layer by default
+satelliteMap.addTo(map);
+
+// Create marker
+const marker = L.marker([38.734306, 31.033806])
+    .bindPopup('Süt Çiftliği<br>Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin')
+    .addTo(map)
+    .openPopup();
+
+// Switch functions
+function switchToSatellite() {
+    map.removeLayer(standardMap);
+    map.addLayer(satelliteMap);
+}
+
+function switchToMap() {
+    map.removeLayer(satelliteMap);
+    map.addLayer(standardMap);
+}
+</script>
 </body>
 </html>
