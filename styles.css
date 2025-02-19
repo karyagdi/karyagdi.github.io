@@ -445,9 +445,10 @@ footer {
     }
 }
 @media (max-width: 768px) {
-    /* Top bar adjustments */
-    .top-bar {
-        padding: 5px 0;
+     /* Top bar adjustments */
+     .top-bar {
+        padding: 3px 0;
+        height: 30px; /* Fixed height for top bar */
     }
 
     .top-bar-container {
@@ -481,6 +482,7 @@ footer {
 
     header {
         padding: 1rem 0;
+        top: 30px; /* Match top bar height exactly */
     }
 
     .logo-container {
@@ -494,33 +496,7 @@ footer {
         height: auto;
     }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
 
-nav ul li {
-    margin: 0 15px;
-    position: relative;
-}
-
-nav ul li a {
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-nav ul li a:hover {
-    color: #fff;
-    transform: scale(1.1);
-}
     /* Footer adjustments */
     .footer-container {
         flex-direction: column;
@@ -540,6 +516,39 @@ nav ul li a:hover {
         grid-template-columns: 1fr;
     }
 }
+nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 5px;
+    gap: 8px;
+}
+
+nav ul li {
+    margin: 0 5px;
+}
+
+nav ul li a {
+    font-size: 13px; /* Smaller font size */
+    padding: 5px;
+    white-space: nowrap;
+}
+
+.dropdown > a {
+    font-size: 13px; /* Match other nav items */
+}
+
+.dropdown-content {
+    min-width: 160px; /* Smaller dropdown width */
+}
+
+.dropdown-content a {
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+.dropdown > a i {
+    font-size: 10px;
+}
 
 @media (max-width: 480px) {
     #showcase {
@@ -556,5 +565,17 @@ nav ul li a:hover {
 
     .contact-details h3 {
         font-size: 1.2rem;
+    }
+    nav ul li a {
+        font-size: 12px; /* Even smaller font */
+        padding: 3px;
+    }
+
+    nav ul {
+        gap: 5px;
+    }
+
+    nav ul li {
+        margin: 0 3px;
     }
 }
