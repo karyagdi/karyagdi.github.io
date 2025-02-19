@@ -1,0 +1,224 @@
+contact.html -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Süt Çiftliği</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .map-controls {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 999; /* Reduced from 1000 to stay below header */
+        }
+
+        .leaflet-top,
+        .leaflet-bottom {
+        z-index: 998 !important; /* Force Leaflet controls below header */
+        }
+       
+        .map-switch-btn {
+            background: white;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .map-switch-btn:hover {
+            background: #f4f4f4;
+        }
+        
+        .map-switch-btn i {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .map-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="contact-info">
+                <a href="tel:+905426182663">
+                    <i class="fas fa-phone"></i>
+                    +90 542 618 26 63
+                </a>
+                <a href="https://maps.google.com/?q=Afyon+Bolvadin" target="_blank">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Afyon Bolvadin
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Şirket Logosu" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="index.html#products">Ürünlerimiz</a></li>
+                <li><a href="index.html#about">Hakkımızda</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="contact">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-controls">
+                    <button onclick="switchToSatellite()" class="map-switch-btn">
+                        <i class="fas fa-satellite"></i> Uydu Görüntüsü
+                    </button>
+                    <button onclick="switchToMap()" class="map-switch-btn">
+                        <i class="fas fa-map"></i> Normal Harita
+                    </button>
+                </div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-container">
+                    <h2>Bize Ulaşın</h2>
+                    <div class="contact-details">
+                        <h3>İletişim Bilgilerimiz</h3>
+                        <p><i class="fas fa-envelope"></i> Email: info@sutciftligi.com</p>
+                        <p><i class="fas fa-phone"></i> Telefon: 0 (312) 123 45 67</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Adres: Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin</p>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=38.734306,31.033806" 
+   target="_blank" 
+   class="directions-button">
+    <i class="fas fa-directions"></i> Yol Tarifi Al
+</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Süt Çiftliği</h3>
+                <p>Telefon: 0 (312) 123 45 67</p>
+            </div>
+            <div class="footer-contact">
+                <p>Email: info@sutciftligi.com</p>
+                <p>Adres: Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        <p>&copy; 2025 Süt Çiftliği. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        let lastScroll = 0;
+    const header = document.querySelector('header');
+    const topBar = document.querySelector('.top-bar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            topBar.classList.remove('top-bar-hidden');
+            header.classList.remove('header-scrolled');
+        }
+        
+        if (currentScroll > lastScroll && currentScroll > 50) {
+            topBar.classList.add('top-bar-hidden');
+            header.classList.add('header-scrolled');
+        }
+        
+        if (currentScroll < lastScroll) {
+            topBar.classList.remove('top-bar-hidden');
+            header.classList.remove('header-scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+        var map = L.map('map', {
+            zoom: 15,
+            minZoom: 3,
+            maxZoom: 22 // Increased max zoom for better satellite view
+        }).setView([38.734306, 31.033806], 15);
+        
+        var standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        var satelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: '&copy; Google',
+            maxZoom: 22
+        });
+    
+        // Update marker position
+        L.marker([38.734306, 31.033806]).addTo(map)
+            .bindPopup('Süt Çiftliği<br>Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin')
+            .openPopup();
+        
+        function switchToSatellite() {
+            map.removeLayer(standardMap);
+            map.addLayer(satelliteMap);
+        }
+        
+        function switchToMap() {
+            map.removeLayer(satelliteMap);
+            map.addLayer(standardMap);
+        }
+    </script>
+</body>
+</html>
