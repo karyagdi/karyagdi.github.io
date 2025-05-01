@@ -3,9 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımızda - Süt Çiftliği</title>
+    <title>Ürünler - Süt Çiftliği</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .product-info h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #333;
+        }
+        
+        .product-description {
+            color: #666;
+            margin: 0.5rem 0 1rem;
+        }
+        
+       
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+
+/* Price-container yapısını kaldırma */
+.price-container {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+/* QR kod konumunu güncelleme */
+.qr-code {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px !important; 
+    height: 50px !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    max-width: unset !important;
+    max-height: unset !important;
+    border: 1px solid #eee;
+    padding: 2px;
+    background: white;
+    cursor: pointer;
+}
+
+/* QR bilgi balonunu düzeltme */
+.qr-info {
+    position: absolute;
+    bottom: 55px; /* QR kodun üstünde */
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    display: none;
+    white-space: nowrap;
+}
+.qr-code:hover {
+    /* transform: scale(3); bu satır kaldırıldı */
+    z-index: 5; /* sadece z-index korundu */
+}
+
+
+.qr-code:hover + .qr-info {
+    display: block;
+}
+
+        /* Lightbox stili */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 3px solid white;
+            border-radius: 5px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        /* Önemli düzeltme - fiyat ve QR kod görünürlüğü sorununu çözme */
+.product-card .product-info .price {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    bottom: 15px !important;
+    left: 20px !important;
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    color: #FFD700 !important;
+    z-index: 100 !important;
+    background: transparent !important;
+}
+
+.product-card .product-info .qr-code {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    bottom: 10px !important;
+    right: 10px !important;
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 101 !important;
+    background: white !important;
+}
+
+/* İnceleme için geçici olarak üretim kartlarının kenarlarını işaretleme */
+.product-card {
+    border: 1px solid red !important;
+}
+
+.product-info {
+    border: 1px solid blue !important;
+    min-height: 200px !important;
+    height: auto !important;
+}
+    </style>
 </head>
 <body>
     <!-- Üst Bar -->
@@ -56,51 +247,275 @@
                         <ul>
                             <li><a href="otel.html">Onur Otel</a></li>
                             <li><a href="insaat.html">Onur İnşaat</a></li>
-                            <li><a href="#usak-seramik">Uşak Seramik</a></li>
+                            <li><a href="usak-seramik.html">Uşak Seramik</a></li>
                         </ul>
                     </div>
                 </li>
-                <li><a href="about.html" class="active">Hakkımızda</a></li>
+                <li><a href="products.html" class="active">Ürünler</a></li>
                 <li><a href="contact.html">İletişim</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- İçerik -->
-   <!-- ...existing code... -->
-
-<!-- İçerik -->
-<main style="margin-top: 160px;">
-    <section class="about-section">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Biz Kimiz?</h2>
-                <p>
-                    Süt Çiftliği olarak, doğrudan doğal kaynaklardan elde ettiğimiz sütü
-                    ve süt ürünlerini en yüksek kalitede sunuyoruz. Doğa dostu yöntemlerle
-                    beslediğimiz hayvanlarımız sayesinde, sofralarınıza sağlıklı ve lezzetli
-                    ürünler getirmenin gururunu yaşıyoruz.
-                </p>
-                
-                <h3>Vizyonumuz</h3>
-                <p>
-                    Sürdürülebilir tarım ve hayvancılık ilkeleriyle, her geçen gün daha
-                    da gelişerek ülkemizin önde gelen süt üreticilerinden biri olmak.
-                </p>
-
-                <h3>Misyonumuz</h3>
-                <p>
-                    Çevreye duyarlı, hayvan refahına öncelik veren ve toplum sağlığını
-                    destekleyen üretim anlayışını sürdürmek; aile sofralarınıza
-                    güvenilir, sağlıklı ve taze ürünler sunmak.
-                </p>
-            </div>
-            <div class="about-image">
-                <img src="background.jpg" alt="Çiftlik Görüntüsü">
-            </div>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightbox-img">
         </div>
-    </section>
-</main>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- İçerik -->
+    <main style="margin-top: 160px;">
+        <section class="products-section">
+            <div class="container">
+                <h1 class="section-title" data-aos="fade-down">Seramik Ürünlerimiz</h1>
+                
+                <div class="products-grid">
+                    <!-- Ürün 1 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="seramik1.jpg" alt="Kristal Yer Seramiği" onclick="openLightbox(this, 'Kristal Yer Seramiği - 60x60 cm, Parlak Yüzey')">
+                        <div class="product-info">
+                            <h3>Kristal Yer Seramiği</h3>
+                            <p class="product-description">60x60 cm, Parlak Yüzey</p>
+                            <div class="price">₺450.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/kristal-yer-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ürün 2 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="150">
+                        <img src="seramik1.jpg" alt="Mavi Dalga Duvar Seramiği" onclick="openLightbox(this, 'Mavi Dalga Duvar Seramiği - 30x60 cm, Mat Yüzey')">
+                        <div class="product-info">
+                            <h3>Mavi Dalga Duvar Seramiği</h3>
+                            <p class="product-description">30x60 cm, Mat Yüzey</p>
+                            <div class="price">₺380.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/mavi-dalga-duvar-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ürün 3 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="seramik1.jpg" alt="Ahşap Doku Yer Seramiği" onclick="openLightbox(this, 'Ahşap Doku Yer Seramiği - 20x120 cm, Ahşap Görünüm')">
+                        <div class="product-info">
+                            <h3>Ahşap Doku Yer Seramiği</h3>
+                            <p class="product-description">20x120 cm, Ahşap Görünüm</p>
+                            <div class="price">₺520.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/ahsap-doku-yer-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ürün 4 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="250">
+                        <img src="seramik1.jpg" alt="Mermer Desen Duvar Seramiği" onclick="openLightbox(this, 'Mermer Desen Duvar Seramiği - 60x60 cm, Parlak Yüzey')">
+                        <div class="product-info">
+                            <h3>Mermer Desen Duvar Seramiği</h3>
+                            <p class="product-description">60x60 cm, Parlak Yüzey</p>
+                            <div class="price">₺490.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/mermer-desen-duvar-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ürün 5 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="seramik1.jpg" alt="Geometrik Dekoratif Seramik" onclick="openLightbox(this, 'Geometrik Dekoratif Seramik - 30x30 cm, 3D Yüzey')">
+                        <div class="product-info">
+                            <h3>Geometrik Dekoratif Seramik</h3>
+                            <p class="product-description">30x30 cm, 3D Yüzey</p>
+                            <div class="price">₺620.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/geometrik-dekoratif-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ürün 6 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="350">
+                        <img src="seramik1.jpg" alt="Lüks Banyo Seramiği" onclick="openLightbox(this, 'Lüks Banyo Seramiği - 45x45 cm, Su Geçirmez')">
+                        <div class="product-info">
+                            <h3>Lüks Banyo Seramiği</h3>
+                            <p class="product-description">45x45 cm, Su Geçirmez</p>
+                            <div class="price">₺420.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/luks-banyo-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 7 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="seramik1.jpg" alt="Modern Mutfak Seramiği" onclick="openLightbox(this, 'Modern Mutfak Seramiği - 30x60 cm, Leke Tutmaz')">
+                        <div class="product-info">
+                            <h3>Modern Mutfak Seramiği</h3>
+                            <p class="product-description">30x60 cm, Leke Tutmaz</p>
+                            <div class="price">₺480.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/modern-mutfak-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 8 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="450">
+                        <img src="seramik1.jpg" alt="Dış Mekan Seramiği" onclick="openLightbox(this, 'Dış Mekan Seramiği - 45x45 cm, Dona Dayanıklı')">
+                        <div class="product-info">
+                            <h3>Dış Mekan Seramiği</h3>
+                            <p class="product-description">45x45 cm, Dona Dayanıklı</p>
+                            <div class="price">₺550.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/dis-mekan-seramigi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 9 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                        <img src="seramik1.jpg" alt="Porselen Karo" onclick="openLightbox(this, 'Porselen Karo - 80x80 cm, Ultra Dayanıklı')">
+                        <div class="product-info">
+                            <h3>Porselen Karo</h3>
+                            <p class="product-description">80x80 cm, Ultra Dayanıklı</p>
+                            <div class="price">₺720.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/porselen-karo" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 10 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="550">
+                        <img src="seramik1.jpg" alt="Mozaik Seramik" onclick="openLightbox(this, 'Mozaik Seramik - 5x5 cm, Dekoratif')">
+                        <div class="product-info">
+                            <h3>Mozaik Seramik</h3>
+                            <p class="product-description">5x5 cm, Dekoratif</p>
+                            <div class="price">₺850.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/mozaik-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 11 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="600">
+                        <img src="seramik1.jpg" alt="Granit Seramik" onclick="openLightbox(this, 'Granit Seramik - 60x120 cm, Yüksek Dayanım')">
+                        <div class="product-info">
+                            <h3>Granit Seramik</h3>
+                            <p class="product-description">60x120 cm, Yüksek Dayanım</p>
+                            <div class="price">₺680.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/granit-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 12 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="650">
+                        <img src="seramik1.jpg" alt="Traverten Doku" onclick="openLightbox(this, 'Traverten Doku - 40x80 cm, Doğal Görünüm')">
+                        <div class="product-info">
+                            <h3>Traverten Doku</h3>
+                            <p class="product-description">40x80 cm, Doğal Görünüm</p>
+                            <div class="price">₺580.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/traverten-doku" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 13 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="700">
+                        <img src="seramik1.jpg" alt="Rustik Seramik" onclick="openLightbox(this, 'Rustik Seramik - 15x60 cm, Antik Görünüm')">
+                        <div class="product-info">
+                            <h3>Rustik Seramik</h3>
+                            <p class="product-description">15x60 cm, Antik Görünüm</p>
+                            <div class="price">₺490.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/rustik-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 14 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="750">
+                        <img src="seramik1.jpg" alt="Cam Mozaik" onclick="openLightbox(this, 'Cam Mozaik - 2x2 cm, Parlak Yüzey')">
+                        <div class="product-info">
+                            <h3>Cam Mozaik</h3>
+                            <p class="product-description">2x2 cm, Parlak Yüzey</p>
+                            <div class="price">₺920.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/cam-mozaik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 15 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="800">
+                        <img src="seramik1.jpg" alt="Mermer Görünümlü" onclick="openLightbox(this, 'Mermer Görünümlü - 60x120 cm, Lüks Görünüm')">
+                        <div class="product-info">
+                            <h3>Mermer Görünümlü</h3>
+                            <p class="product-description">60x120 cm, Lüks Görünüm</p>
+                            <div class="price">₺750.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/mermer-gorunumlu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 16 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="850">
+                        <img src="seramik1.jpg" alt="Metro Fayans" onclick="openLightbox(this, 'Metro Fayans - 10x30 cm, Retro Tarz')">
+                        <div class="product-info">
+                            <h3>Metro Fayans</h3>
+                            <p class="product-description">10x30 cm, Retro Tarz</p>
+                            <div class="price">₺390.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/metro-fayans" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 17 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="900">
+                        <img src="seramik1.jpg" alt="Hexagon Seramik" onclick="openLightbox(this, 'Hexagon Seramik - 20x23 cm, Altıgen Form')">
+                        <div class="product-info">
+                            <h3>Hexagon Seramik</h3>
+                            <p class="product-description">20x23 cm, Altıgen Form</p>
+                            <div class="price">₺630.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/hexagon-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 18 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="950">
+                        <img src="seramik1.jpg" alt="İnci Seramik" onclick="openLightbox(this, 'İnci Seramik - 60x60 cm, Sedef Efekti')">
+                        <div class="product-info">
+                            <h3>İnci Seramik</h3>
+                            <p class="product-description">60x60 cm, Sedef Efekti</p>
+                            <div class="price">₺820.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/inci-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 19 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="1000">
+                        <img src="seramik1.jpg" alt="Beton Görünümlü" onclick="openLightbox(this, 'Beton Görünümlü - 60x60 cm, Endüstriyel')">
+                        <div class="product-info">
+                            <h3>Beton Görünümlü</h3>
+                            <p class="product-description">60x60 cm, Endüstriyel</p>
+                            <div class="price">₺510.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/beton-gorunumlu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                
+                    <!-- Ürün 20 -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="1050">
+                        <img src="seramik1.jpg" alt="Vintage Seramik" onclick="openLightbox(this, 'Vintage Seramik - 20x20 cm, Desenli')">
+                        <div class="product-info">
+                            <h3>Vintage Seramik</h3>
+                            <p class="product-description">20x20 cm, Desenli</p>
+                            <div class="price">₺570.00 /m²</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/product/vintage-seramik" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -127,6 +542,54 @@
         </div>
         <p>&copy; 2025 Süt Çiftliği. Tüm hakları saklıdır.</p>
     </footer>
+    
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: false,
+            delay: 100,
+        });
+
+        // Lightbox fonksiyonları
+        function openLightbox(img, caption) {
+            var lightbox = document.getElementById("lightbox");
+            var lightboxImg = document.getElementById("lightbox-img");
+            var lightboxCaption = document.getElementById("lightbox-caption");
+            
+            lightboxImg.src = img.src;
+            lightboxCaption.innerHTML = caption;
+            lightbox.style.display = "block";
+            
+            // Vücut kaydırmayı devre dışı bırak
+            document.body.style.overflow = "hidden";
+        }
+        
+        // Lightbox'ı kapatma
+        var lightbox = document.getElementById("lightbox");
+        var closeBtn = document.getElementsByClassName("lightbox-close")[0];
+        
+        closeBtn.onclick = function() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        
+        lightbox.onclick = function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        
+        // ESC tuşu ile kapatma
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                lightbox.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+    </script>
 </body>
 </html>
