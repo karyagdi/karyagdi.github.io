@@ -881,7 +881,7 @@ nav ul li a {
 
 @media (max-width: 480px) {
     #showcase {
-        margin-top: 160px;
+        margin-top: 0px;
     }
 
     .slider-title h1 {
