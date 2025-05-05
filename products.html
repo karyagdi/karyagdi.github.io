@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ürünler - Süt Çiftliği</title>
+    <title>Ürünler - Uşak Seramik</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -52,61 +52,56 @@
             margin: 0.5rem 0 1rem;
         }
         
-       
-        
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
         }
 
+        /* Price-container yapısını kaldırma */
+        .price-container {
+            position: relative;
+            display: block;
+            margin-bottom: 10px;
+        }
 
-/* Price-container yapısını kaldırma */
-.price-container {
-    position: relative;
-    display: block;
-    margin-bottom: 10px;
-}
+        /* QR kod konumunu güncelleme */
+        .qr-code {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px !important; 
+            height: 50px !important;
+            min-width: unset !important;
+            min-height: unset !important;
+            max-width: unset !important;
+            max-height: unset !important;
+            border: 1px solid #eee;
+            padding: 2px;
+            background: white;
+            cursor: pointer;
+        }
 
+        /* QR bilgi balonunu düzeltme */
+        .qr-info {
+            position: absolute;
+            bottom: 55px; /* QR kodun üstünde */
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 10px;
+            display: none;
+            white-space: nowrap;
+        }
+        
+        .qr-code:hover {
+            z-index: 5; /* sadece z-index korundu */
+        }
 
-/* QR kod konumunu güncelleme */
-.qr-code {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 50px !important; 
-    height: 50px !important;
-    min-width: unset !important;
-    min-height: unset !important;
-    max-width: unset !important;
-    max-height: unset !important;
-    border: 1px solid #eee;
-    padding: 2px;
-    background: white;
-    cursor: pointer;
-}
-
-/* QR bilgi balonunu düzeltme */
-.qr-info {
-    position: absolute;
-    bottom: 55px; /* QR kodun üstünde */
-    right: 10px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-size: 10px;
-    display: none;
-    white-space: nowrap;
-}
-.qr-code:hover {
-    /* transform: scale(3); bu satır kaldırıldı */
-    z-index: 5; /* sadece z-index korundu */
-}
-
-
-.qr-code:hover + .qr-info {
-    display: block;
-}
+        .qr-code:hover + .qr-info {
+            display: block;
+        }
 
         /* Lightbox stili */
         .lightbox {
@@ -158,44 +153,100 @@
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.7);
         }
+        
         /* Önemli düzeltme - fiyat ve QR kod görünürlüğü sorununu çözme */
-.product-card .product-info .price {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute !important;
-    bottom: 15px !important;
-    left: 20px !important;
-    font-size: 1.5rem !important;
-    font-weight: bold !important;
-    color: #FFD700 !important;
-    z-index: 100 !important;
-    background: transparent !important;
+        .product-card .product-info .price {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: absolute !important;
+            bottom: 15px !important;
+            left: 20px !important;
+            font-size: 1.5rem !important;
+            font-weight: bold !important;
+            color: #FFD700 !important;
+            z-index: 100 !important;
+            background: transparent !important;
+        }
+
+        .product-card .product-info .qr-code {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: absolute !important;
+            bottom: 10px !important;
+            right: 10px !important;
+            width: 70px !important;
+            height: 70px !important;
+            z-index: 101 !important;
+            background: white !important;
+        }
+
+        /* Kategoriler için bölüm başlıkları */
+        .category-header {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+        /* Kategori butonları stili */
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px;
 }
 
-.product-card .product-info .qr-code {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute !important;
-    bottom: 10px !important;
-    right: 10px !important;
-    width: 70px !important;
-    height: 70px !important;
-    z-index: 101 !important;
-    background: white !important;
+.category-btn {
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* İnceleme için geçici olarak üretim kartlarının kenarlarını işaretleme */
-.product-card {
-    border: 1px solid red !important;
+.category-btn.active {
+    background-color: #FFD700;
+    color: #333;
+    font-weight: bold;
 }
 
-.product-info {
-    border: 1px solid blue !important;
-    min-height: 200px !important;
-    height: auto !important;
+.category-btn:hover:not(.active) {
+    background-color: #e0e0e0;
 }
+
+.sub-category-header {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sub-category-header h3 {
+    font-size: 1.6rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+        /* İnceleme için geçici olarak üretim kartlarının kenarlarını işaretleme */
+        .product-card {
+            border: 1px solid red !important;
+        }
+
+        .product-info {
+            border: 1px solid blue !important;
+            min-height: 200px !important;
+            height: auto !important;
+        }
     </style>
 </head>
 <body>
@@ -203,11 +254,11 @@
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="contact-info">
-                <a href="tel:03121234567">
+                <a href="tel:05404103500">
                     <i class="fas fa-phone"></i>
-                    0 (540) 410 35 00
+                    0 (546) 620 79 94
                 </a>
-                <a href="mailto:info@sutciftligi.com">
+                <a href="mailto:nukaryagdi@gmail.com">
                     <i class="fas fa-envelope"></i>
                     nukaryagdi@gmail.com
                 </a>
@@ -233,7 +284,7 @@
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Şirket Logosu" class="logo">
+            <img src="onurlogo.png" alt="Şirket Logosu" class="logo">
         </div>
         <nav>
             <ul>
@@ -270,11 +321,27 @@
     <main style="margin-top: 160px;">
         <section class="products-section">
             <div class="container">
-                <h1 class="section-title" data-aos="fade-down">Seramik Ürünlerimiz</h1>
+                <h1 class="section-title" data-aos="fade-down">Ürünlerimiz</h1>
+                
+                <!-- Ürün Kategorileri Başlık ve Navigasyon -->
+<div class="category-header">
+    <h2>Ürün Kategorilerimiz</h2>
+    <div class="category-buttons">
+        <button class="category-btn active" onclick="scrollToCategory('seramik-kategori')">Seramik Ürünleri</button>
+        <button class="category-btn" onclick="scrollToCategory('musluk-kategori')">Musluk Ürünleri</button>
+    </div>
+</div>
+
+<!-- Seramik Kategori Başlığı -->
+<div id="seramik-kategori" class="sub-category-header">
+    <h3>Seramik Ürünlerimiz</h3>
+</div>
+
                 
                 <div class="products-grid">
+                    <!-- Seramik Ürünleri -->
                     <!-- Ürün 1 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="100">
                         <img src="seramik1.jpg" alt="Kristal Yer Seramiği" onclick="openLightbox(this, 'Kristal Yer Seramiği - 60x60 cm, Parlak Yüzey')">
                         <div class="product-info">
                             <h3>Kristal Yer Seramiği</h3>
@@ -286,7 +353,7 @@
                     </div>
                     
                     <!-- Ürün 2 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="150">
                         <img src="seramik1.jpg" alt="Mavi Dalga Duvar Seramiği" onclick="openLightbox(this, 'Mavi Dalga Duvar Seramiği - 30x60 cm, Mat Yüzey')">
                         <div class="product-info">
                             <h3>Mavi Dalga Duvar Seramiği</h3>
@@ -298,7 +365,7 @@
                     </div>
                     
                     <!-- Ürün 3 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="200">
                         <img src="seramik1.jpg" alt="Ahşap Doku Yer Seramiği" onclick="openLightbox(this, 'Ahşap Doku Yer Seramiği - 20x120 cm, Ahşap Görünüm')">
                         <div class="product-info">
                             <h3>Ahşap Doku Yer Seramiği</h3>
@@ -310,7 +377,7 @@
                     </div>
                     
                     <!-- Ürün 4 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="250">
                         <img src="seramik1.jpg" alt="Mermer Desen Duvar Seramiği" onclick="openLightbox(this, 'Mermer Desen Duvar Seramiği - 60x60 cm, Parlak Yüzey')">
                         <div class="product-info">
                             <h3>Mermer Desen Duvar Seramiği</h3>
@@ -322,7 +389,7 @@
                     </div>
                     
                     <!-- Ürün 5 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="300">
                         <img src="seramik1.jpg" alt="Geometrik Dekoratif Seramik" onclick="openLightbox(this, 'Geometrik Dekoratif Seramik - 30x30 cm, 3D Yüzey')">
                         <div class="product-info">
                             <h3>Geometrik Dekoratif Seramik</h3>
@@ -334,7 +401,7 @@
                     </div>
                     
                     <!-- Ürün 6 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="350">
                         <img src="seramik1.jpg" alt="Lüks Banyo Seramiği" onclick="openLightbox(this, 'Lüks Banyo Seramiği - 45x45 cm, Su Geçirmez')">
                         <div class="product-info">
                             <h3>Lüks Banyo Seramiği</h3>
@@ -346,7 +413,7 @@
                     </div>
                 
                     <!-- Ürün 7 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="400">
                         <img src="seramik1.jpg" alt="Modern Mutfak Seramiği" onclick="openLightbox(this, 'Modern Mutfak Seramiği - 30x60 cm, Leke Tutmaz')">
                         <div class="product-info">
                             <h3>Modern Mutfak Seramiği</h3>
@@ -358,7 +425,7 @@
                     </div>
                 
                     <!-- Ürün 8 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="450">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="450">
                         <img src="seramik1.jpg" alt="Dış Mekan Seramiği" onclick="openLightbox(this, 'Dış Mekan Seramiği - 45x45 cm, Dona Dayanıklı')">
                         <div class="product-info">
                             <h3>Dış Mekan Seramiği</h3>
@@ -370,7 +437,7 @@
                     </div>
                 
                     <!-- Ürün 9 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="500">
                         <img src="seramik1.jpg" alt="Porselen Karo" onclick="openLightbox(this, 'Porselen Karo - 80x80 cm, Ultra Dayanıklı')">
                         <div class="product-info">
                             <h3>Porselen Karo</h3>
@@ -382,7 +449,7 @@
                     </div>
                 
                     <!-- Ürün 10 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="550">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="550">
                         <img src="seramik1.jpg" alt="Mozaik Seramik" onclick="openLightbox(this, 'Mozaik Seramik - 5x5 cm, Dekoratif')">
                         <div class="product-info">
                             <h3>Mozaik Seramik</h3>
@@ -394,7 +461,7 @@
                     </div>
                 
                     <!-- Ürün 11 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="600">
                         <img src="seramik1.jpg" alt="Granit Seramik" onclick="openLightbox(this, 'Granit Seramik - 60x120 cm, Yüksek Dayanım')">
                         <div class="product-info">
                             <h3>Granit Seramik</h3>
@@ -406,7 +473,7 @@
                     </div>
                 
                     <!-- Ürün 12 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="650">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="650">
                         <img src="seramik1.jpg" alt="Traverten Doku" onclick="openLightbox(this, 'Traverten Doku - 40x80 cm, Doğal Görünüm')">
                         <div class="product-info">
                             <h3>Traverten Doku</h3>
@@ -418,7 +485,7 @@
                     </div>
                 
                     <!-- Ürün 13 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="700">
                         <img src="seramik1.jpg" alt="Rustik Seramik" onclick="openLightbox(this, 'Rustik Seramik - 15x60 cm, Antik Görünüm')">
                         <div class="product-info">
                             <h3>Rustik Seramik</h3>
@@ -430,7 +497,7 @@
                     </div>
                 
                     <!-- Ürün 14 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="750">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="750">
                         <img src="seramik1.jpg" alt="Cam Mozaik" onclick="openLightbox(this, 'Cam Mozaik - 2x2 cm, Parlak Yüzey')">
                         <div class="product-info">
                             <h3>Cam Mozaik</h3>
@@ -442,7 +509,7 @@
                     </div>
                 
                     <!-- Ürün 15 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="800">
                         <img src="seramik1.jpg" alt="Mermer Görünümlü" onclick="openLightbox(this, 'Mermer Görünümlü - 60x120 cm, Lüks Görünüm')">
                         <div class="product-info">
                             <h3>Mermer Görünümlü</h3>
@@ -454,7 +521,7 @@
                     </div>
                 
                     <!-- Ürün 16 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="850">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="850">
                         <img src="seramik1.jpg" alt="Metro Fayans" onclick="openLightbox(this, 'Metro Fayans - 10x30 cm, Retro Tarz')">
                         <div class="product-info">
                             <h3>Metro Fayans</h3>
@@ -466,7 +533,7 @@
                     </div>
                 
                     <!-- Ürün 17 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="900">
                         <img src="seramik1.jpg" alt="Hexagon Seramik" onclick="openLightbox(this, 'Hexagon Seramik - 20x23 cm, Altıgen Form')">
                         <div class="product-info">
                             <h3>Hexagon Seramik</h3>
@@ -478,7 +545,7 @@
                     </div>
                 
                     <!-- Ürün 18 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="950">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="950">
                         <img src="seramik1.jpg" alt="İnci Seramik" onclick="openLightbox(this, 'İnci Seramik - 60x60 cm, Sedef Efekti')">
                         <div class="product-info">
                             <h3>İnci Seramik</h3>
@@ -490,7 +557,7 @@
                     </div>
                 
                     <!-- Ürün 19 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="1000">
                         <img src="seramik1.jpg" alt="Beton Görünümlü" onclick="openLightbox(this, 'Beton Görünümlü - 60x60 cm, Endüstriyel')">
                         <div class="product-info">
                             <h3>Beton Görünümlü</h3>
@@ -502,7 +569,7 @@
                     </div>
                 
                     <!-- Ürün 20 -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="1050">
+                    <div class="product-card" data-category="seramik" data-aos="fade-up" data-aos-delay="1050">
                         <img src="seramik1.jpg" alt="Vintage Seramik" onclick="openLightbox(this, 'Vintage Seramik - 20x20 cm, Desenli')">
                         <div class="product-info">
                             <h3>Vintage Seramik</h3>
@@ -513,6 +580,381 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Musluk Kategori Başlığı -->
+                <div id="musluk-kategori" class="sub-category-header">
+                <h3>Musluk Ürünlerimiz</h3>
+                </div>
+                
+                <div class="products-grid">
+                    <!-- Musluk Ürünleri -->
+                    <!-- Musluk 1 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="100">
+                        <img src="gildolavabogumus.jpg" alt="Gildo Lavabo Bataryası" onclick="openLightbox(this, 'Modern Banyo Musluğu - Krom Kaplama')">
+                        <div class="product-info">
+                            <h3>Gildo Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#modern-banyo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 2 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="150">
+                        <img src="gildolavabo.jpg" alt="Mutfak Eviye Musluğu" onclick="openLightbox(this, 'Mutfak Eviye Musluğu - Çekilebilir Başlıklı')">
+                        <div class="product-info">
+                            <h3>Gildo Lavabo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺920.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#mutfak-eviye-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 3 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="200">
+                        <img src="gildolavabosr.jpg" alt="Gildo Lavabo Bataryası" onclick="openLightbox(this, 'Siyah Mat Lavabo Musluğu - Modern Tasarım')">
+                        <div class="product-info">
+                            <h3>Gildo Tek Gövde Lavabo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺850.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#siyah-mat-lavabo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 4 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="250">
+                        <img src="adriolavabo.jpg" alt="Adrio Lavabo Bataryası" onclick="openLightbox(this, 'Altın Renkli Banyo Musluğu - Lüks Tasarım')">
+                        <div class="product-info">
+                            <h3>Adrio Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#altin-renkli-banyo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 5 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="300">
+                        <img src="atroslavabo.jpg" alt="Atros Lavabo Bataryası" onclick="openLightbox(this, 'Duş Bataryası - Termostatik Kontrollü')">
+                        <div class="product-info">
+                            <h3>Atros Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1850.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dus-bataryasi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 6 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="350">
+                        <img src="espinalavabo.jpg" alt="Espina Lavabo Bataryası" onclick="openLightbox(this, 'Fotoselli Musluk - Sensörlü')">
+                        <div class="product-info">
+                            <h3>Espina Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1450.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#fotoselli-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 7 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="400">
+                        <img src="ritmolavabo.jpg" alt="Ritmo Lavabo Bataryası" onclick="openLightbox(this, 'Endüstriyel Mutfak Musluğu - Profesyonel Seri')">
+                        <div class="product-info">
+                            <h3>Ritmo Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺2200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#endustriyel-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 8 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="450">
+                        <img src="providolavaboa.jpg" alt="Klasik Stil Musluk" onclick="openLightbox(this, 'Klasik Stil Musluk - Nostaljik Tasarım')">
+                        <div class="product-info">
+                            <h3>Provido Lavabo Bataryası</h3>
+                            <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺980.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#klasik-stil-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 9 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="500">
+                        <img src="taurolavabosiyah.jpg" alt="Tauro Lavabo Bataryası" onclick="openLightbox(this, 'Ankastre Duş Sistemi - Gizli Montaj')">
+                        <div class="product-info">
+                            <h3>Tauro Lavabo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺3200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#ankastre-dus-sistemi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 10 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="taurolavabos.jpg" alt="Tauro Set Üstü Lavabo Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Tauro Set Üstü Lavabo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 11 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="100">
+                        <img src="pruvalavabo.jpg" alt="Pruva Lavabo Bataryası" onclick="openLightbox(this, 'Modern Banyo Musluğu - Krom Kaplama')">
+                        <div class="product-info">
+                            <h3>Pruva Lavabo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#modern-banyo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 12 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="150">
+                        <img src="atrosevye.jpg" alt="Atros Eviye Bataryası" onclick="openLightbox(this, 'Mutfak Eviye Musluğu - Çekilebilir Başlıklı')">
+                        <div class="product-info">
+                            <h3>Atros Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺920.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#mutfak-eviye-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 13 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="200">
+                        <img src="espinaevye.jpg" alt="Espina Eviye Bataryası" onclick="openLightbox(this, 'Siyah Mat Lavabo Musluğu - Modern Tasarım')">
+                        <div class="product-info">
+                            <h3>Espina Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺850.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#siyah-mat-lavabo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 14 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="250">
+                        <img src="felisevye.jpg" alt="Felis Eviye Bataryası" onclick="openLightbox(this, 'Altın Renkli Banyo Musluğu - Lüks Tasarım')">
+                        <div class="product-info">
+                            <h3>Felis Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#altin-renkli-banyo-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 15 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="300">
+                        <img src="florusevye.jpg" alt="Florus Eviye Bataryası" onclick="openLightbox(this, 'Duş Bataryası - Termostatik Kontrollü')">
+                        <div class="product-info">
+                            <h3>Florus Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1850.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dus-bataryasi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 16 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="350">
+                        <img src="freziaevye.jpg" alt="Frezia Eviye Bataryası" onclick="openLightbox(this, 'Fotoselli Musluk - Sensörlü')">
+                        <div class="product-info">
+                            <h3>Frezia Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1450.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#fotoselli-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 17 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="400">
+                        <img src="gpdtauroevye.jpg" alt="Tauro Eviye Bataryası" onclick="openLightbox(this, 'Endüstriyel Mutfak Musluğu - Profesyonel Seri')">
+                        <div class="product-info">
+                            <h3>Tauro Eviye Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺2200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#endustriyel-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 18 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="450">
+                        <img src="providoevye.jpg" alt="Provido Eviye Bataryası" onclick="openLightbox(this, 'Klasik Stil Musluk - Nostaljik Tasarım')">
+                        <div class="product-info">
+                            <h3>Provido Eviye Bataryası</h3>
+                            <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺980.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#klasik-stil-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 19 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="500">
+                        <img src="pedraevye.jpg" alt="Pedra Eviye Bataryası" onclick="openLightbox(this, 'Ankastre Duş Sistemi - Gizli Montaj')">
+                        <div class="product-info">
+                            <h3>Pedra Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺3200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#ankastre-dus-sistemi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 20 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="ritmoevye.jpg" alt="Ritmo Eviye Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Ritmo Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 21 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="solusevye.jpg" alt="Solus Eviye Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Solus Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 22 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="450">
+                        <img src="claireevye.jpg" alt="Claire Eviye Bataryası" onclick="openLightbox(this, 'Klasik Stil Musluk - Nostaljik Tasarım')">
+                        <div class="product-info">
+                            <h3>Claire Eviye Bataryası</h3>
+                            <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺980.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#klasik-stil-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 23 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="500">
+                        <img src="spirallievye.jpg" alt="Spiralli Eviye Bataryası" onclick="openLightbox(this, 'Ankastre Duş Sistemi - Gizli Montaj')">
+                        <div class="product-info">
+                            <h3>Spiralli Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺3200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#ankastre-dus-sistemi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 24 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="karespiralevye.jpg" alt="Kare Spiral Eviye Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Kare Spiral Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 25 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="pruvaevye.jpg" alt="Pruva Eviye Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Pruva Eviye Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+
+                    <!-- Musluk 26 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="500">
+                        <img src="atrosbanyo.jpg" alt="Atros Banyo Bataryası" onclick="openLightbox(this, 'Ankastre Duş Sistemi - Gizli Montaj')">
+                        <div class="product-info">
+                            <h3>Atros Banyo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺3200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#ankastre-dus-sistemi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 27 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="espinabanyo.jpg" alt="Espina Banyo Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Espina Banyo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 28 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="florusbanyo.jpg" alt="Florus Banyo Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Florus Banyo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    <!-- Musluk 29 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="450">
+                        <img src="gildobanyosr.jpg" alt="Gildo Banyo Bataryası" onclick="openLightbox(this, 'Klasik Stil Musluk - Nostaljik Tasarım')">
+                        <div class="product-info">
+                            <h3>Gildo Banyo Bataryası</h3>
+                            <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺980.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#klasik-stil-musluk" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 30 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="500">
+                        <img src="gpdprovido.jpg" alt="Porvido Banyo Bataryası" onclick="openLightbox(this, 'Ankastre Duş Sistemi - Gizli Montaj')">
+                        <div class="product-info">
+                            <h3>Provido Banyo Bataryası</h3>
+                            <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺3200.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#ankastre-dus-sistemi" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Musluk 31 -->
+                    <div class="product-card" data-category="musluk" data-aos="fade-up" data-aos-delay="550">
+                        <img src="taurobanyoa.jpg" alt="Tauro Banyo Bataryası" onclick="openLightbox(this, 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol')">
+                        <div class="product-info">
+                            <h3>Tauro Banyo Bataryası</h3>
+                            <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+                            <div class="price">₺1750.00</div>
+                            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=https://karyagdi.me/products.html#dokunmatik-mutfak-muslugu" alt="QR Kod">
+                            <div class="qr-info">QR Kodu okutun</div>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </section>
     </main>
@@ -521,8 +963,8 @@
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
-                <h3>Süt Çiftliği</h3>
-                <p>Telefon: 0 (540) 410 35 00</p>
+                <h3>Onur İnşaat</h3>
+                <p>Telefon: 0 (546) 620 79 94</p>
             </div>
             <div class="footer-contact">
                 <p>Email: nukaryagdi@gmail.com</p>
@@ -540,7 +982,7 @@
                 </a>
             </div>
         </div>
-        <p>&copy; 2025 Süt Çiftliği. Tüm hakları saklıdır.</p>
+        <p>&copy; 2025 Onur İnşaat. Tüm hakları saklıdır.</p>
     </footer>
     
     <script src="script.js"></script>
@@ -552,6 +994,7 @@
             once: false,
             delay: 100,
         });
+        
         // Sayfa yüklendiğinde URL'deki fragment'i kontrol et
         document.addEventListener("DOMContentLoaded", function() {
             // URL'den fragment'i al (#'den sonraki kısım)
@@ -560,6 +1003,7 @@
             if (fragment) {
                 // Ürün ID'sini bul ve lightbox'ı aç
                 var productMap = {
+                    // Seramik ürünleri
                     "kristal-yer-seramigi": {
                         img: document.querySelector('[alt="Kristal Yer Seramiği"]'),
                         caption: 'Kristal Yer Seramiği - 60x60 cm, Parlak Yüzey'
@@ -639,6 +1083,48 @@
                     "vintage-seramik": {
                         img: document.querySelector('[alt="Vintage Seramik"]'),
                         caption: 'Vintage Seramik - 20x20 cm, Desenli'
+                    },
+                    
+                    // Musluk ürünleri
+                    "modern-banyo-muslugu": {
+                        img: document.querySelector('[alt="Modern Banyo Musluğu"]'),
+                        caption: 'Gildo Lavabo Bataryası - Krom Kaplama, Su Tasarruflu'
+                    },
+                    "mutfak-eviye-muslugu": {
+                        img: document.querySelector('[alt="Mutfak Eviye Musluğu"]'),
+                        caption: 'Mutfak Eviye Musluğu - Çekilebilir Başlıklı, Paslanmaz'
+                    },
+                    "siyah-mat-lavabo-muslugu": {
+                        img: document.querySelector('[alt="Siyah Mat Lavabo Musluğu"]'),
+                        caption: 'Siyah Mat Lavabo Musluğu - Modern Tasarım, Parmak İzi Tutmaz'
+                    },
+                    "altin-renkli-banyo-muslugu": {
+                        img: document.querySelector('[alt="Altın Renkli Banyo Musluğu"]'),
+                        caption: 'Altın Renkli Banyo Musluğu - Lüks Tasarım, Titanyum Kaplama'
+                    },
+                    "dus-bataryasi": {
+                        img: document.querySelector('[alt="Duş Bataryası"]'),
+                        caption: 'Duş Bataryası - Termostatik Kontrollü, Yağmur Başlıklı'
+                    },
+                    "fotoselli-musluk": {
+                        img: document.querySelector('[alt="Fotoselli Musluk"]'),
+                        caption: 'Fotoselli Musluk - Sensörlü, Pilli/Şarjlı Çalışma'
+                    },
+                    "endustriyel-mutfak-muslugu": {
+                        img: document.querySelector('[alt="Endüstriyel Mutfak Musluğu"]'),
+                        caption: 'Endüstriyel Mutfak Musluğu - Profesyonel Seri, Yüksek Basınçlı'
+                    },
+                    "klasik-stil-musluk": {
+                        img: document.querySelector('[alt="Klasik Stil Musluk"]'),
+                        caption: 'Klasik Stil Musluk - Nostaljik Tasarım, Pirinç Malzeme'
+                    },
+                    "ankastre-dus-sistemi": {
+                        img: document.querySelector('[alt="Ankastre Duş Sistemi"]'),
+                        caption: 'Ankastre Duş Sistemi - Gizli Montaj, Çok Fonksiyonlu'
+                    },
+                    "dokunmatik-mutfak-muslugu": {
+                        img: document.querySelector('[alt="Dokunmatik Mutfak Musluğu"]'),
+                        caption: 'Dokunmatik Mutfak Musluğu - Akıllı Kontrol, LED Göstergeli'
                     }
                 };
                 
@@ -680,7 +1166,30 @@
                 document.body.style.overflow = "auto";
             }
         }
+        // Kategori bölümüne kaydırma fonksiyonu
+function scrollToCategory(elementId) {
+    const element = document.getElementById(elementId);
+    
+    if (element) {
+        // Hedef elemente yumuşak kaydırma
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
         
+        // Aktif buton stilini güncelle
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Tıklanan kategoriye karşılık gelen butonu aktif yap
+        if (elementId === 'seramik-kategori') {
+            document.querySelectorAll('.category-btn')[0].classList.add('active');
+        } else if (elementId === 'musluk-kategori') {
+            document.querySelectorAll('.category-btn')[1].classList.add('active');
+        }
+    }
+}
         // ESC tuşu ile kapatma
         document.addEventListener("keydown", function(event) {
             if (event.key === "Escape") {
