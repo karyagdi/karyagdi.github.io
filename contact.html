@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim - Süt Çiftliği</title>
+    <title>İletişim - Onur İnşaat</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -79,7 +79,7 @@
             <div class="contact-info">
                 <a href="tel:03121234567">
                     <i class="fas fa-phone"></i>
-                    0 (540) 410 35 00
+                    0 (546) 620 79 94
                 </a>
                 <a href="mailto:info@sutciftligi.com">
                     <i class="fas fa-envelope"></i>
@@ -91,7 +91,7 @@
                 </a>
             </div>
             <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
+                <a href="https://www.facebook.com/Onurinsaatyapimalzemeleri?locale=tr_TR" target="_blank">
                     <i class="fab fa-facebook"></i>
                 </a>
                 <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
@@ -108,7 +108,7 @@
     
         <header>
             <div class="logo-container">
-                <img src="logo.png" alt="Şirket Logosu" class="logo">
+                <img src="onurlogo.png" alt="Şirket Logosu" class="logo">
             </div>
             <nav>
                 <ul>
@@ -154,7 +154,7 @@
                         <p><i class="fas fa-envelope"></i> Email: nukaryagdi@gmail.com</p>
                         <p><i class="fas fa-phone"></i> Telefon: 0 (540) 410 35 00</p>
                         <p><i class="fas fa-map-marker-alt"></i> Adres: Yakup Şevki Paşa Mahallesi Bolvadin/Afyonkarahisar</p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=38.734306,31.033806" 
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=38.70760,31.03403" 
                            target="_blank" 
                            class="directions-button">
                             <i class="fas fa-directions"></i> Yol Tarifi Al
@@ -171,7 +171,7 @@
             <div class="footer-container">
                 <div class="footer-brand">
                     <h3>Süt Çiftliği</h3>
-                    <p>Telefon: 0 (540) 410 35 00</p>
+                    <p>Telefon: 0 (546) 620 79 94</p>
                 </div>
                 <div class="footer-contact">
                     <p>Email: nukaryagdi@gmail.com</p>
@@ -225,7 +225,7 @@ const map = L.map('map', {
     zoom: 15,
     minZoom: 3,
     maxZoom: 22
-}).setView([38.734306, 31.033806], 15);
+}).setView([38.70760,31.03403], 15);
 
 // Create tile layers
 const satelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
@@ -243,8 +243,8 @@ const standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
 satelliteMap.addTo(map);
 
 // Create marker
-const marker = L.marker([38.734306, 31.033806])
-    .bindPopup('Süt Çiftliği<br>Örnek Mahallesi, Tarım Sokak, No: 123, Afyon Bolvadin')
+const marker = L.marker([38.70760,31.03403])
+    .bindPopup('Onur İnşaat<br>Bağlarbaşı, TİCARET BÖLGESİ, 03300 , Afyon Bolvadin')
     .addTo(map)
     .openPopup();
 
