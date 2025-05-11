@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategoriler - Onur İnşaat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header buraya yüklenecek -->
+    <div id="header"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html" class="active">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html">Favorilerim</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="categories-page">
+        <h1 class="page-title">Ürün Kategorileri</h1>
+        <p class="page-description">Aradığınız ürüne göre kategorilerimizi inceleyebilirsiniz.</p>
+
+        <div class="categories-container">
+            <!-- Seramik Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/seramik.jpg" alt="Seramik Ürünleri">
+                </div>
+                <div class="category-content">
+                    <h2>Seramik</h2>
+                    <p>Modern, şık ve dayanıklı seramik ürünleri ile mekanlarınızı yenileyin.</p>
+                    <a href="urunler.html?category=seramik" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+            
+            <!-- Banyo Bataryaları Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/banyo.jpg" alt="Banyo Bataryaları">
+                </div>
+                <div class="category-content">
+                    <h2>Banyo Bataryaları</h2>
+                    <p>Banyonuza şıklık katacak kaliteli ve modern banyo bataryaları.</p>
+                    <a href="urunler.html?category=banyo" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+            
+            <!-- Mutfak Bataryaları Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/mutfak.jpg" alt="Mutfak Bataryaları">
+                </div>
+                <div class="category-content">
+                    <h2>Mutfak Bataryaları</h2>
+                    <p>Mutfaklarınızı fonksiyonel ve estetik mutfak bataryaları ile tamamlayın.</p>
+                    <a href="urunler.html?category=mutfak" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+            
+            <!-- Klozetler Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/klozet.jpg" alt="Klozet Ürünleri">
+                </div>
+                <div class="category-content">
+                    <h2>Klozet & Rezervuar</h2>
+                    <p>Modern tasarımlı ve su tasarruflu klozet ve rezervuar çeşitleri.</p>
+                    <a href="urunler.html?category=klozet" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+            
+            <!-- Lavabolar Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/lavabo.jpg" alt="Lavabo Ürünleri">
+                </div>
+                <div class="category-content">
+                    <h2>Lavabo & Eviyeler</h2>
+                    <p>Her türlü ihtiyaca uygun farklı boyut ve tasarımlarda lavabo ve eviyeler.</p>
+                    <a href="urunler.html?category=lavabo" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+            
+            <!-- Duş Setleri Kategorisi -->
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="images/categories/dus.jpg" alt="Duş Sistemleri">
+                </div>
+                <div class="category-content">
+                    <h2>Duş Sistemleri</h2>
+                    <p>Banyonuzu spa merkezine dönüştürecek şık ve fonksiyonel duş setleri.</p>
+                    <a href="urunler.html?category=dus" class="category-btn">Ürünleri Görüntüle</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer buraya yüklenecek -->
+    <div id="footer"></div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
