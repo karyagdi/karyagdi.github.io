@@ -89,6 +89,60 @@ function initSlider() {
     // Başlangıçta slider'ı başlat
     startSlideInterval();
 }
+// Ürün Hızlı Bakış Modal Fonksiyonu
+function initProductModal() {
+    // Modal elemanlarını al
+    const modal = document.getElementById('product-modal');
+    const modalImg = document.getElementById('modal-image');
+    const captionText = document.getElementById('modal-caption');
+    const closeBtn = document.getElementsByClassName('close-modal')[0];
+    
+    if (!modal) return; // Modal yoksa fonksiyonu sonlandır
+    
+    // Tüm Hızlı Bakış butonlarına tıklama olayı ekle
+    document.querySelectorAll('.quick-view').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // En yakın ürün kartını ve görseli/başlığı al
+            const productCard = this.closest('.product-card');
+            const img = productCard.querySelector('.product-image img');
+            const title = productCard.querySelector('h3').textContent;
+            
+            // Modalda göster
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            captionText.innerHTML = title;
+            
+            // Modal açıkken sayfa kaydırmayı engelle
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // × butonuna tıklayınca modalı kapat
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Görselin dışına tıklayınca modalı kapat
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // ESC tuşuna basınca modalı kapat
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aktif et
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
@@ -103,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         themeToggle: document.getElementById('theme-toggle')
     };
     initSlider();
+    initProductModal();
     // Cart Functions
     function updateCartCount() {
         try {
@@ -297,12 +352,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Load templates and initialize
     Promise.all([
         loadTemplate('header'),
         loadTemplate('footer')
     ]).then(() => {
         updateCartCount();
+        initProductModal(); // Template'ler yüklendikten sonra da modalları başlat
         if (typeof setupCategoryFilter === 'function') setupCategoryFilter();
         if (typeof setupPriceFilter === 'function') setupPriceFilter();
         if (typeof setupSortingFilter === 'function') setupSortingFilter();
