@@ -3,130 +3,997 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uşak Seramik Bayi</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ürünler - Mağaza Adı</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Üst Bar -->
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="contact-info">
-                <a href="tel:03121234567">
-                    <i class="fas fa-phone"></i>
-                    0 (546) 620 79 94
-                </a>
-                <a href="mailto:info@sutciftligi.com">
-                    <i class="fas fa-envelope"></i>
-                    nukaryagdi@gmail.com
-                </a>
-                <a href="https://maps.google.com/?q=Afyon+Bolvadin" target="_blank">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Afyon Bolvadin
-                </a>
+    <div id="header"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html">Favorilerim</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="products-container">
+        <aside class="filters">
+            <div class="filter-group">
+                <h3>Kategoriler</h3>
+                <div class="filter-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="seramik">
+                        <span class="checkmark"></span>
+                        Seramik
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="banyo">
+                        <span class="checkmark"></span>
+                        Banyo Bataryaları
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="mutfak">
+                        <span class="checkmark"></span>
+                        Mutfak Bataryaları
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="category" value="klozet">
+                        <span class="checkmark"></span>
+                        Klozet
+                    </label>
+                </div>
             </div>
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
+
+            <div class="filter-group">
+                <h3>Fiyat Aralığı</h3>
+                <div class="price-filter">
+                    <input type="text" placeholder="Min" class="price-input">
+                    <span>-</span>
+                    <input type="text" placeholder="Max" class="price-input">
+                    <button class="filter-btn">Uygula</button>
+                </div>
             </div>
+
+            <div class="filter-group">
+                <h3>Sıralama</h3>
+                <select class="sort-select">
+                    <option value="popular">En Popüler</option>
+                    <option value="price-low">En Düşük Fiyat</option>
+                    <option value="price-high">En Yüksek Fiyat</option>
+                    <option value="new">En Yeniler</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="products-grid">
+            <div class="product-card" data-category="seramik">
+                
+                <div class="product-image">
+                    <img src="images/images/statuario.jpg" alt="Statuario Goya Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Statiuario Goya Yer Seramiği</h3>
+                    <p class="product-description">30x60 cm, Parlak Yüzey</p>
+                    <div class="product-price">450.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="101" 
+                            data-name="Statiuario Goya Yer Seramiği" 
+                            data-price="450.00" 
+                            data-image="images/statuario.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 2 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/nomerleswhite.jpg" alt="Nomerles White Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Nomerles White Yer Seramiği</h3>
+                    <p class="product-description">60x120, 0.7cm, Mat Yüzey</p>
+                    <div class="product-price">380.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="102" 
+                            data-name="Nomerles White Yer Seramiği" 
+                            data-price="380.00" 
+                            data-image="images/nomerleswhite.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 3 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/shanti.jpg" alt="Shanti Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Shanti Yer Seramiği</h3>
+                    <p class="product-description">60x120, 0.7cm, Ahşap Görünüm</p>
+                    <div class="product-price">520.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="103" 
+                            data-name="Shanti Yer Seramiği" 
+                            data-price="520.00" 
+                            data-image="images/shanti.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 4 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/nomerlesgrey.png" alt="Nomerles Grey Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Nomerles Grey Yer Seramiği</h3>
+                    <p class="product-description">60x120, 0.7cm, Parlak Yüzey</p>
+                    <div class="product-price">490.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="104" 
+                            data-name="Nomerles Grey Yer Seramiği" 
+                            data-price="490.00" 
+                            data-image="images/nomerlesgrey.png">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 5 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/lagomgra.jpg" alt="Lagom Gra Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Lagom Gra Yer Seramiği</h3>
+                    <p class="product-description">60x120, 0.7cm, 3D Yüzey</p>
+                    <div class="product-price">620.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="105" 
+                            data-name="Lagom Gra Yer Seramiği" 
+                            data-price="620.00" 
+                            data-image="images/lagomgra.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 6 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/leedswhite.jpg" alt="Leeds White Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Leeds White Yer Seramiği</h3>
+                    <p class="product-description">60x120 cm, Su Geçirmez</p>
+                    <div class="product-price">420.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="106" 
+                            data-name="Leeds White Yer Seramiği" 
+                            data-price="420.00" 
+                            data-image="images/leedswhite.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 7 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/afyonbeyaz.jpg" alt="Afyon Beyaz Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Afyon Beyaz Yer Seramiği</h3>
+                    <p class="product-description">60x60 cm, Leke Tutmaz</p>
+                    <div class="product-price">480.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="107" 
+                            data-name="Afyon Beyaz Yer Seramiği" 
+                            data-price="480.00" 
+                            data-image="images/afyonbeyaz.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 8 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/noblestatuariowhite.jpg" alt="Noble Statuario White Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Noble Statuario White Yer Seramiği</h3>
+                    <p class="product-description">30x60 cm, Dona Dayanıklı</p>
+                    <div class="product-price">550.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="108" 
+                            data-name="Noble Statuario White Yer Seramiği" 
+                            data-price="550.00" 
+                            data-image="images/noblestatuariowhite.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 9 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/primagri.jpg" alt="Prima Gri Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Prima Gri Yer Seramiği</h3>
+                    <p class="product-description">60x60 cm, Ultra Dayanıklı</p>
+                    <div class="product-price">720.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="109" 
+                            data-name="Prima Gri Yer Seramiği" 
+                            data-price="720.00" 
+                            data-image="images/primagri.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Ürün 10 -->
+            <div class="product-card" data-category="seramik">
+                <div class="product-image">
+                    <img src="images/primabeyaz.jpg" alt="Prima Beyaz Yer Seramiği">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Prima Beyaz Yer Seramiği</h3>
+                    <p class="product-description">60x60 cm, Dekoratif</p>
+                    <div class="product-price">850.00 TL</div>
+                    <button class="add-to-cart-btn" 
+                            data-id="110" 
+                            data-name="Prima Beyaz Yer Seramiği" 
+                            data-price="850.00" 
+                            data-image="images/primabeyaz.jpg">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+            <!-- Ürün 11 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/gildolavabogumus.jpg" alt="Gildo Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
         </div>
     </div>
+    <div class="product-info">
+        <h3>Gildo Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="111" 
+                data-name="Gildo Lavabo Bataryası" 
+                data-price="750.00" 
+                data-image="images/gildolavabogumus.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
-            <img src="onurlogo.png" alt="Şirket Logosu" class="logo">
+<!-- Ürün 12 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/gildolavabo.jpg" alt="Gildo Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li class="dropdown">
-                    <a href="#products">
-                        Faaliyet Alanlarımız
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <ul>
-                            <li><a href="otel.html">Onur Otel</a></li>
-                            <li><a href="insaat.html">Onur İnşaat</a></li>
-                            <li><a href="usak-seramik.html">Uşak Seramik</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="products.html" class="active">Ürünler</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+    </div>
+    <div class="product-info">
+        <h3>Gildo Lavabo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">920.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="112" 
+                data-name="Gildo Lavabo Bataryası" 
+                data-price="920.00" 
+                data-image="images/gildolavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
 
-    <!-- İçerik -->
-    <main style="margin-top: 160px;">
-        <section class="ceramic-section">
-            <div class="ceramic-content">
-                <h2>Uşak Seramik</h2>
-                <div class="ceramic-intro">
-                    <div class="ceramic-text">
-                        <p>
-                            Uşak Seramik olarak, modern tasarım ve yüksek kalite standartlarıyla
-                            ürettiğimiz seramik ürünlerimizle yaşam alanlarınıza değer katıyoruz.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="product-categories">
-                    <h3>Ürün Kategorilerimiz</h3>
-                    <div class="category-grid">
-                        <div class="category-card">
-                            <img src="seramik1.jpg" alt="Yer Seramikleri">
-                            <h4>Yer Seramikleri</h4>
-                            <p>Dayanıklı ve şık tasarımlı yer seramikleri</p>
-                        </div>
-                        <div class="category-card">
-                            <img src="seramik2.jpg" alt="Yer Seramikleri">
-                            <h4>Duvar Seramikleri</h4>
-                            <p>Modern ve estetik duvar seramikleri</p>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>Onur İnşaat</h3>
-                <p>Telefon: 0 (546) 620 79 94</p>
-            </div>
-            <div class="footer-contact">
-                <p>Email: nukaryagdi@gmail.com</p>
-                <p>Adres: Yakup Şevki Paşa Mahallesi Bolvadin/Afyonkarahisar</p>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
+<!-- Ürün 13 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/gildolavabosr.jpg" alt="Gildo Tek Gövde Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
         </div>
-        <p>&copy; 2025 Onur İnşaat. Tüm hakları saklıdır.</p>
-    </footer>
-    <script src="script.js"></script>
+    </div>
+    <div class="product-info">
+        <h3>Gildo Tek Gövde Lavabo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">850.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="113" 
+                data-name="Gildo Tek Gövde Lavabo Bataryası" 
+                data-price="850.00" 
+                data-image="images/gildolavabosr.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 14 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/adriolavabo.jpg" alt="Adrio Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Adrio Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="114" 
+                data-name="Adrio Lavabo Bataryası" 
+                data-price="1200.00" 
+                data-image="images/adriolavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 15 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/atroslavabo.jpg" alt="Atros Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Atros Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1850.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="115" 
+                data-name="Atros Lavabo Bataryası" 
+                data-price="1850.00" 
+                data-image="images/atroslavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 16 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/espinalavabo.jpg" alt="Espina Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Espina Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1450.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="116" 
+                data-name="Espina Lavabo Bataryası" 
+                data-price="1450.00" 
+                data-image="images/espinalavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 17 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/ritmolavabo.jpg" alt="Ritmo Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Ritmo Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">2200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="117" 
+                data-name="Ritmo Lavabo Bataryası" 
+                data-price="2200.00" 
+                data-image="images/ritmolavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 18 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/providolavaboa.jpg" alt="Provido Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Provido Lavabo Bataryası</h3>
+        <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+        <div class="product-price">980.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="118" 
+                data-name="Provido Lavabo Bataryası" 
+                data-price="980.00" 
+                data-image="images/providolavaboa.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 19 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/taurolavabosiyah.jpg" alt="Tauro Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Tauro Lavabo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">3200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="119" 
+                data-name="Tauro Lavabo Bataryası" 
+                data-price="3200.00" 
+                data-image="images/taurolavabosiyah.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 20 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/taurolavabos.jpg" alt="Tauro Set Üstü Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Tauro Set Üstü Lavabo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="120" 
+                data-name="Tauro Set Üstü Lavabo Bataryası" 
+                data-price="1750.00" 
+                data-image="images/taurolavabos.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 21 - Lavabo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/pruvalavabo.jpg" alt="Pruva Lavabo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Pruva Lavabo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="121" 
+                data-name="Pruva Lavabo Bataryası" 
+                data-price="750.00" 
+                data-image="images/pruvalavabo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 22 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/atrosevye.jpg" alt="Atros Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Atros Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">920.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="122" 
+                data-name="Atros Eviye Bataryası" 
+                data-price="920.00" 
+                data-image="images/atrosevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 23 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/espinaevye.jpg" alt="Espina Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Espina Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">850.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="123" 
+                data-name="Espina Eviye Bataryası" 
+                data-price="850.00" 
+                data-image="images/espinaevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 24 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/felisevye.jpg" alt="Felis Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Felis Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="124" 
+                data-name="Felis Eviye Bataryası" 
+                data-price="1200.00" 
+                data-image="images/felisevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 25 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/florusevye.jpg" alt="Florus Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Florus Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1850.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="125" 
+                data-name="Florus Eviye Bataryası" 
+                data-price="1850.00" 
+                data-image="images/florusevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 26 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/freziaevye.jpg" alt="Frezia Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Frezia Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1450.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="126" 
+                data-name="Frezia Eviye Bataryası" 
+                data-price="1450.00" 
+                data-image="images/freziaevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 27 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/gpdtauroevye.jpg" alt="Tauro Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Tauro Eviye Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">2200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="127" 
+                data-name="Tauro Eviye Bataryası" 
+                data-price="2200.00" 
+                data-image="images/gpdtauroevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 28 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/providoevye.jpg" alt="Provido Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Provido Eviye Bataryası</h3>
+        <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+        <div class="product-price">980.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="128" 
+                data-name="Provido Eviye Bataryası" 
+                data-price="980.00" 
+                data-image="images/providoevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 29 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/pedraevye.jpg" alt="Pedra Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Pedra Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">3200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="129" 
+                data-name="Pedra Eviye Bataryası" 
+                data-price="3200.00" 
+                data-image="images/pedraevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 30 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/ritmoevye.jpg" alt="Ritmo Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Ritmo Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="130" 
+                data-name="Ritmo Eviye Bataryası" 
+                data-price="1750.00" 
+                data-image="images/ritmoevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+<!-- Ürün 31 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/solusevye.jpg" alt="Solus Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Solus Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="131" 
+                data-name="Solus Eviye Bataryası" 
+                data-price="1750.00" 
+                data-image="images/solusevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 32 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/claireevye.jpg" alt="Claire Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Claire Eviye Bataryası</h3>
+        <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+        <div class="product-price">980.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="132" 
+                data-name="Claire Eviye Bataryası" 
+                data-price="980.00" 
+                data-image="images/claireevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 33 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/spirallievye.jpg" alt="Spiralli Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Spiralli Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">3200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="133" 
+                data-name="Spiralli Eviye Bataryası" 
+                data-price="3200.00" 
+                data-image="images/spirallievye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 34 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/karespiralevye.jpg" alt="Kare Spiral Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Kare Spiral Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="134" 
+                data-name="Kare Spiral Eviye Bataryası" 
+                data-price="1750.00" 
+                data-image="images/karespiralevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 35 - Eviye Bataryası -->
+<div class="product-card" data-category="mutfak">
+    <div class="product-image">
+        <img src="images/pruvaevye.jpg" alt="Pruva Eviye Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Pruva Eviye Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="135" 
+                data-name="Pruva Eviye Bataryası" 
+                data-price="1750.00" 
+                data-image="images/pruvaevye.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 36 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/atrosbanyo.jpg" alt="Atros Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Atros Banyo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">3200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="136" 
+                data-name="Atros Banyo Bataryası" 
+                data-price="3200.00" 
+                data-image="images/atrosbanyo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 37 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/espinabanyo.jpg" alt="Espina Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Espina Banyo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="137" 
+                data-name="Espina Banyo Bataryası" 
+                data-price="1750.00" 
+                data-image="images/espinabanyo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 38 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/florusbanyo.jpg" alt="Florus Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Florus Banyo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="138" 
+                data-name="Florus Banyo Bataryası" 
+                data-price="1750.00" 
+                data-image="images/florusbanyo.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 39 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/gildobanyosr.jpg" alt="Gildo Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Gildo Banyo Bataryası</h3>
+        <p class="product-description">Siyah Kaplama, Su Tasarruflu</p>
+        <div class="product-price">980.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="139" 
+                data-name="Gildo Banyo Bataryası" 
+                data-price="980.00" 
+                data-image="images/gildobanyosr.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 40 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/gpdprovido.jpg" alt="Provido Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Provido Banyo Bataryası</h3>
+        <p class="product-description">Krom Kaplama, Su Tasarruflu</p>
+        <div class="product-price">3200.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="140" 
+                data-name="Provido Banyo Bataryası" 
+                data-price="3200.00" 
+                data-image="images/gpdprovido.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+
+<!-- Ürün 41 - Banyo Bataryası -->
+<div class="product-card" data-category="banyo">
+    <div class="product-image">
+        <img src="images/taurobanyoa.jpg" alt="Tauro Banyo Bataryası">
+        <div class="product-overlay">
+            <button class="quick-view">Hızlı Bakış</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h3>Tauro Banyo Bataryası</h3>
+        <p class="product-description">Gold Kaplama, Su Tasarruflu</p>
+        <div class="product-price">1750.00 TL</div>
+        <button class="add-to-cart-btn" 
+                data-id="141" 
+                data-name="Tauro Banyo Bataryası" 
+                data-price="1750.00" 
+                data-image="images/taurobanyoa.jpg">
+            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+        </button>
+    </div>
+</div>
+            <!-- Additional product cards with same structure -->
+        </main>
+    </div>
+
+    <div class="pagination">
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">...</button>
+        <button class="pagination-btn">10</button>
+    </div>
+
+    <div id="footer"></div>
+    <script src="scripts.js"></script>
 </body>
 </html>
