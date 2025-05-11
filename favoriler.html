@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorilerim - Onur İnşaat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header buraya yüklenecek -->
+    <div id="header"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html" class="active">Favorilerim</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="favorites-page">
+        <div class="favorites-container">
+            <h1>Favori Ürünlerim</h1>
+            
+            <div id="favorites-items">
+                <!-- Favoriler JavaScript ile burada listelenecek -->
+            </div>
+            
+            <div id="empty-favorites-message" style="display: none;">
+                <div class="empty-message">
+                    <i class="fas fa-heart-broken"></i>
+                    <h2>Favori Listeniz Boş</h2>
+                    <p>Beğendiğiniz ürünleri favorilerinize ekleyerek daha sonra kolayca bulabilirsiniz.</p>
+                    <a href="urunler.html" class="continue-shopping">Ürünleri İncele</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer buraya yüklenecek -->
+    <div id="footer"></div>
+
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Favorileri göster
+            displayFavorites();
+            
+            // Event delegation for removing items from favorites
+            document.getElementById('favorites-items').addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-favorite') || e.target.closest('.remove-favorite')) {
+                    const itemId = e.target.closest('.favorite-item').dataset.id;
+                    removeFromFavorites(itemId);
+                }
+                
+                if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
+                    const item = e.target.closest('.favorite-item');
+                    const itemData = {
+                        id: item.dataset.id,
+                        name: item.dataset.name,
+                        price: parseFloat(item.dataset.price),
+                        image: item.dataset.image
+                    };
+                    addToCartFromFavorites(itemData);
+                }
+            });
+            
+            function displayFavorites() {
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const favoritesContainer = document.getElementById('favorites-items');
+                const emptyMessage = document.getElementById('empty-favorites-message');
+                
+                if (favorites.length === 0) {
+                    favoritesContainer.style.display = 'none';
+                    emptyMessage.style.display = 'block';
+                    return;
+                }
+                
+                favoritesContainer.style.display = 'block';
+                emptyMessage.style.display = 'none';
+                
+                favoritesContainer.innerHTML = favorites.map(item => `
+                    <div class="favorite-item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">
+                        <img src="${item.image}" alt="${item.name}" class="item-image">
+                        <div class="item-details">
+                            <h3 class="item-title">${item.name}</h3>
+                            <div class="item-price">${item.price.toFixed(2)} TL</div>
+                            <div class="item-actions">
+                                <button class="add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                                </button>
+                                <button class="remove-favorite">
+                                    <i class="fas fa-trash"></i> Favorilerden Çıkar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            function removeFromFavorites(itemId) {
+                try {
+                    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    favorites = favorites.filter(item => item.id !== itemId);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    displayFavorites();
+                    showNotification('Ürün favorilerden kaldırıldı', 'info');
+                } catch (error) {
+                    console.error('Favori kaldırılırken hata oluştu:', error);
+                    showNotification('İşlem sırasında bir hata oluştu', 'error');
+                }
+            }
+            
+            function addToCartFromFavorites(itemData) {
+                try {
+                    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                    const existingItem = cart.find(item => item.id === itemData.id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            ...itemData,
+                            quantity: 1
+                        });
+                    }
+                    
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    showNotification(`${itemData.name} sepete eklendi!`, 'success');
+                } catch (error) {
+                    console.error('Sepete eklenirken hata oluştu:', error);
+                    showNotification('Ürün sepete eklenirken hata oluştu', 'error');
+                }
+            }
+            
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                    document.getElementById('cart-count').textContent = totalCount;
+                } catch (error) {
+                    console.error('Sepet sayacı güncellenirken hata oluştu:', error);
+                }
+            }
+            
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                requestAnimationFrame(() => {
+                    notification.classList.add('show');
+                });
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
