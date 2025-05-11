@@ -3,135 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onur İnşaat</title>
+    <title>ONUR İNŞAAT - Ana Sayfa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="contact-info">
-                <a href="tel:03121234567">
-                    <i class="fas fa-phone"></i>
-                    0 (546) 620 79 94
-                </a>
-                <a href="mailto:info@sutciftligi.com">
-                    <i class="fas fa-envelope"></i>
-                    nukaryagdi@gmail.com
-                </a>
-                <a href="https://maps.google.com/?q=Afyon+Bolvadin" target="_blank">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Afyon Bolvadin
-                </a>
-            </div>
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Header buraya yüklenecek -->
+    <div id="header"></div>
 
-    <header>
-        <div class="logo-container">
-            <img src="onurlogo.png" alt="Şirket Logosu" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li class="dropdown">
-                    <a href="#products">
-                        Faaliyet Alanlarımız
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <ul>
-                            <li><a href="otel.html">Onur Otel</a></li>
-                            <li><a href="insaat.html">Onur İnşaat</a></li>
-                            <li><a href="usak-seramik.html">Uşak Seramik</a></li>
-                        </ul>
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html">Favorilerim</a></li>
+            <!-- Tema Değiştirme Düğmesi -->
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
                     </div>
-                </li>
-                <li><a href="products.html" class="active">Ürünler</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="showcase">
-            <div class="slider-container">
-                <button class="slider-button prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-button next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                <div class="slider-title">
-                    <h1></h1>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slides">
+                <div class="slide active">
+                    <img src="images/slider/onurins.jpg" alt="Kaliteli Batarya Ürünleri">
+                    <div class="slide-content">
+                        <h2></h2>
+                        <p>Mutfak ve banyolarınız için modern tasarımlar</p>
+                        <a href="urunler.html" class="btn">İncele</a>
+                    </div>
                 </div>
-                <div class="slides">
-                    <div class="slide active">
-                        <img src="onurins.jpg" alt="onur inşaat">
+                <div class="slide">
+                    <img src="images/slider/vitrareklam.png" alt="Seramik Koleksiyonu">
+                    <div class="slide-content">
+                        <h2>Vitra Kalitesi</h2>
+                        <p></p>
+                        <a href="urunler.html" class="btn">İncele</a>
                     </div>
-                    <div class="slide">
-                        <img src="bienreklam.jpg" alt="onur inşaat">
+                </div>
+                <div class="slide">
+                    <img src="images/slider/dyoreklam.jpg" alt="Klozet Modelleri">
+                    <div class="slide-content">
+                        <h2>Çeşit Çeşit DYO Boya</h2>
+                        <p>Mekanlarınızı Güzelleştirin</p>
+                        <a href="urunler.html" class="btn">İncele</a>
                     </div>
-                    <div class="slide">
-                        <img src="dyoreklam.jpg" alt="onur inşaat">
+                </div>
+                <div class="slide">
+                    <img src="images/slider/bienreklam.jpg" alt="Mutfak Setleri">
+                    <div class="slide-content">
+                        <h2>Bien Seramik Fayanslar</h2>
+                        <p>Her mutfağa uygun çeşitler</p>
+                        <a href="urunler.html" class="btn">İncele</a>
                     </div>
-                    <div class="slide">
-                        <img src="quareklam1.jpg" alt="onur inşaat">
+                </div>
+                <div class="slide">
+                    <img src="images/slider/varioreklam.jpg" alt="Banyo Setleri">
+                    <div class="slide-content">
+                        <h2>Banyo Bataryaları</h2>
+                        <p>Modern ve klasik tasarımlar</p>
+                        <a href="urunler.html" class="btn">İncele</a>
                     </div>
-                    <div class="slide">
-                        <img src="varioreklam.jpg" alt="onur inşaat">
-                    </div>
-                    <div class="slide">
-                        <img src="vitrareklam.png" alt="onur inşaat">
+                </div>
+                <div class="slide">
+                    <img src="images/slider/quareklam1.jpg" alt="Özel Fırsatlar">
+                    <div class="slide-content">
+                        <h2></h2>
+                        <p></p>
+                        <a href="urunler.html" class="btn">İncele</a>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="about">
-            <h2>Hakkımızda</h2>
-            <p>Bizler, ihtiyacınız olan inşaat malzemelerinizi temin ediyoruz.</p>
-        </section>
-        
-
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>Onur İnşaat</h3>
-                <p>Telefon: 0 (546) 620 79 94</p>
-            </div>
-            <div class="footer-contact">
-                <p>Email: nukaryagdi@gmail.com</p>
-                <p>Adres: Yakup Şevki Paşa Mahallesi Bolvadin/Afyonkarahisar</p>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=100047628467259" target="_blank">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/harlak_koyunculuk03/" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/@bolvadinharlakkoyunculuk8604" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
+            
+            <!-- Slider Kontrolleri -->
+            <div class="slider-controls">
+                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                    <span class="dot" data-slide="5"></span>
+                </div>
+                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-        <p>&copy; 2025  Onur İnşaat. Tüm hakları saklıdır.</p>
-    </footer>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="featured-products">
+        <h2>Öne Çıkan Ürünler</h2>
+        <div class="product-grid">
+            <!-- Ürün 1 -->
+            <div class="product">
+                <a href="product1.html">
+                    <img src="images/claireevye.jpg" alt="Eca Niobe Eviye Bataryası">
+                </a>
+                <h3><a href="product1.html">GPD Claire Eviye Bataryası</a></h3>
+                <p>GPD Claire Eviye Bataryası, şık tasarımı ve yüksek performansıyla mutfaklarınıza değer katıyor.</p>
+                <div class="product-footer">
+                    <div class="price-container">
+                        <span class="price">499.99 TL</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="add-to-cart-btn" data-id="1" data-name="Eca Niobe Eviye Bataryası" data-price="499.99" data-image="images/product1.jpg">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün 2 -->
+            <div class="product">
+                <a href="product2.html">
+                    <img src="images/felisevye.jpg" alt="Eca Spylos Spiralli Eviye Bataryası">
+                </a>
+                <h3><a href="product2.html">Felis Eviye Bataryası</a></h3>
+                <p>Felis Eviye Bataryası, mutfaklarınıza modern bir dokunuş katıyor.</p>
+                <div class="product-footer">
+                    <div class="price-container">
+                        <span class="price">799.99 TL</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="add-to-cart-btn" data-id="2" data-name="Eca Spylos Spiralli Eviye Bataryası" data-price="799.99" data-image="images/product2.jpg">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ürün 3 -->
+            <div class="product">
+                <a href="product3.html">
+                    <img src="images/providoevye.jpg" alt="Eca Ar Liona Spiralli Eviye Bataryası">
+                </a>
+                <h3><a href="product3.html">Provido Eviye Bataryası</a></h3>
+                <p>Provido Eviye Bataryası, zarif tasarımı ve pratik kullanımı bir araya getiriyor.</p>
+                <div class="product-footer">
+                    <div class="price-container">
+                        <span class="price">649.99 TL</span>
+                    </div>
+                    <div class="button-container">
+                        <button class="add-to-cart-btn" data-id="3" data-name="Eca Ar Liona Spiralli Eviye Bataryası" data-price="649.99" data-image="images/product3.jpg">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Kategoriler</h2>
+        <div class="category-grid">
+            <div class="category">
+                <img src="images/category1.jpg" alt="Kategori 1">
+                <h3>Kategori 1</h3>
+                <a href="kategoriler.html" class="btn">Görüntüle</a>
+            </div>
+            <div class="category">
+                <img src="images/category2.jpg" alt="Kategori 2">
+                <h3>Kategori 2</h3>
+                <a href="kategoriler.html" class="btn">Görüntüle</a>
+            </div>
+            <div class="category">
+                <img src="images/category3.jpg" alt="Kategori 3">
+                <h3>Kategori 3</h3>
+                <a href="kategoriler.html" class="btn">Görüntüle</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer buraya yüklenecek -->
+    <div id="footer"></div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
