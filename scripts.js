@@ -89,6 +89,7 @@ function initSlider() {
     // Başlangıçta slider'ı başlat
     startSlideInterval();
 }
+
 // Ürün Hızlı Bakış Modal Fonksiyonu
 function initProductModal() {
     // Modal elemanlarını al
@@ -143,6 +144,7 @@ function initProductModal() {
         document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aktif et
     }
 }
+
 // Fiyat filtreleme işlevi
 function setupPriceFilter() {
     const filterBtn = document.querySelector('.filter-btn');
@@ -213,6 +215,226 @@ function loadFilterState() {
     }
 }
 
+function initMap() {
+    // Harita konteynerini kontrol et
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) {
+        console.error("Harita konteyneri bulunamadı");
+        return;
+    }
+    
+    console.log("Harita başlatılıyor...");
+    
+    // Haritayı başlat
+    const map = L.map('map', {
+        attributionControl: false,
+        maxZoom: 17,
+        minZoom: 3,
+        zoomControl: true
+    }).setView([38.70760, 31.03403], 13);
+    
+    // Harita katmanları
+    const standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '',
+        maxZoom: 17
+    });
+    
+    const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '',
+        maxZoom: 17
+    });
+    
+    // Varsayılan olarak uydu haritasını ekle
+    satelliteMap.addTo(map);
+    
+    // Global fonksiyonları tanımla
+    window.switchToSatellite = function() {
+        map.removeLayer(standardMap);
+        map.addLayer(satelliteMap);
+    };
+    
+    window.switchToMap = function() {
+        map.removeLayer(satelliteMap);
+        map.addLayer(standardMap);
+    };
+    
+    // Zoom denetimi - maksimum zoom seviyesini zorla
+    map.on('zoomend', function() {
+        if (map.getZoom() > 17) {
+            map.setZoom(17); // Maksimum 17 zoom seviyesine zorla
+        }
+    });
+
+    // Her zoom denemesinde önceden kontrol et
+    map.on('zoomanim', function(e) {
+        if (e.zoom > 17) {
+            e.zoom = 17;
+        }
+    });
+    
+    // Yol tarifi butonu
+    const directionsBtn = document.getElementById('directions-btn');
+    if (directionsBtn) {
+        directionsBtn.addEventListener('click', function() {
+            const lat = 38.70760;
+            const lng = 31.03403;
+            const locationName = encodeURIComponent("Onur İnşaat");
+            
+            // Cihaz kontrolü
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            let url;
+            if (isIOS) {
+                url = `https://maps.apple.com/?q=${locationName}&ll=${lat},${lng}`;
+            } else {
+                url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+            }
+            
+            window.open(url, '_blank');
+        });
+    }
+    
+    // Harita yüklenince bir kez tekrar görüntüleri yükle (bazen bu gereklidir)
+    map.whenReady(function() {
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+    });
+    
+    
+}
+    
+    // Yol tarifi butonu
+    const directionsBtn = document.getElementById('directions-btn');
+    if (directionsBtn) {
+        directionsBtn.addEventListener('click', function() {
+            const lat = 38.70760;
+            const lng = 31.03403;
+            const locationName = encodeURIComponent("Onur İnşaat");
+            
+            // Cihaz kontrolü
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            let url;
+            if (isIOS) {
+                url = `https://maps.apple.com/?q=${locationName}&ll=${lat},${lng}`;
+            } else {
+                url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+            }
+            
+            window.open(url, '_blank');
+        });
+    }
+    
+    // Harita yüklenince bir kez tekrar görüntüleri yükle (bazen bu gereklidir)
+    map.whenReady(function() {
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+    });
+    
+    // Zoom seviyesi değiştiğinde hata mesajlarını temizle
+    map.on('zoomend', function() {
+        if (map.getZoom() > 17) {
+            map.setZoom(17);
+        }
+    });
+
+
+// Kategori filtreleme
+function setupCategoryFilter() {
+    const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
+    if (!categoryCheckboxes.length) return;
+    
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterProducts);
+    });
+    
+    // Sayfa yüklendiğinde seçilen kategorileri göster
+    filterProducts();
+    
+    function filterProducts() {
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+        
+        const products = document.querySelectorAll('.product-card');
+        
+        products.forEach(product => {
+            const category = product.dataset.category;
+            
+            // Hiçbir kategori seçilmemişse veya ürün seçilen kategorilerden birindeyse göster
+            if (selectedCategories.length === 0 || selectedCategories.includes(category)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+        
+        // Fiyat filtresi de uygulandıysa, onu da dikkate al
+        if (document.querySelector('.price-input')) {
+            applyPriceFilter();
+        }
+    }
+}
+
+// Fiyat filtresini uygula
+function applyPriceFilter() {
+    const minPrice = parseFloat(document.querySelectorAll('.price-input')[0].value) || 0;
+    const maxPrice = parseFloat(document.querySelectorAll('.price-input')[1].value) || Infinity;
+    
+    const products = document.querySelectorAll('.product-card');
+    
+    products.forEach(product => {
+        // Eğer kategori filtresinden dolayı zaten gizliyse, fiyat filtresini atla
+        if (product.style.display === 'none') return;
+        
+        const priceText = product.querySelector('.product-price').textContent;
+        const price = parseFloat(priceText.replace(/[^\d.]/g, '')); // TL gibi karakterleri kaldır
+        
+        if (price >= minPrice && price <= maxPrice) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
+// Sıralama filtresi
+function setupSortingFilter() {
+    const sortSelect = document.querySelector('.sort-select');
+    if (!sortSelect) return;
+    
+    sortSelect.addEventListener('change', function() {
+        const sortBy = this.value;
+        const products = Array.from(document.querySelectorAll('.product-card'));
+        const productsGrid = document.querySelector('.products-grid');
+        
+        // Ürünleri seçilen kritere göre sırala
+        products.sort((a, b) => {
+            if (sortBy === 'price-low') {
+                const priceA = parseFloat(a.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+                const priceB = parseFloat(b.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+                return priceA - priceB;
+            } 
+            else if (sortBy === 'price-high') {
+                const priceA = parseFloat(a.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+                const priceB = parseFloat(b.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+                return priceB - priceA;
+            }
+            // Diğer sıralama kriterleri için (popular, new) şimdilik ID'ye göre sırala
+            else {
+                const idA = a.querySelector('.add-to-cart-btn').dataset.id;
+                const idB = b.querySelector('.add-to-cart-btn').dataset.id;
+                return idA - idB;
+            }
+        });
+        
+        // Sıralanmış ürünleri DOM'a ekle
+        products.forEach(product => productsGrid.appendChild(product));
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
     const elements = {
@@ -225,50 +447,16 @@ document.addEventListener('DOMContentLoaded', function () {
         loginForm: document.getElementById('loginForm'),
         themeToggle: document.getElementById('theme-toggle')
     };
-    const map = L.map('map').setView([38.70760, 31.03403], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Add marker
-    L.marker([38.70760, 31.03403]).addTo(map)
-        .bindPopup('Onur İnşaat Burada!')
-        .openPopup();
     
-    // Yol tarifi butonuna tıklama olayı ekle
-    const directionsBtn = document.getElementById('directions-btn');
-    if (directionsBtn) {
-        directionsBtn.addEventListener('click', function() {
-            // Koordinatlar
-            const lat = 38.70760;
-            const lng = 31.03403;
-            
-            // Mobil cihaz kontrolü
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
-            // Uygun URL'yi oluştur
-            let url;
-            if (isMobile) {
-                // Mobil cihaz için cihazın varsayılan harita uygulamasını açacak URL
-                url = `geo:${lat},${lng}?q=${lat},${lng}(Onur İnşaat)`;
-                
-                // iOS için Apple Maps
-                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                    url = `maps://maps.apple.com/?q=Onur+İnşaat&ll=${lat},${lng}`;
-                }
-            } else {
-                // Masaüstü için Google Maps
-                url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=Onur+İnşaat`;
-            }
-            
-            // URL'yi yeni sekmede aç
-            window.open(url, '_blank');
-        });
-    }
+    // Başlangıç fonksiyonları
     initSlider();
     initProductModal();
+    initMap();
+    setupCategoryFilter();
     setupPriceFilter();
+    setupSortingFilter();
     loadFilterState();
+    
     // Cart Functions
     function updateCartCount() {
         try {
