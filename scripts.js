@@ -218,36 +218,37 @@ function loadFilterState() {
 function initMap() {
     // Harita konteynerini kontrol et
     const mapContainer = document.getElementById('map');
-    if (!mapContainer) {
-        console.error("Harita konteyneri bulunamadı");
-        return;
-    }
+    if (!mapContainer) return;
     
     console.log("Harita başlatılıyor...");
     
-    // Haritayı başlat
+    // Haritayı başlat 
     const map = L.map('map', {
         attributionControl: false,
-        maxZoom: 17,
-        minZoom: 3,
+        maxZoom: 19,
         zoomControl: true
     }).setView([38.70760, 31.03403], 13);
     
-    // Harita katmanları
+    // Standart harita katmanı
     const standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '',
-        maxZoom: 17
+        maxZoom: 19
     });
     
+    // ESRI uydu görüntüleri - daha güvenilir
     const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: '',
-        maxZoom: 17
+        maxZoom: 19
     });
     
     // Varsayılan olarak uydu haritasını ekle
     satelliteMap.addTo(map);
     
-    // Global fonksiyonları tanımla
+    // İşaretleyici ekle
+    const marker = L.marker([38.70760, 31.03403]).addTo(map);
+    marker.bindPopup('Onur İnşaat Burada!').openPopup();
+    
+    // Global fonksiyonlar
     window.switchToSatellite = function() {
         map.removeLayer(standardMap);
         map.addLayer(satelliteMap);
@@ -258,51 +259,22 @@ function initMap() {
         map.addLayer(standardMap);
     };
     
-    // Zoom denetimi - maksimum zoom seviyesini zorla
-    map.on('zoomend', function() {
-        if (map.getZoom() > 17) {
-            map.setZoom(17); // Maksimum 17 zoom seviyesine zorla
+    // CSS ekle - hata mesajlarını ve fazla logoları gizlemek için
+    const style = document.createElement('style');
+    style.textContent = `
+        .leaflet-container .leaflet-control-attribution {
+            display: none !important;
         }
-    });
-
-    // Her zoom denemesinde önceden kontrol et
-    map.on('zoomanim', function(e) {
-        if (e.zoom > 17) {
-            e.zoom = 17;
+        .leaflet-tile-container img {
+            border: none !important;
         }
-    });
-    
-    // Yol tarifi butonu
-    const directionsBtn = document.getElementById('directions-btn');
-    if (directionsBtn) {
-        directionsBtn.addEventListener('click', function() {
-            const lat = 38.70760;
-            const lng = 31.03403;
-            const locationName = encodeURIComponent("Onur İnşaat");
-            
-            // Cihaz kontrolü
-            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            
-            let url;
-            if (isIOS) {
-                url = `https://maps.apple.com/?q=${locationName}&ll=${lat},${lng}`;
-            } else {
-                url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-            }
-            
-            window.open(url, '_blank');
-        });
-    }
-    
-    // Harita yüklenince bir kez tekrar görüntüleri yükle (bazen bu gereklidir)
-    map.whenReady(function() {
-        setTimeout(function() {
-            map.invalidateSize();
-        }, 100);
-    });
+        .leaflet-tile-loaded {
+            opacity: 1 !important;
+        }
+    `;
+    document.head.appendChild(style);
     
     
-}
     
     // Yol tarifi butonu
     const directionsBtn = document.getElementById('directions-btn');
@@ -339,7 +311,7 @@ function initMap() {
             map.setZoom(17);
         }
     });
-
+}
 
 // Kategori filtreleme
 function setupCategoryFilter() {
