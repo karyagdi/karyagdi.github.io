@@ -143,6 +143,75 @@ function initProductModal() {
         document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aktif et
     }
 }
+// Fiyat filtreleme işlevi
+function setupPriceFilter() {
+    const filterBtn = document.querySelector('.filter-btn');
+    const priceInputs = document.querySelectorAll('.price-input');
+    const productCards = document.querySelectorAll('.product-card');
+    
+    if (!filterBtn) return; // Buton yoksa işlemi sonlandır
+    
+    filterBtn.addEventListener('click', function() {
+        const minPrice = parseFloat(priceInputs[0].value) || 0;
+        const maxPrice = parseFloat(priceInputs[1].value) || Infinity;
+        
+        productCards.forEach(card => {
+            // Ürün fiyatını al (içeriği temizleyerek sadece sayısal değeri al)
+            const priceText = card.querySelector('.product-price').textContent;
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+            
+            // Fiyat aralığına göre ürünü göster/gizle
+            if (price >= minPrice && price <= maxPrice) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Filtreleme durumunu kaydedelim
+        saveFilterState();
+    });
+    
+    // Enter tuşuna basıldığında da filtrelesin
+    priceInputs.forEach(input => {
+        input.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                filterBtn.click();
+            }
+        });
+    });
+}
+
+// Filtre durumunu kaydetme
+function saveFilterState() {
+    const minValue = document.querySelectorAll('.price-input')[0].value;
+    const maxValue = document.querySelectorAll('.price-input')[1].value;
+    
+    if (minValue || maxValue) {
+        sessionStorage.setItem('minPrice', minValue);
+        sessionStorage.setItem('maxPrice', maxValue);
+    }
+}
+
+// Kaydedilen filtre durumunu yükleme
+function loadFilterState() {
+    const minPrice = sessionStorage.getItem('minPrice');
+    const maxPrice = sessionStorage.getItem('maxPrice');
+    const priceInputs = document.querySelectorAll('.price-input');
+    
+    if (minPrice && priceInputs.length > 0) {
+        priceInputs[0].value = minPrice;
+    }
+    
+    if (maxPrice && priceInputs.length > 1) {
+        priceInputs[1].value = maxPrice;
+    }
+    
+    // Eğer değerler varsa, filtreyi uygula
+    if ((minPrice || maxPrice) && document.querySelector('.filter-btn')) {
+        document.querySelector('.filter-btn').click();
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
@@ -156,8 +225,50 @@ document.addEventListener('DOMContentLoaded', function () {
         loginForm: document.getElementById('loginForm'),
         themeToggle: document.getElementById('theme-toggle')
     };
+    const map = L.map('map').setView([38.70760, 31.03403], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add marker
+    L.marker([38.70760, 31.03403]).addTo(map)
+        .bindPopup('Onur İnşaat Burada!')
+        .openPopup();
+    
+    // Yol tarifi butonuna tıklama olayı ekle
+    const directionsBtn = document.getElementById('directions-btn');
+    if (directionsBtn) {
+        directionsBtn.addEventListener('click', function() {
+            // Koordinatlar
+            const lat = 38.70760;
+            const lng = 31.03403;
+            
+            // Mobil cihaz kontrolü
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // Uygun URL'yi oluştur
+            let url;
+            if (isMobile) {
+                // Mobil cihaz için cihazın varsayılan harita uygulamasını açacak URL
+                url = `geo:${lat},${lng}?q=${lat},${lng}(Onur İnşaat)`;
+                
+                // iOS için Apple Maps
+                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    url = `maps://maps.apple.com/?q=Onur+İnşaat&ll=${lat},${lng}`;
+                }
+            } else {
+                // Masaüstü için Google Maps
+                url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=Onur+İnşaat`;
+            }
+            
+            // URL'yi yeni sekmede aç
+            window.open(url, '_blank');
+        });
+    }
     initSlider();
     initProductModal();
+    setupPriceFilter();
+    loadFilterState();
     // Cart Functions
     function updateCartCount() {
         try {
