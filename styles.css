@@ -1249,25 +1249,40 @@ nav ul li {
 .filter-btn:hover {
     background-color: var(--secondary-color, #388E3C);
 }
+
+
 /* Harita konteyner stili */
 #map-container {
-    position: relative;
+    position: relative; /* Bu önemli - içindeki butonların konumlandırılması için */
     width: 100%;
     height: 400px;
     margin: 30px 0;
+    border-radius: 8px;
+    overflow: visible; /* Harita kontrolleri görünebilsin */
 }
 
 #map {
     width: 100%;
     height: 100%;
+    border-radius: 8px;
+    z-index: 1;
+}
+/* Harita kontrol butonları için düzenlenmiş stil */
+.map-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* Haritanın üzerinde görünmesi için yüksek z-index */
+    display: flex;
+    gap: 5px;
 }
 
-/* Yol tarifi butonu stili */
+/* Yol tarifi butonu stili - harita içerisinde doğru konumda */
 .directions-btn {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    z-index: 400;
+    z-index: 1000;
     background-color: var(--primary-color, #4CAF50);
     color: white;
     border: none;
@@ -1282,20 +1297,32 @@ nav ul li {
     gap: 8px;
     transition: background-color 0.3s, transform 0.1s;
 }
-
 .directions-btn:hover {
     background-color: var(--secondary-color, #388E3C);
     transform: translateY(-2px);
 }
-
 .directions-btn:active {
     transform: translateY(0);
 }
+
 
 /* Karanlık mod uyumu */
 body.dark-mode .directions-btn {
     background-color: var(--accent-color, #66BB6A);
     color: #222;
+}
+/* Mobil uyumluluğu */
+@media (max-width: 768px) {
+    #map-container {
+        height: 300px;
+    }
+    
+    .directions-btn {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
 }
 
 /* Mobil cihaz uyumluluğu */
