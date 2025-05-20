@@ -407,6 +407,141 @@ function setupSortingFilter() {
     });
 }
 
+// Ürünleri localStorage'dan yükleme fonksiyonu
+function loadProductsFromAdmin() {
+    const productsGrid = document.querySelector('.products-grid');
+    if (!productsGrid) return; // Eğer ürünler sayfasında değilsek, çık
+    
+    // Admin tarafından eklenen ürünleri al
+    const adminProducts = JSON.parse(localStorage.getItem('products')) || [];
+    
+    // Her ürün için HTML oluştur
+    adminProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        
+        // Kategori adına göre data-category ekle
+        let categorySlug = '';
+        switch(product.categoryName) {
+            case 'Seramik':
+                categorySlug = 'seramik';
+                break;
+            case 'Banyo Bataryaları':
+                categorySlug = 'banyo';
+                break;
+            case 'Mutfak Bataryaları':
+                categorySlug = 'mutfak';
+                break;
+            case 'Klozet':
+                categorySlug = 'klozet';
+                break;
+            default:
+                categorySlug = 'diger';
+        }
+        
+        productCard.setAttribute('data-category', categorySlug);
+        
+        // Ürün HTML yapısını oluştur - İncele butonu eklenmiş hali
+        productCard.innerHTML = `
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-overlay">
+                    <button class="quick-view">Hızlı Bakış</button>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-price">${product.price.toFixed(2)} TL</div>
+                <div class="product-actions">
+                    <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                    <button class="btn add-to-cart-btn" 
+                            data-id="${product.id}" 
+                            data-name="${product.name}" 
+                            data-price="${product.price}" 
+                            data-image="${product.image}">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Sayfaya ekle
+        productsGrid.appendChild(productCard);
+    });
+}
+// Ürün kartlarının yüksekliklerini eşitle
+function normalizeProductCardHeights() {
+    // Tüm ürün kartlarını seç
+    const productCards = document.querySelectorAll('.product-card');
+    if (!productCards.length) return;
+    
+    // Önce tüm yükseklikleri sıfırla
+    productCards.forEach(card => {
+        card.style.height = 'auto';
+    });
+    
+    // Satır bazında grupla ve yükseklikleri eşitle
+    const grid = document.querySelector('.products-grid');
+    if (!grid) return;
+    
+    const gridStyles = window.getComputedStyle(grid);
+    const gap = parseInt(gridStyles.getPropertyValue('gap')) || 20;
+    const cardWidth = productCards[0].offsetWidth;
+    const gridWidth = grid.clientWidth;
+    const cardsPerRow = Math.floor(gridWidth / (cardWidth + gap));
+    
+    // Her satırı grupla ve yükseklikleri eşitle
+    for (let i = 0; i < productCards.length; i += cardsPerRow) {
+        const rowCards = Array.from(productCards).slice(i, i + cardsPerRow);
+        const maxHeight = Math.max(...rowCards.map(card => card.scrollHeight));
+        
+        rowCards.forEach(card => {
+            card.style.height = `${maxHeight}px`;
+        });
+    }
+}
+
+// Ürünleri yükleme fonksiyonu - bu fonksiyonu bulun ve güncelleyin
+function loadProducts(products, container) {
+    container.innerHTML = '';
+    
+    if (products.length === 0) {
+        container.innerHTML = '<div class="no-products">Bu kriterlere uygun ürün bulunamadı.</div>';
+        return;
+    }
+    
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        
+        // BU KISMI DEĞİŞTİRİN - İncele butonu ekleyin
+        productCard.innerHTML = `
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="product-price">${product.price.toFixed(2)} ₺</p>
+                <div class="product-actions">
+                    <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                    <button class="btn add-to-cart-btn" data-id="${product.id}">Sepete Ekle</button>
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(productCard);
+    });
+    
+    // Event listener'ları ekleyin
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = parseInt(this.dataset.id);
+            addToCart(productId);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
     const elements = {
@@ -420,15 +555,145 @@ document.addEventListener('DOMContentLoaded', function () {
         themeToggle: document.getElementById('theme-toggle')
     };
     
-    // Başlangıç fonksiyonları
-    initSlider();
-    initProductModal();
-    initMap();
-    setupCategoryFilter();
-    setupPriceFilter();
-    setupSortingFilter();
-    loadFilterState();
+   // Başlangıç fonksiyonları
+initSlider();
+initProductModal();
+initMap();
+setupCategoryFilter();
+setupPriceFilter();
+setupSortingFilter();
+loadFilterState();
+// Admin panelinden eklenen ürünleri yükle
+loadProductsFromAdmin();
+// Ürünler yüklendikten sonra filtreleme ve diğer fonksiyonları tekrar çalıştır
+setupCategoryFilter();
+setupPriceFilter();
+initProductModal();
+normalizeProductCardHeights();
+// Pencere boyutu değiştiğinde yeniden hesapla
+    window.addEventListener('resize', function() {
+        // Performans için debounce uygula
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(normalizeProductCardHeights, 250);
+    });
+    // Admin giriş formu kontrolleri
+    const adminLoginForm = document.getElementById('adminLoginForm');
     
+    if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Basit doğrulama - gerçek uygulamada güvenli bir API kullanılmalıdır
+            if (username === 'admin' && password === 'admin123') {
+                // Başarılı giriş
+                localStorage.setItem('adminLoggedIn', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                // Hatalı giriş
+                showNotification('Kullanıcı adı veya şifre hatalı!', 'error');
+            }
+        });
+    }
+    // Admin panelinden eklenen ürünleri ana sayfada göster
+    const featuredProductsContainer = document.querySelector('.featured-products');
+    
+    if (featuredProductsContainer) {
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        
+        // Son eklenen 3-6 ürünü göster
+        const featuredProducts = products.slice(-6).reverse();
+        
+        if (featuredProducts.length > 0) {
+            featuredProductsContainer.innerHTML = featuredProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="category">${product.categoryName}</p>
+                        <p class="price">${product.price.toFixed(2)} ₺</p>
+                        <div class="product-actions">
+                            <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                            <button class="btn add-to-cart-btn" data-id="${product.id}">Sepete Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+    
+    // Bildirim gösterme fonksiyonu
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        // Görünür yap
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Kaldır
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+    
+    // Kullanıcı giriş yapmış mı kontrolü
+    function checkAuth() {
+        // dashboard.html veya diğer admin sayfalarında bu kontrolü kullan
+        if (!localStorage.getItem('adminLoggedIn') && !window.location.href.includes('admin.html')) {
+            window.location.href = 'admin.html';
+        }
+    }
+    
+    // Admin sayfası açıldığında yetki kontrolü yap
+    if (!window.location.href.includes('admin.html')) {
+        checkAuth();
+    }
+    
+    // Çıkış işlevi
+    window.adminLogout = function() {
+        localStorage.removeItem('adminLoggedIn');
+        window.location.href = 'admin.html';
+    };
+    
+    // Dashboard içeriği için kodlar
+    initDashboard();
+
+
+// Dashboard içeriği başlatma
+function initDashboard() {
+    const statsContainer = document.getElementById('stats-container');
+    if (!statsContainer) return;
+    
+    // Örnek istatistikleri göster (gerçek uygulamada bir API'den alınabilir)
+    updateStats({
+        products: 24,
+        users: 156,
+        orders: 53,
+        revenue: '15.240 ₺'
+    });
+}
+
+
+
+// İstatistikleri güncelleme
+function updateStats(stats) {
+    document.getElementById('product-count').textContent = stats.products;
+    document.getElementById('user-count').textContent = stats.users;
+    document.getElementById('order-count').textContent = stats.orders;
+    document.getElementById('revenue').textContent = stats.revenue;
+}
     // Cart Functions
     function updateCartCount() {
         try {
