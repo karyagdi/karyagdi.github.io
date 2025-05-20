@@ -648,18 +648,17 @@ normalizeProductCardHeights();
         }, 3000);
     }
     
-    // Kullanıcı giriş yapmış mı kontrolü
-    function checkAuth() {
-        // dashboard.html veya diğer admin sayfalarında bu kontrolü kullan
-        if (!localStorage.getItem('adminLoggedIn') && !window.location.href.includes('admin.html')) {
-            window.location.href = 'admin.html';
-        }
-    }
-    
     // Admin sayfası açıldığında yetki kontrolü yap
-    if (!window.location.href.includes('admin.html')) {
-        checkAuth();
+if (!window.location.href.includes('admin.html')) {
+    checkAuth();
+}
+
+function checkAuth() {
+    // dashboard.html veya diğer admin sayfalarında bu kontrolü kullan
+    if (!localStorage.getItem('adminLoggedIn') && !window.location.href.includes('admin.html')) {
+        window.location.href = 'admin.html';
     }
+}
     
     // Çıkış işlevi
     window.adminLogout = function() {
