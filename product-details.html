@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Detayı | Onur İnşaat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header buraya yüklenecek -->
+    <div id="header"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="kategoriler.html">Kategoriler</a></li>
+            <li><a href="urunler.html">Ürünler</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+            <li><a href="favoriler.html">Favorilerim</a></li>
+            <li class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                    <div class="theme-slider">
+                        <div class="slider-circle">
+                            <span class="theme-slider-icon sun">☀️</span>
+                            <span class="theme-slider-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="product-detail-page">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Ana Sayfa</a> &gt; 
+                <a href="urunler.html">Ürünler</a> &gt; 
+                <span id="product-breadcrumb">Ürün Adı</span>
+            </div>
+            
+            <div class="product-details-container" id="product-details">
+                <!-- JavaScript ile ürün detayları buraya yüklenecek -->
+                <div class="loading">Yükleniyor...</div>
+            </div>
+            
+            <div class="related-products">
+                <h2>Benzer Ürünler</h2>
+                <div class="products-grid" id="related-products">
+                    <!-- JavaScript ile benzer ürünler buraya yüklenecek -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer buraya yüklenecek -->
+    <div id="footer"></div>
+    
+    <script src="scripts.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL'den ürün ID'sini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            
+            if (!productId) {
+                window.location.href = 'urunler.html'; // ID yoksa ürünler sayfasına yönlendir
+                return;
+            }
+            
+            // Ürün detaylarını yükle
+            loadProductDetails(productId);
+            
+            // Benzer ürünleri yükle
+            loadRelatedProducts(productId);
+            
+            // Sepet sayacını güncelle
+            updateCartCount();
+        });
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = totalItems;
+            }
+        }
+        
+        function loadProductDetails(productId) {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const product = products.find(p => p.id === productId);
+    
+    if (!product) {
+        window.location.href = 'urunler.html'; // Ürün bulunamazsa yönlendir
+        return;
+    }
+    
+    // Sayfa başlığını güncelle
+    document.title = `${product.name} | Onur İnşaat`;
+    document.getElementById('product-breadcrumb').textContent = product.name;
+    
+    // Ürün detaylarını doldur
+    const detailsContainer = document.getElementById('product-details');
+    detailsContainer.innerHTML = `
+        <div class="product-details-image">
+            <img src="${product.image}" alt="${product.name}">
+        </div>
+        <div class="product-details-info">
+            <h1>${product.name}</h1>
+            <p class="category">Kategori: ${product.categoryName}</p>
+            <div class="price-container">
+                <p class="price">${product.price.toFixed(2)} ₺</p>
+            </div>
+            <div class="description">
+                ${product.description || 'Bu ürün için açıklama bulunmamaktadır.'}
+            </div>
+            <div class="product-actions detail-actions">
+                <div class="quantity">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" value="1" min="1" class="qty-input" id="product-quantity">
+                    <button class="qty-btn plus">+</button>
+                </div>
+                <button class="btn add-to-cart-btn" data-id="${product.id}">Sepete Ekle</button>
+            </div>
+        </div>
+    `;
+    
+    // Adet artırma-azaltma butonları
+    setupQuantityButtons();
+    
+    // Sepete ekle butonuna dinleyici ekle
+    const addToCartBtn = document.querySelector('.add-to-cart-btn');
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+            const quantity = parseInt(document.getElementById('product-quantity').value);
+            addToCart(productId, quantity);
+        });
+    }
+}
+        
+        function loadRelatedProducts(productId) {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const currentProduct = products.find(p => p.id === productId);
+    
+    if (!currentProduct) return;
+    
+    // Aynı kategorideki diğer ürünleri bul (en fazla 4 tane)
+    const relatedProducts = products
+        .filter(p => p.category === currentProduct.category && p.id !== productId)
+        .slice(0, 4);
+    
+    const relatedContainer = document.getElementById('related-products');
+    
+    if (relatedProducts.length === 0) {
+        relatedContainer.innerHTML = '<p>Bu kategoride başka ürün bulunamadı.</p>';
+        return;
+    }
+    
+    relatedContainer.innerHTML = relatedProducts.map(product => `
+        <div class="product-card">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="product-price">${product.price.toFixed(2)} ₺</p>
+                <div class="product-actions">
+                    <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                    <button class="btn add-to-cart-btn" data-id="${product.id}">Sepete Ekle</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Sepete ekle butonlarına dinleyici ekle
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            addToCart(id);
+        });
+    });
+}
+        
+        function setupQuantityButtons() {
+            const minusBtn = document.querySelector('.qty-btn.minus');
+            const plusBtn = document.querySelector('.qty-btn.plus');
+            const qtyInput = document.querySelector('.qty-input');
+            
+            if (!minusBtn || !plusBtn || !qtyInput) return;
+            
+            minusBtn.addEventListener('click', function() {
+                const value = parseInt(qtyInput.value);
+                if (value > 1) {
+                    qtyInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                const value = parseInt(qtyInput.value);
+                qtyInput.value = value + 1;
+            });
+        }
+    </script>
+</body>
+</html>
