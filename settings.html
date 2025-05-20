@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Ayarları - Yönetim Paneli</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="admin-page">
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>Onur İnşaat</h2>
+                <button class="sidebar-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-profile">
+                <img src="https://via.placeholder.com/80" alt="Admin" class="profile-avatar">
+                <h4>Admin Kullanıcı</h4>
+                <p>Yönetici</p>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-title">Ana Menü</p>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" onclick="goToHomePage()" class="nav-link">
+                            <i class="fas fa-external-link-alt"></i> Ana Siteye Dön
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="products.html" class="nav-link">
+                            <i class="fas fa-box"></i> Ürünler
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="categories.html" class="nav-link">
+                            <i class="fas fa-tags"></i> Kategoriler
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-title">Ayarlar</p>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link active">
+                            <i class="fas fa-cog"></i> Site Ayarları
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" onclick="adminLogout()" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i> Çıkış
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="admin-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Ara...">
+                </div>
+                
+                <a href="javascript:void(0);" onclick="goToHomePage()" class="view-site-btn">
+                    <i class="fas fa-home"></i> Ana Siteyi Görüntüle
+                </a>
+            </div>
+            
+            <!-- Site Ayarları İçeriği -->
+            <div class="admin-content">
+                <div class="admin-card">
+                    <h2>Site Ayarları</h2>
+                    
+                    <form id="site-settings-form" class="admin-form">
+                        <div class="form-section">
+                            <h3>Genel Ayarlar</h3>
+                            
+                            <div class="form-group">
+                                <label for="site-title">Site Başlığı</label>
+                                <input type="text" id="site-title" name="site-title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="site-description">Site Açıklaması</label>
+                                <textarea id="site-description" name="site-description" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="site-keywords">Anahtar Kelimeler (SEO)</label>
+                                <input type="text" id="site-keywords" name="site-keywords" placeholder="örn: inşaat, seramik, banyo">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>İletişim Bilgileri</h3>
+                            
+                            <div class="form-group">
+                                <label for="contact-address">Adres</label>
+                                <textarea id="contact-address" name="contact-address" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="contact-phone">Telefon</label>
+                                    <input type="text" id="contact-phone" name="contact-phone">
+                                </div>
+                                
+                                <div class="form-group half">
+                                    <label for="contact-email">E-posta</label>
+                                    <input type="email" id="contact-email" name="contact-email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-hours">Çalışma Saatleri</label>
+                                <input type="text" id="contact-hours" name="contact-hours" placeholder="örn: Pzt-Cuma 09:00-18:00">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Sosyal Medya</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="social-facebook">Facebook</label>
+                                    <div class="input-with-icon">
+                                        <i class="fab fa-facebook"></i>
+                                        <input type="text" id="social-facebook" name="social-facebook">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group half">
+                                    <label for="social-instagram">Instagram</label>
+                                    <div class="input-with-icon">
+                                        <i class="fab fa-instagram"></i>
+                                        <input type="text" id="social-instagram" name="social-instagram">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="social-twitter">Twitter</label>
+                                    <div class="input-with-icon">
+                                        <i class="fab fa-twitter"></i>
+                                        <input type="text" id="social-twitter" name="social-twitter">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group half">
+                                    <label for="social-youtube">YouTube</label>
+                                    <div class="input-with-icon">
+                                        <i class="fab fa-youtube"></i>
+                                        <input type="text" id="social-youtube" name="social-youtube">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Footer Metni</h3>
+                            <div class="form-group">
+                                <label for="footer-text">Telif Hakkı Metni</label>
+                                <input type="text" id="footer-text" name="footer-text" placeholder="© 2025 Onur İnşaat - Tüm Hakları Saklıdır">
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="primary-btn">Ayarları Kaydet</button>
+                            <button type="reset" class="secondary-btn">Sıfırla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
