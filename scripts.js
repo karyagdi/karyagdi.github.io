@@ -648,18 +648,30 @@ normalizeProductCardHeights();
         }, 3000);
     }
     
-    // Admin sayfası açıldığında yetki kontrolü yap
-if (!window.location.href.includes('admin.html')) {
-    checkAuth();
-}
-
+// Sadece admin paneline özgü sayfalarda yetki kontrolü yap
 function checkAuth() {
-    // dashboard.html veya diğer admin sayfalarında bu kontrolü kullan
-    if (!localStorage.getItem('adminLoggedIn') && !window.location.href.includes('admin.html')) {
+    const isAdminPage = 
+        window.location.href.includes('dashboard.html') || 
+        window.location.href.includes('admin-products.html') ||
+        window.location.href.includes('admin-orders.html') ||
+        window.location.href.includes('admin-users.html');
+    
+    // Sadece admin sayfalarında kontrol yap
+    if (isAdminPage && !localStorage.getItem('adminLoggedIn')) {
         window.location.href = 'admin.html';
     }
 }
-    
+
+// Sadece admin sayfalarında kontrol yap
+const isAdminPage = 
+    window.location.href.includes('dashboard.html') || 
+    window.location.href.includes('admin-products.html') ||
+    window.location.href.includes('admin-orders.html') ||
+    window.location.href.includes('admin-users.html');
+
+if (isAdminPage) {
+    checkAuth();
+}
     // Çıkış işlevi
     window.adminLogout = function() {
         localStorage.removeItem('adminLoggedIn');
