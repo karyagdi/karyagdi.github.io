@@ -407,68 +407,154 @@ function setupSortingFilter() {
     });
 }
 
-// Ürünleri localStorage'dan yükleme fonksiyonu
+// Ürünleri yükleme fonksiyonu - GitHub Pages uyumlu
 function loadProductsFromAdmin() {
     const productsGrid = document.querySelector('.products-grid');
     if (!productsGrid) return; // Eğer ürünler sayfasında değilsek, çık
     
-    // Admin tarafından eklenen ürünleri al
-    const adminProducts = JSON.parse(localStorage.getItem('products')) || [];
+    // Yükleniyor göstergesi
+    productsGrid.innerHTML = '<div class="loading">Ürünler yükleniyor...</div>';
     
-    // Her ürün için HTML oluştur
-    adminProducts.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        
-        // Kategori adına göre data-category ekle
-        let categorySlug = '';
-        switch(product.categoryName) {
-            case 'Seramik':
-                categorySlug = 'seramik';
-                break;
-            case 'Banyo Bataryaları':
-                categorySlug = 'banyo';
-                break;
-            case 'Mutfak Bataryaları':
-                categorySlug = 'mutfak';
-                break;
-            case 'Klozet':
-                categorySlug = 'klozet';
-                break;
-            default:
-                categorySlug = 'diger';
-        }
-        
-        productCard.setAttribute('data-category', categorySlug);
-        
-        // Ürün HTML yapısını oluştur - İncele butonu eklenmiş hali
-        productCard.innerHTML = `
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
-                <div class="product-overlay">
-                    <button class="quick-view">Hızlı Bakış</button>
+    // Önce localStorage'dan ürünleri yüklemeyi deneyelim
+    let adminProducts = JSON.parse(localStorage.getItem('products')) || [];
+    
+    // Eğer ürünler localStorage'da yoksa (GitHub Pages'ta olduğu gibi), varsayılan ürünleri kullan
+    if (adminProducts.length === 0) {
+        // Sabit ürün listesi - github pages için
+        adminProducts = [
+            {
+                id: 101,
+                name: 'Statiuario Goya Yer Seramiği',
+                category: 1,
+                categoryName: 'Seramik',
+                price: 450.00,
+                description: '30x60 cm, Parlak Yüzey',
+                image: 'images/statuariogoya.png'
+            },
+            {
+                id: 102,
+                name: 'Nomerles White Yer Seramiği',
+                category: 1,
+                categoryName: 'Seramik',
+                price: 380.00,
+                description: '60x120, 0.7cm, Mat Yüzey',
+                image: 'images/nomerleswhite.jpg'
+            },
+            {
+                id: 111,
+                name: 'Gildo Lavabo Bataryası',
+                category: 2,
+                categoryName: 'Banyo Bataryaları',
+                price: 2149.00,
+                description: 'Krom Kaplama, Su Tasarruflu',
+                image: 'images/gildolavabogumus.jpg'
+            },
+            {
+                id: 112,
+                name: 'Gildo Lavabo Bataryası',
+                category: 2,
+                categoryName: 'Banyo Bataryaları',
+                price: 2549.00,
+                description: 'Siyah Kaplama, Su Tasarruflu',
+                image: 'images/gildolavabo.jpg'
+            },
+            {
+                id: 122,
+                name: 'Atros Eviye Bataryası',
+                category: 1,
+                categoryName: 'Mutfak Bataryaları',
+                price: 920.00,
+                description: 'Krom Kaplama, Su Tasarruflu',
+                image: 'images/atrosevye.jpg'
+            },
+            {
+                id: 124,
+                name: 'Felis Eviye Bataryası',
+                category: 1,
+                categoryName: 'Mutfak Bataryaları',
+                price: 1200.00,
+                description: 'Krom Kaplama, Su Tasarruflu',
+                image: 'images/felisevye.jpg'
+            }
+        ];
+    }
+    
+    // Yükleniyor mesajını temizle
+    productsGrid.innerHTML = '';
+    
+    // Hata durumunda göster
+    if (adminProducts.length === 0) {
+        productsGrid.innerHTML = '<div class="error">Ürünler yüklenemedi.</div>';
+        return;
+    }
+    
+    try {
+        // Her ürün için HTML oluştur
+        adminProducts.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            
+            // Kategori adına göre data-category ekle
+            let categorySlug = '';
+            switch(product.categoryName) {
+                case 'Seramik':
+                    categorySlug = 'seramik';
+                    break;
+                case 'Banyo Bataryaları':
+                    categorySlug = 'banyo';
+                    break;
+                case 'Mutfak Bataryaları':
+                    categorySlug = 'mutfak';
+                    break;
+                case 'Klozet':
+                    categorySlug = 'klozet';
+                    break;
+                default:
+                    categorySlug = 'diger';
+            }
+            
+            productCard.setAttribute('data-category', categorySlug);
+            
+            // Ürün HTML yapısını oluştur - İncele butonu eklenmiş hali
+            productCard.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-overlay">
+                        <button class="quick-view">Hızlı Bakış</button>
+                    </div>
                 </div>
-            </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p class="product-description">${product.description}</p>
-                <div class="product-price">${product.price.toFixed(2)} TL</div>
-                <div class="product-actions">
-                    <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
-                    <button class="btn add-to-cart-btn" 
-                            data-id="${product.id}" 
-                            data-name="${product.name}" 
-                            data-price="${product.price}" 
-                            data-image="${product.image}">
-                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
-                    </button>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-price">${product.price.toFixed(2)} TL</div>
+                    <div class="product-actions">
+                        <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                        <button class="btn add-to-cart-btn" 
+                                data-id="${product.id}" 
+                                data-name="${product.name}" 
+                                data-price="${product.price}" 
+                                data-image="${product.image}">
+                            <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+            
+            // Sayfaya ekle
+            productsGrid.appendChild(productCard);
+        });
+
+        // Sepete ekle butonlarına olay dinleyicileri ekle
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                addToCart(this);
+            });
+        });
         
-        // Sayfaya ekle
-        productsGrid.appendChild(productCard);
-    });
+    } catch (error) {
+        console.error("Ürünler yüklenirken hata:", error);
+        productsGrid.innerHTML = '<div class="error">Ürünler yüklenirken bir hata oluştu.</div>';
+    }
 }
 // Ürün kartlarının yüksekliklerini eşitle
 function normalizeProductCardHeights() {
@@ -899,18 +985,31 @@ function updateStats(stats) {
         }
     }
 
-    Promise.all([
-        loadTemplate('header'),
-        loadTemplate('footer')
-    ]).then(() => {
-        updateCartCount();
-        initProductModal(); // Template'ler yüklendikten sonra da modalları başlat
-        if (typeof setupCategoryFilter === 'function') setupCategoryFilter();
-        if (typeof setupPriceFilter === 'function') setupPriceFilter();
-        if (typeof setupSortingFilter === 'function') setupSortingFilter();
-    }).catch(() => {
-        showNotification('Şablon yükleme hatası', 'error');
-    });
+    // DOMContentLoaded event dinleyici içinde:
+Promise.all([
+    loadTemplate('header'),
+    loadTemplate('footer')
+]).then(() => {
+    updateCartCount();
+    
+    // Önce sayfanın türünü kontrol edin
+    if (document.querySelector('.products-grid')) {
+        // Sadece ürünler sayfasındaysak bu fonksiyonları çağırın
+        loadProductsFromAdmin();
+        setTimeout(() => {
+            setupCategoryFilter();
+            setupPriceFilter();
+            setupSortingFilter();
+            initProductModal();
+            normalizeProductCardHeights();
+        }, 100);
+    } else if (document.querySelector('.hero-slider')) {
+        // Ana sayfadaysak slider'ı başlatın
+        initSlider();
+    }
+}).catch(() => {
+    showNotification('Şablon yükleme hatası', 'error');
+});
 
     // Event Binding
     elements.addToCartButtons.forEach(button =>
