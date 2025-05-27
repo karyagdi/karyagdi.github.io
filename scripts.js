@@ -641,75 +641,144 @@ document.addEventListener('DOMContentLoaded', function () {
         themeToggle: document.getElementById('theme-toggle')
     };
     
-   // Başlangıç fonksiyonları
-initSlider();
-initProductModal();
-initMap();
-setupCategoryFilter();
-setupPriceFilter();
-setupSortingFilter();
-loadFilterState();
-// Admin panelinden eklenen ürünleri yükle
-loadProductsFromAdmin();
-// Ürünler yüklendikten sonra filtreleme ve diğer fonksiyonları tekrar çalıştır
-setupCategoryFilter();
-setupPriceFilter();
-initProductModal();
-normalizeProductCardHeights();
-// Pencere boyutu değiştiğinde yeniden hesapla
-    window.addEventListener('resize', function() {
-        // Performans için debounce uygula
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(normalizeProductCardHeights, 250);
+    // Önce template'leri yükle
+    Promise.all([
+        loadTemplate('header'),
+        loadTemplate('footer')
+    ]).then(() => {
+        // Tema kontrolü ve sepet sayısı güncelleme
+        updateCartCount();
+        initTheme();
+        
+        // Sayfa türüne göre gerekli fonksiyonları çağır
+        if (document.querySelector('.products-grid')) {
+            // Ürünler sayfası
+            loadProductsFromAdmin();
+            
+            // Ürünler yüklendikten sonra çalışacak fonksiyonlar
+            setTimeout(() => {
+                setupCategoryFilter();
+                setupPriceFilter();
+                setupSortingFilter();
+                initProductModal();
+                normalizeProductCardHeights();
+            }, 300); // Ürünlerin yüklenmesi için biraz daha uzun süre bekleyin
+        } 
+        else if (document.querySelector('.hero-slider')) {
+            // Ana sayfa
+            initSlider();
+            displayFeaturedProducts();
+        } 
+        else if (document.querySelector('.product-detail-page')) {
+            // Ürün detay sayfası
+            loadProductDetails();
+        }
+        
+        // Harita varsa haritayı yükle
+        if (document.getElementById('map')) {
+            initMap();
+        }
+        
+        // Admin formu varsa işlevini yükle
+        setupAdminForm();
+    }).catch((error) => {
+        console.error('Template yükleme hatası:', error);
+        showNotification('Sayfa içerikleri yüklenirken hata oluştu', 'error');
     });
-    // Admin giriş formu kontrolleri
-    const adminLoginForm = document.getElementById('adminLoginForm');
     
-    if (adminLoginForm) {
+    // Öne çıkan ürünleri göster
+    function displayFeaturedProducts() {
+        const featuredProductsContainer = document.querySelector('.featured-products .fixed-grid-3');
+        if (!featuredProductsContainer) return;
+        
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        
+        // Son eklenen 3-6 ürünü göster
+        let featuredProducts = products.slice(-6).reverse();
+        
+        // Eğer localStorage'da ürün yoksa, varsayılan ürünleri kullan
+        if (featuredProducts.length === 0) {
+            featuredProducts = [
+                {
+                    id: 101,
+                    name: 'Statiuario Goya Yer Seramiği',
+                    category: 1,
+                    categoryName: 'Seramik',
+                    price: 450.00,
+                    description: '30x60 cm, Parlak Yüzey',
+                    image: 'images/statuariogoya.png'
+                },
+                {
+                    id: 111,
+                    name: 'Gildo Lavabo Bataryası',
+                    category: 2,
+                    categoryName: 'Banyo Bataryaları',
+                    price: 2149.00,
+                    description: 'Krom Kaplama, Su Tasarruflu',
+                    image: 'images/gildolavabogumus.jpg'
+                },
+                {
+                    id: 124,
+                    name: 'Felis Eviye Bataryası',
+                    category: 1,
+                    categoryName: 'Mutfak Bataryaları',
+                    price: 1200.00,
+                    description: 'Krom Kaplama, Su Tasarruflu',
+                    image: 'images/felisevye.jpg'
+                }
+            ];
+        }
+        
+        if (featuredProducts.length > 0) {
+            featuredProductsContainer.innerHTML = featuredProducts.map(product => `
+                <div class="product">
+                    <a href="product-details.html?id=${product.id}">
+                        <img src="${product.image}" alt="${product.name}">
+                    </a>
+                    <h3><a href="product-details.html?id=${product.id}">${product.name}</a></h3>
+                    <p>${product.description}</p>
+                    <div class="product-footer">
+                        <div class="price-container">
+                            <span class="price">${product.price.toFixed(2)} TL</span>
+                        </div>
+                        <div class="button-container">
+                            <button class="add-to-cart-btn" 
+                                data-id="${product.id}" 
+                                data-name="${product.name}" 
+                                data-price="${product.price}" 
+                                data-image="${product.image}">Sepete Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Yeni eklenen sepete ekle butonlarına dinleyiciler ekle
+            featuredProductsContainer.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    addToCart(this);
+                });
+            });
+        }
+    }
+    
+    // Admin form kontrolü
+    function setupAdminForm() {
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        if (!adminLoginForm) return;
+        
         adminLoginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Basit doğrulama - gerçek uygulamada güvenli bir API kullanılmalıdır
             if (username === 'admin' && password === 'admin123') {
-                // Başarılı giriş
                 localStorage.setItem('adminLoggedIn', 'true');
                 window.location.href = 'dashboard.html';
             } else {
-                // Hatalı giriş
                 showNotification('Kullanıcı adı veya şifre hatalı!', 'error');
             }
         });
-    }
-    // Admin panelinden eklenen ürünleri ana sayfada göster
-    const featuredProductsContainer = document.querySelector('.featured-products');
-    
-    if (featuredProductsContainer) {
-        const products = JSON.parse(localStorage.getItem('products')) || [];
-        
-        // Son eklenen 3-6 ürünü göster
-        const featuredProducts = products.slice(-6).reverse();
-        
-        if (featuredProducts.length > 0) {
-            featuredProductsContainer.innerHTML = featuredProducts.map(product => `
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p class="category">${product.categoryName}</p>
-                        <p class="price">${product.price.toFixed(2)} ₺</p>
-                        <div class="product-actions">
-                            <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
-                            <button class="btn add-to-cart-btn" data-id="${product.id}">Sepete Ekle</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
     }
     
     // Bildirim gösterme fonksiyonu
