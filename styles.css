@@ -219,6 +219,9 @@ input:checked + .theme-slider .moon {
     z-index: 10;
     position: relative;
 }
+.filter-btn {
+        max-width: 100%;
+    }
 .quick-view { /* Hızlı bakış butonu */
     background: white;
     color: #333;
@@ -596,34 +599,59 @@ input:checked + .theme-slider .moon {
     border-radius: 0 0 5px 5px; /* Alt kenarlara radius */
 }
 
-
-/* Products Page (Filtreler ve Ürün Listesi) */
+/* Filtre alanı düzenlemeleri */
 .products-container {
     display: flex;
-    gap: 30px;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto;
 }
 
-/* Filters Sidebar */
 .filters {
-    width: 250px;
-    flex-shrink: 0;
-    background: #fff;
-    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.products-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .filter-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .filter-group h3 {
+    margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.1em;
+    font-size: 16px;
     color: #333;
+}
+
+/* Filtre buton düzenlemesi */
+.filter-btn {
+    width: 100%;
+    max-width: 100px;
+    text-align: center;
 }
 
 .checkbox-container { /* TODO: Checkbox stilleri eksik, gerekirse eklenebilir */
@@ -1838,13 +1866,7 @@ body.dark-mode footer {
 body.dark-mode .footer-bottom {
     border-top-color: #333;
 }
-/* Hem products-grid hem de product-grid için stil tanımlama */
-.products-grid, .product-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* 3 eşit sütun */
-    gap: 25px !important;
-    padding: 0 0 20px 0;
-}
+
 
 /* Responsive düzen için - bu kısımları koruyalım */
 @media (max-width: 992px) {
@@ -1858,7 +1880,31 @@ body.dark-mode .footer-bottom {
         grid-template-columns: 1fr !important; /* Mobil için tek sütun */
     }
 }
-
+/* Mobil ürün görünümü düzeltmeleri */
+@media (max-width: 768px) {
+    .products-grid {
+        display: block !important;
+        width: 100% !important;
+        padding: 10px !important;
+    }
+    
+    .product-card {
+        width: 100% !important;
+        margin: 10px 0 !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    .product-image img {
+        max-height: 150px;
+        object-fit: contain;
+    }
+    
+    /* Mobilde gereksiz animasyonları kapat */
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
 
 /* --- MEDIA QUERIES --- */
 
@@ -1922,9 +1968,10 @@ body.dark-mode .footer-bottom {
     .products-container {
         flex-direction: column;
     }
-    .filters {
-        width: 100%;
+     .filters {
+        max-width: 100%;
         margin-bottom: 20px;
+        position: static;
     }
     .price-filter { /* Fiyat filtresi mobil */
         gap: 5px;
@@ -1955,13 +2002,57 @@ body.dark-mode .footer-bottom {
     .contact-container {
         grid-template-columns: 1fr;
     }
-    #map-container { height: 300px; }
-    .directions-btn {
-        bottom: 10px;
-        right: 10px;
-        padding: 8px 12px;
-        font-size: 12px;
-    }
+  
+
+/* Tam ekran harita için stil */
+.map-fullscreen {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+}
+
+.map-fullscreen #map {
+    height: 100vh !important;
+    width: 100vw !important;
+    border-radius: 0 !important;
+}
+
+.exit-fullscreen-btn {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background: white;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#map-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
     .cart-item, .favorite-item {
         flex-direction: column;
@@ -1978,8 +2069,137 @@ body.dark-mode .footer-bottom {
         align-items: center;
     }
 }
+/* Filtre kutusu düzenlemeleri - taşma sorununu çözme */
+@media (max-width: 768px) {
+    /* Filtre kutusu tam genişlikte olsun */
+    .filters {
+        width: calc(100% - 20px) !important; /* Ekranın kenarlarına 10px boşluk bırakma */
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 15px 12px !important; /* İç dolguyu azaltma */
+        box-sizing: border-box !important;
+        overflow-x: hidden !important; /* Yatay taşmayı engelle */
+    }
+    
+    /* Filtre içeriğinin taşmamasını sağlama */
+    .filter-group {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fiyat filtresi için düzeltmeler */
+    .price-filter {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    
+    .price-filter .min-container,
+    .price-filter .max-container,
+    .price-filter input {
+        width: 100% !important;
+    }
+    
+    /* Uygula butonu için düzenleme */
+    .filter-btn {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+    
+    /* Checkbox container'ların taşmaması için */
+    .checkbox-container {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding-right: 10px !important;
+    }
+    
+    /* Sıralama seçimi için */
+    .sort-select {
+        width: 100% !important;
+    }
+}
+/* Ürün kartları ve grid düzenlemesi - taşmayı önleme */
+@media (max-width: 768px) {
+    /* Container genişliği ayarlaması */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 10px !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Ürünler konteyneri düzenlemesi */
+    .products-container {
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Ürün kartlarının genişlik ve dolgu ayarlaması */
+    .product-card {
+        margin: 8px 0 !important;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        min-height: auto !important;
+    }
+    
+    /* Ürün resmi boyutunu optimize etme */
+    .product-image {
+        height: 180px !important;
+    }
+    
+    /* Ürün başlığı düzenlemesi */
+    .product-info h3 {
+        font-size: 14px !important;
+        height: auto !important;
+        max-height: 40px !important;
+        overflow: hidden !important;
+    }
+    
+    /* Ürün fiyatı ve butonları düzenlemesi */
+    .product-price {
+        font-size: 16px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* Ürün kartı butonlarının boyut düzenlemesi */
+    .product-card .product-actions .btn {
+        padding: 6px 10px !important;
+        font-size: 13px !important;
+        height: 32px !important;
+    }
+}
 
-
+/* Özellikle küçük ekranlarda taşmayı önlemek için */
+@media (max-width: 480px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Filtre daha kompakt */
+    .filters {
+        padding: 10px 8px !important;
+    }
+    
+    .filter-group {
+        margin-bottom: 12px !important;
+        padding-bottom: 10px !important;
+    }
+    
+    /* Kategori checkbox'ları düzenlemesi */
+    .checkbox-container {
+        font-size: 13px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    /* Ürün resmi daha küçük */
+    .product-image {
+        height: 150px !important;
+    }
+}
 /* Çok Küçük Ekranlar (<= 480px) */
 @media (max-width: 480px) {
     nav ul {
