@@ -145,41 +145,99 @@ function initProductModal() {
     }
 }
 
-// Fiyat filtreleme işlevi
+// Fiyat filtreleme işlevi - mobil uyumlu güncellenmiş versiyon
 function setupPriceFilter() {
     const filterBtn = document.querySelector('.filter-btn');
     const priceInputs = document.querySelectorAll('.price-input');
-    const productCards = document.querySelectorAll('.product-card');
     
     if (!filterBtn) return; // Buton yoksa işlemi sonlandır
     
-    filterBtn.addEventListener('click', function() {
-        const minPrice = parseFloat(priceInputs[0].value) || 0;
-        const maxPrice = parseFloat(priceInputs[1].value) || Infinity;
-        
-        productCards.forEach(card => {
-            // Ürün fiyatını al (içeriği temizleyerek sadece sayısal değeri al)
-            const priceText = card.querySelector('.product-price').textContent;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+    // Hem click hem de touchend olaylarını ekle
+    ['click', 'touchend'].forEach(eventType => {
+        filterBtn.addEventListener(eventType, function(e) {
+            if (eventType === 'touchend') {
+                e.preventDefault(); // Varsayılan dokunma davranışını engelle
+            }
             
-            // Fiyat aralığına göre ürünü göster/gizle
-            if (price >= minPrice && price <= maxPrice) {
-                card.style.display = 'block';
+            applyPriceFilter();
+        });
+    });
+    
+    // Fiyat filtresini uygulayan fonksiyon
+    function applyPriceFilter() {
+        try {
+            const productCards = document.querySelectorAll('.product-card');
+            if (!productCards.length) {
+                console.log('Ürün kartları bulunamadı');
+                return;
+            }
+            
+            const minPrice = parseFloat(priceInputs[0]?.value) || 0;
+            const maxPrice = parseFloat(priceInputs[1]?.value) || Infinity;
+            
+            console.log(`Fiyat filtresi uygulanıyor: ${minPrice} - ${maxPrice}`);
+            
+            let visibleCount = 0;
+            
+            productCards.forEach(card => {
+                // Ürün fiyatını al (içeriği temizleyerek sadece sayısal değeri al)
+                const priceElement = card.querySelector('.product-price');
+                if (!priceElement) return;
+                
+                const priceText = priceElement.textContent;
+                const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+                
+                // Fiyat aralığına göre ürünü göster/gizle
+                if (price >= minPrice && price <= maxPrice) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Eğer hiç görünür ürün yoksa mesaj göster
+            const productsGrid = document.querySelector('.products-grid');
+            if (visibleCount === 0 && productsGrid) {
+                // Önce "ürün bulunamadı" mesajını temizle
+                const existingMessage = productsGrid.querySelector('.no-filtered-products');
+                if (!existingMessage) {
+                    const noProductsMessage = document.createElement('div');
+                    noProductsMessage.className = 'no-filtered-products';
+                    noProductsMessage.textContent = 'Bu fiyat aralığında ürün bulunamadı.';
+                    productsGrid.appendChild(noProductsMessage);
+                }
             } else {
-                card.style.display = 'none';
+                // Mesaj varsa kaldır
+                const existingMessage = document.querySelector('.no-filtered-products');
+                if (existingMessage) existingMessage.remove();
+            }
+            
+            // Filtreleme durumunu kaydedelim
+            saveFilterState();
+            
+        } catch (error) {
+            console.error('Fiyat filtreleme hatası:', error);
+        }
+    }
+    
+    // Enter tuşuna basıldığında da filtrelesin (mobil klavye için önemli)
+    priceInputs.forEach(input => {
+        if (!input) return;
+        
+        input.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                applyPriceFilter();
             }
         });
         
-        // Filtreleme durumunu kaydedelim
-        saveFilterState();
-    });
-    
-    // Enter tuşuna basıldığında da filtrelesin
-    priceInputs.forEach(input => {
-        input.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                filterBtn.click();
-            }
+        // Mobil klavyeler için input olayını da dinle
+        input.addEventListener('input', function() {
+            // Gereksiz yeniden yüklemeyi önlemek için debounce uygula
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                applyPriceFilter();
+            }, 1000); // 1 saniye bekle
         });
     });
 }
@@ -313,17 +371,23 @@ function initMap() {
     });
 }
 
-// Kategori filtreleme
+// Kategori filtreleme için dokunma olayları ekleyin
 function setupCategoryFilter() {
     const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
     if (!categoryCheckboxes.length) return;
     
     categoryCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', filterProducts);
+        // Hem click hem touchend olaylarını ekleyin
+        ['change', 'touchend'].forEach(eventType => {
+            checkbox.addEventListener(eventType, function(e) {
+                if (eventType === 'touchend') {
+                    e.preventDefault();
+                    this.checked = !this.checked;
+                }
+                filterProducts();
+            });
+        });
     });
-    
-    // Sayfa yüklendiğinde seçilen kategorileri göster
-    filterProducts();
     
     function filterProducts() {
         const selectedCategories = Array.from(categoryCheckboxes)
@@ -407,153 +471,251 @@ function setupSortingFilter() {
     });
 }
 
-// Ürünleri yükleme fonksiyonu - GitHub Pages uyumlu
+// Ürünleri yükleme fonksiyonu - Mobil Uyumlu GitHub Pages Versiyonu
 function loadProductsFromAdmin() {
     const productsGrid = document.querySelector('.products-grid');
     if (!productsGrid) return; // Eğer ürünler sayfasında değilsek, çık
     
-    // Yükleniyor göstergesi
-    productsGrid.innerHTML = '<div class="loading">Ürünler yükleniyor...</div>';
+    // Daha görünür bir yükleniyor göstergesi
+    productsGrid.innerHTML = '<div class="loading" style="text-align:center; padding:40px; font-size:18px;">Ürünler yükleniyor<span class="loading-dots">...</span></div>';
     
-    // Önce localStorage'dan ürünleri yüklemeyi deneyelim
-    let adminProducts = JSON.parse(localStorage.getItem('products')) || [];
+    // Loading dots animasyonu için stil ekle
+    const style = document.createElement('style');
+    style.textContent = `
+        .loading-dots { animation: loadingDots 1.5s infinite; }
+        @keyframes loadingDots {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+    `;
+    document.head.appendChild(style);
     
-    // Eğer ürünler localStorage'da yoksa (GitHub Pages'ta olduğu gibi), varsayılan ürünleri kullan
-    if (adminProducts.length === 0) {
-        // Sabit ürün listesi - github pages için
-        adminProducts = [
-            {
-                id: 101,
-                name: 'Statiuario Goya Yer Seramiği',
-                category: 1,
-                categoryName: 'Seramik',
-                price: 450.00,
-                description: '30x60 cm, Parlak Yüzey',
-                image: 'images/statuariogoya.png'
-            },
-            {
-                id: 102,
-                name: 'Nomerles White Yer Seramiği',
-                category: 1,
-                categoryName: 'Seramik',
-                price: 380.00,
-                description: '60x120, 0.7cm, Mat Yüzey',
-                image: 'images/nomerleswhite.jpg'
-            },
-            {
-                id: 111,
-                name: 'Gildo Lavabo Bataryası',
-                category: 2,
-                categoryName: 'Banyo Bataryaları',
-                price: 2149.00,
-                description: 'Krom Kaplama, Su Tasarruflu',
-                image: 'images/gildolavabogumus.jpg'
-            },
-            {
-                id: 112,
-                name: 'Gildo Lavabo Bataryası',
-                category: 2,
-                categoryName: 'Banyo Bataryaları',
-                price: 2549.00,
-                description: 'Siyah Kaplama, Su Tasarruflu',
-                image: 'images/gildolavabo.jpg'
-            },
-            {
-                id: 122,
-                name: 'Atros Eviye Bataryası',
-                category: 1,
-                categoryName: 'Mutfak Bataryaları',
-                price: 920.00,
-                description: 'Krom Kaplama, Su Tasarruflu',
-                image: 'images/atrosevye.jpg'
-            },
-            {
-                id: 124,
-                name: 'Felis Eviye Bataryası',
-                category: 1,
-                categoryName: 'Mutfak Bataryaları',
-                price: 1200.00,
-                description: 'Krom Kaplama, Su Tasarruflu',
-                image: 'images/felisevye.jpg'
-            }
-        ];
-    }
-    
-    // Yükleniyor mesajını temizle
-    productsGrid.innerHTML = '';
-    
-    // Hata durumunda göster
-    if (adminProducts.length === 0) {
-        productsGrid.innerHTML = '<div class="error">Ürünler yüklenemedi.</div>';
-        return;
-    }
-    
-    try {
-        // Her ürün için HTML oluştur
-        adminProducts.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
+    // Kısa gecikme ekleyerek yükleme ekranını göstermeyi ve işlemi daha güvenilir yapmayı sağla
+    setTimeout(() => {
+        try {
+            // localStorage'dan ürünleri yüklemeyi dene
+            let adminProducts = JSON.parse(localStorage.getItem('products')) || [];
+            console.log("localStorage'dan yüklenen ürün sayısı:", adminProducts.length);
             
-            // Kategori adına göre data-category ekle
-            let categorySlug = '';
-            switch(product.categoryName) {
-                case 'Seramik':
-                    categorySlug = 'seramik';
-                    break;
-                case 'Banyo Bataryaları':
-                    categorySlug = 'banyo';
-                    break;
-                case 'Mutfak Bataryaları':
-                    categorySlug = 'mutfak';
-                    break;
-                case 'Klozet':
-                    categorySlug = 'klozet';
-                    break;
-                default:
-                    categorySlug = 'diger';
+            // Eğer localStorage'da ürün yoksa varsayılan ürünleri kullan
+            if (adminProducts.length === 0) {
+                console.log("Varsayılan ürünler kullanılıyor");
+                adminProducts = [
+                    {
+                        id: 101,
+                        name: 'Statiuario Goya Yer Seramiği',
+                        category: 1,
+                        categoryName: 'Seramik',
+                        price: 450.00,
+                        description: '30x60 cm, Parlak Yüzey',
+                        image: 'images/statuariogoya.png'
+                    },
+                    {
+                        id: 102,
+                        name: 'Nomerles White Yer Seramiği',
+                        category: 1,
+                        categoryName: 'Seramik',
+                        price: 380.00,
+                        description: '60x120, 0.7cm, Mat Yüzey',
+                        image: 'images/nomerleswhite.jpg'
+                    },
+                    {
+                        id: 111,
+                        name: 'Gildo Lavabo Bataryası',
+                        category: 2,
+                        categoryName: 'Banyo Bataryaları',
+                        price: 2149.00,
+                        description: 'Krom Kaplama, Su Tasarruflu',
+                        image: 'images/gildolavabogumus.jpg'
+                    },
+                    {
+                        id: 112,
+                        name: 'Gildo Lavabo Bataryası',
+                        category: 2,
+                        categoryName: 'Banyo Bataryaları',
+                        price: 2549.00,
+                        description: 'Siyah Kaplama, Su Tasarruflu',
+                        image: 'images/gildolavabo.jpg'
+                    },
+                    {
+                        id: 122,
+                        name: 'Atros Eviye Bataryası',
+                        category: 3,
+                        categoryName: 'Mutfak Bataryaları',
+                        price: 920.00,
+                        description: 'Krom Kaplama, Su Tasarruflu',
+                        image: 'images/atrosevye.jpg'
+                    },
+                    {
+                        id: 124,
+                        name: 'Felis Eviye Bataryası',
+                        category: 3,
+                        categoryName: 'Mutfak Bataryaları',
+                        price: 1200.00,
+                        description: 'Krom Kaplama, Su Tasarruflu',
+                        image: 'images/felisevye.jpg'
+                    }
+                ];
             }
             
-            productCard.setAttribute('data-category', categorySlug);
+            // Yükleme mesajını temizle
+            productsGrid.innerHTML = '';
             
-            // Ürün HTML yapısını oluştur - İncele butonu eklenmiş hali
-            productCard.innerHTML = `
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-overlay">
-                        <button class="quick-view">Hızlı Bakış</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-price">${product.price.toFixed(2)} TL</div>
-                    <div class="product-actions">
-                        <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
-                        <button class="btn add-to-cart-btn" 
-                                data-id="${product.id}" 
-                                data-name="${product.name}" 
-                                data-price="${product.price}" 
-                                data-image="${product.image}">
-                            <i class="fas fa-shopping-cart"></i> Sepete Ekle
-                        </button>
-                    </div>
-                </div>
-            `;
+            // Hata durumunda mesaj göster
+            if (adminProducts.length === 0) {
+                console.error("Hiç ürün bulunamadı");
+                productsGrid.innerHTML = '<div class="error" style="text-align:center; padding:30px;">Ürünler yüklenemedi.</div>';
+                return;
+            }
             
-            // Sayfaya ekle
-            productsGrid.appendChild(productCard);
-        });
-
-        // Sepete ekle butonlarına olay dinleyicileri ekle
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                addToCart(this);
+            // Mobil cihaz kontrolü
+            const isMobile = window.innerWidth < 768;
+            console.log("Mobil cihaz:", isMobile ? "Evet" : "Hayır");
+            
+            // Her ürün için HTML oluştur
+            adminProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                // Kategori adına göre data-category ekle
+                let categorySlug = '';
+                switch(product.categoryName) {
+                    case 'Seramik':
+                        categorySlug = 'seramik';
+                        break;
+                    case 'Banyo Bataryaları':
+                        categorySlug = 'banyo';
+                        break;
+                    case 'Mutfak Bataryaları':
+                        categorySlug = 'mutfak';
+                        break;
+                    case 'Klozet':
+                        categorySlug = 'klozet';
+                        break;
+                    default:
+                        categorySlug = 'diger';
+                }
+                
+                productCard.setAttribute('data-category', categorySlug);
+                
+                // Ürün HTML yapısını oluştur - İncele butonu eklenmiş hali
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        <div class="product-overlay">
+                            <button class="quick-view">Hızlı Bakış</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${product.price.toFixed(2)} TL</div>
+                        <div class="product-actions">
+                            <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
+                            <button class="btn add-to-cart-btn" 
+                                    data-id="${product.id}" 
+                                    data-name="${product.name}" 
+                                    data-price="${product.price}" 
+                                    data-image="${product.image}">
+                                <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Sayfaya ekle
+                productsGrid.appendChild(productCard);
             });
-        });
+            
+            console.log(`${adminProducts.length} ürün başarıyla yüklendi`);
+            
+            // Mobil cihazlar için touch olayları
+            if (isMobile) {
+                // Bütün butonlar için dokunma olaylarını iyileştir
+                document.querySelectorAll('.btn, .quick-view').forEach(button => {
+                    button.addEventListener('touchstart', function() {
+                        this.style.opacity = '0.7';
+                    });
+                    
+                    button.addEventListener('touchend', function() {
+                        this.style.opacity = '1';
+                    });
+                });
+            }
+
+            // Sepete ekle butonlarına olay dinleyicileri ekle
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                // Hem click hem de touchend olayı ekle
+                ['click', 'touchend'].forEach(eventType => {
+                    button.addEventListener(eventType, function(e) {
+                        if (eventType === 'touchend') {
+                            e.preventDefault(); // Varsayılan dokunma davranışını engelle
+                        }
+                        addToCart(this);
+                    });
+                });
+            });
+            
+            // Hızlı bakış butonlarına olay dinleyicileri ekle
+            document.querySelectorAll('.quick-view').forEach(button => {
+                ['click', 'touchend'].forEach(eventType => {
+                    button.addEventListener(eventType, function(e) {
+                        if (eventType === 'touchend') {
+                            e.preventDefault();
+                        }
+                        openQuickView(this);
+                    });
+                });
+            });
+            
+            // Filtre elemanlarının görünürlüğünü kontrol et
+            setTimeout(() => {
+                checkFilterVisibility();
+            }, 100);
+            
+        } catch (error) {
+            console.error("Ürünler yüklenirken hata:", error);
+            productsGrid.innerHTML = '<div class="error" style="text-align:center; padding:30px; color:red;">Ürünler yüklenirken bir hata oluştu. <button onclick="window.location.reload()">Tekrar Dene</button></div>';
+        }
+    }, 200); // 200ms gecikme ile işlemi başlat
+}
+// Hızlı bakış açma fonksiyonu
+function openQuickView(button) {
+    const productCard = button.closest('.product-card');
+    const modal = document.getElementById('product-modal');
+    
+    if (productCard && modal) {
+        const img = productCard.querySelector('.product-image img');
+        const title = productCard.querySelector('h3').textContent;
         
-    } catch (error) {
-        console.error("Ürünler yüklenirken hata:", error);
-        productsGrid.innerHTML = '<div class="error">Ürünler yüklenirken bir hata oluştu.</div>';
+        const modalImg = document.getElementById('modal-image');
+        const captionText = document.getElementById('modal-caption');
+        
+        if (modalImg && captionText) {
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            captionText.innerHTML = title;
+            document.body.style.overflow = 'hidden';
+        }
+    }
+}
+// Filtre görünürlüğünü kontrol et
+function checkFilterVisibility() {
+    const filterSection = document.querySelector('.filter-section');
+    const productsGrid = document.querySelector('.products-grid');
+    
+    if (!filterSection || !productsGrid) return;
+    
+    // Mobil cihazlarda filtre bölümü görünürlüğünü kontrol et
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        console.log('Mobil cihaz: Filtreler kontrol ediliyor');
+        // Filtre bölümünün görünür olduğunu doğrula
+        filterSection.style.display = 'block';
+        // Genişliğini ayarla
+        filterSection.style.width = '100%';
     }
 }
 // Ürün kartlarının yüksekliklerini eşitle
