@@ -163,63 +163,113 @@ function setupPriceFilter() {
         });
     });
     
-    // Fiyat filtresini uygulayan fonksiyon
-    function applyPriceFilter() {
-        try {
-            const productCards = document.querySelectorAll('.product-card');
-            if (!productCards.length) {
-                console.log('Ürün kartları bulunamadı');
+    // Fiyat filtresini uygulayan fonksiyon - geliştirilmiş versiyon
+function applyPriceFilter() {
+    try {
+        // Ürün kartlarını seç ve kontrol et
+        const productCards = document.querySelectorAll('.product-card');
+        if (!productCards.length) {
+            console.log('Ürün kartları bulunamadı');
+            return;
+        }
+        
+        // Fiyat inputlarından değerleri al
+        const minInput = document.getElementById('min-price');
+        const maxInput = document.getElementById('max-price');
+        
+        // Değerleri parse et (geçersiz değerler için varsayılanları kullan)
+        const minPrice = minInput && !isNaN(minInput.value) ? parseFloat(minInput.value) : 0;
+        const maxPrice = maxInput && !isNaN(maxInput.value) ? parseFloat(maxInput.value) : Infinity;
+        
+        console.log(`Fiyat filtresi uygulanıyor: ${minPrice} - ${maxPrice}`);
+        
+        // Görünür ürün sayacı
+        let visibleCount = 0;
+        
+        // Her bir ürün kartı için filtreleme işlemi yap
+        productCards.forEach(card => {
+            // Ürün fiyatını al
+            const priceElement = card.querySelector('.product-price');
+            if (!priceElement) return;
+            
+            // Fiyat metnini temizle ve sadece sayısal değeri al
+            const priceText = priceElement.textContent;
+            const price = parseFloat(priceText.replace(/[^0-9.,]/g, '').replace(',', '.'));
+            
+            // Fiyat geçerli mi kontrol et
+            if (isNaN(price)) {
+                console.warn('Geçersiz fiyat:', priceText);
                 return;
             }
             
-            const minPrice = parseFloat(priceInputs[0]?.value) || 0;
-            const maxPrice = parseFloat(priceInputs[1]?.value) || Infinity;
+            // Fiyat aralığına göre ürünü göster/gizle
+            const isVisible = price >= minPrice && price <= maxPrice;
+            card.style.display = isVisible ? 'block' : 'none';
             
-            console.log(`Fiyat filtresi uygulanıyor: ${minPrice} - ${maxPrice}`);
-            
-            let visibleCount = 0;
-            
-            productCards.forEach(card => {
-                // Ürün fiyatını al (içeriği temizleyerek sadece sayısal değeri al)
-                const priceElement = card.querySelector('.product-price');
-                if (!priceElement) return;
-                
-                const priceText = priceElement.textContent;
-                const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-                
-                // Fiyat aralığına göre ürünü göster/gizle
-                if (price >= minPrice && price <= maxPrice) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            // Görünür ürün sayacını güncelle
+            if (isVisible) visibleCount++;
+        });
+        
+        // "Ürün bulunamadı" mesajını göster/gizle
+        const productsGrid = document.querySelector('.products-grid');
+        if (productsGrid) {
+            // Önceki mesajı varsa temizle
+            const existingMessage = productsGrid.querySelector('.no-filtered-products');
+            if (existingMessage) existingMessage.remove();
             
             // Eğer hiç görünür ürün yoksa mesaj göster
-            const productsGrid = document.querySelector('.products-grid');
-            if (visibleCount === 0 && productsGrid) {
-                // Önce "ürün bulunamadı" mesajını temizle
-                const existingMessage = productsGrid.querySelector('.no-filtered-products');
-                if (!existingMessage) {
-                    const noProductsMessage = document.createElement('div');
-                    noProductsMessage.className = 'no-filtered-products';
-                    noProductsMessage.textContent = 'Bu fiyat aralığında ürün bulunamadı.';
-                    productsGrid.appendChild(noProductsMessage);
+            if (visibleCount === 0) {
+                const noProductsMessage = document.createElement('div');
+                noProductsMessage.className = 'no-filtered-products';
+                noProductsMessage.innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <p>Bu fiyat aralığında ürün bulunamadı.</p>
+                        <button class="reset-filter-btn">Filtreyi Temizle</button>
+                    </div>
+                `;
+                productsGrid.appendChild(noProductsMessage);
+                
+                // Filtre temizleme butonuna olay dinleyicisi ekle
+                const resetBtn = noProductsMessage.querySelector('.reset-filter-btn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', function() {
+                        if (minInput) minInput.value = '';
+                        if (maxInput) maxInput.value = '';
+                        applyPriceFilter(); // Filtreyi tekrar uygula
+                    });
                 }
-            } else {
-                // Mesaj varsa kaldır
-                const existingMessage = document.querySelector('.no-filtered-products');
-                if (existingMessage) existingMessage.remove();
             }
-            
-            // Filtreleme durumunu kaydedelim
-            saveFilterState();
-            
-        } catch (error) {
-            console.error('Fiyat filtreleme hatası:', error);
         }
+        
+        // Filtreleme durumunu kaydet
+        saveFilterState();
+        
+        // Sonuçları animasyonla göster
+        animateFilterResults();
+        
+    } catch (error) {
+        console.error('Fiyat filtreleme hatası:', error);
+        showNotification('Filtreleme yapılırken bir hata oluştu', 'error');
     }
+}
+
+// Filtreleme sonuçlarını animasyonla göster
+function animateFilterResults() {
+    const visibleCards = document.querySelectorAll('.product-card[style="display: block;"]');
+    
+    visibleCards.forEach((card, index) => {
+        // Kart görünürlüğünü gecikmeli olarak ayarla
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 50); // Her kart için 50ms gecikme
+    });
+}
     
     // Enter tuşuna basıldığında da filtrelesin (mobil klavye için önemli)
     priceInputs.forEach(input => {
@@ -867,22 +917,35 @@ function loadProductsFromAdmin() {
         try {
             productsGrid.innerHTML = ''; // Temizle
             
-            // Basit kart yapısı oluştur - kategori ve filtre olmadan
             basicProducts.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <div class="product-price">${product.price.toFixed(2)} TL</div>
-                        <button class="btn add-to-cart-btn">Sepete Ekle</button>
-                    </div>
-                `;
-                productsGrid.appendChild(card);
-            });
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    
+    // Kategori adını ekleyin (filtre için gerekli)
+    card.setAttribute('data-category', product.categoryName.toLowerCase().includes('seramik') ? 'seramik' : 
+                                      product.categoryName.toLowerCase().includes('banyo') ? 'banyo' :
+                                      product.categoryName.toLowerCase().includes('mutfak') ? 'mutfak' : 'diger');
+    
+    // Daha basit, hızlı yüklenen kart yapısı
+    card.innerHTML = `
+        <div class="product-image">
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+        </div>
+        <div class="product-info">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="product-price">${product.price.toFixed(2)} TL</div>
+            <button class="btn add-to-cart-btn" 
+                    data-id="${product.id}" 
+                    data-name="${product.name}" 
+                    data-price="${product.price}" 
+                    data-image="${product.image}">
+                Sepete Ekle
+            </button>
+        </div>
+    `;
+    productsGrid.appendChild(card);
+});
             
             console.log("Ürünler başarıyla yüklendi");
         } catch (error) {
