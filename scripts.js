@@ -709,214 +709,186 @@ function loadProductsFromAdmin() {
     image: 'images/florusevye.jpg'
 },
 
+// Tüm ürünler için standartlaştırılmış format
 {
-    "id": 126,
-    "name": "Frezia Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 1450.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/freziaevye.jpg"
-  },
-  {
-    "id": 127,
-    "name": "Tauro Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 2200.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/gpdtauroevye.jpg"
-  },
-  {
-    "id": 128,
-    "name": "Provido Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 980.00,
-    "description": "Gold Kaplama, Su Tasarruflu",
-    "image": "images/providoevye.jpg"
-  },
-  {
-    "id": 129,
-    "name": "Pedra Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 3200.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/pedraevye.jpg"
-  },
-  {
-    "id": 130,
-    "name": "Ritmo Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/ritmoevye.jpg"
-  },
-  {
-    "id": 131,
-    "name": "Solus Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/solusevye.jpg"
-  },
-  {
-    "id": 132,
-    "name": "Claire Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 980.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/claireevye.jpg"
-  },
-  {
-    "id": 133,
-    "name": "Spiralli Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 3200.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/spirallievye.jpg"
-  },
-  {
-    "id": 134,
-    "name": "Kare Spiral Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/karespiralevye.jpg"
-  },
-  {
-    "id": 135,
-    "name": "Pruva Eviye Bataryası",
-    "category": 1,
-    "categoryName": "Mutfak Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/pruvaevye.jpg"
-  },
-  {
-    "id": 136,
-    "name": "Atros Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 3200.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/atrosbanyo.jpg"
-  },
-  {
-    "id": 137,
-    "name": "Espina Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/espinabanyo.jpg"
-  },
-  {
-    "id": 138,
-    "name": "Florus Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 1750.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/florusbanyo.jpg"
-  },
-  {
-    "id": 139,
-    "name": "Gildo Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 980.00,
-    "description": "Siyah Kaplama, Su Tasarruflu",
-    "image": "images/gildobanyosr.jpg"
-  },
-  {
-    "id": 140,
-    "name": "Provido Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 3200.00,
-    "description": "Krom Kaplama, Su Tasarruflu",
-    "image": "images/gpdprovido.jpg"
-  },
-  {
-    "id": 141,
-    "name": "Tauro Banyo Bataryası",
-    "category": 2,
-    "categoryName": "Banyo Bataryaları",
-    "price": 1750.00,
-    "description": "Gold Kaplama, Su Tasarruflu",
-    "image": "images/taurobanyoa.jpg"
-  },
+    id: 126,
+    name: 'Frezia Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 1450.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/freziaevye.jpg'
+},
+{
+    id: 127,
+    name: 'Tauro Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 2200.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/gpdtauroevye.jpg'
+},
+{
+    id: 128,
+    name: 'Provido Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 980.00,
+    description: 'Gold Kaplama, Su Tasarruflu',
+    image: 'images/providoevye.jpg'
+},
+{
+    id: 129,
+    name: 'Pedra Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 3200.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/pedraevye.jpg'
+},
+{
+    id: 130,
+    name: 'Ritmo Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/ritmoevye.jpg'
+},
+{
+    id: 131,
+    name: 'Solus Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/solusevye.jpg'
+},
+{
+    id: 132,
+    name: 'Claire Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 980.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/claireevye.jpg'
+},
+{
+    id: 133,
+    name: 'Spiralli Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 3200.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/spirallievye.jpg'
+},
+{
+    id: 134,
+    name: 'Kare Spiral Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/karespiralevye.jpg'
+},
+{
+    id: 135,
+    name: 'Pruva Eviye Bataryası',
+    category: 3,
+    categoryName: 'Mutfak Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/pruvaevye.jpg'
+},
+{
+    id: 136,
+    name: 'Atros Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 3200.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/atrosbanyo.jpg'
+},
+{
+    id: 137,
+    name: 'Espina Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/espinabanyo.jpg'
+},
+{
+    id: 138,
+    name: 'Florus Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 1750.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/florusbanyo.jpg'
+},
+{
+    id: 139,
+    name: 'Gildo Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 980.00,
+    description: 'Siyah Kaplama, Su Tasarruflu',
+    image: 'images/gildobanyosr.jpg'
+},
+{
+    id: 140,
+    name: 'Provido Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 3200.00,
+    description: 'Krom Kaplama, Su Tasarruflu',
+    image: 'images/gpdprovido.jpg'
+},
+{
+    id: 141,
+    name: 'Tauro Banyo Bataryası',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 1750.00,
+    description: 'Gold Kaplama, Su Tasarruflu',
+    image: 'images/taurobanyoa.jpg'
+},
 
         // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
     ];
             
-            
-            
-            // Yükleme mesajını temizle
+   // Yükleniyor mesajını temizle
     productsGrid.innerHTML = '';
     
-    // Her ürün için HTML oluştur
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        
-        // Kategori adına göre data-category ekle
-        let categorySlug = '';
-        switch(product.categoryName) {
-            case 'Seramik': categorySlug = 'seramik'; break;
-            case 'Banyo Bataryaları': categorySlug = 'banyo'; break;
-            case 'Mutfak Bataryaları': categorySlug = 'mutfak'; break;
-            default: categorySlug = 'diger';
-        }
-        
-        productCard.setAttribute('data-category', categorySlug);
-        
-        // Ürün kartı oluştur
-        productCard.innerHTML = `
+    // Sayfaya ürün kartlarını ekle (basit yapıda)
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
-                <div class="product-overlay">
-                    <button class="quick-view">Hızlı Bakış</button>
-                </div>
+                <img src="${product.image}" alt="${product.name}">
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <p class="product-description">${product.description}</p>
                 <div class="product-price">${product.price.toFixed(2)} TL</div>
-                <div class="product-actions">
-                    <a href="product-details.html?id=${product.id}" class="btn details-btn">İncele</a>
-                    <button class="btn add-to-cart-btn" 
-                            data-id="${product.id}" 
-                            data-name="${product.name}" 
-                            data-price="${product.price}" 
-                            data-image="${product.image}">
-                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
-                    </button>
-                </div>
+                <button class="btn add-to-cart-btn" 
+                        data-id="${product.id}" 
+                        data-name="${product.name}" 
+                        data-price="${product.price}" 
+                        data-image="${product.image}">
+                    Sepete Ekle
+                </button>
             </div>
         `;
-        
-        productsGrid.appendChild(productCard);
-    });
+        productsGrid.appendChild(card);
+    }
     
-    // Olay dinleyicileri ekle
+    // Sepete ekle butonlarına olay dinleyicileri ekle
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', function() {
-            addToCart(this);
-        });
-    });
-    
-    document.querySelectorAll('.quick-view').forEach(button => {
-        button.addEventListener('click', function() {
-            const productCard = this.closest('.product-card');
-            openQuickView(productCard.querySelector('.product-image img'));
+            alert('Ürün sepete eklendi: ' + this.dataset.name);
         });
     });
 }
