@@ -2,18 +2,59 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ürünler - Mağaza Adı</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Sayfa içi mobil düzeltmeler */
+        @media (max-width: 768px) {
+            .products-container {
+                display: flex;
+                flex-direction: column;
+            }
+            .filters {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .products-grid {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                padding: 0 10px !important;
+            }
+            .filter-toggle {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                background-color: #f5f5f5;
+                border: none;
+                text-align: left;
+                font-weight: bold;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+            .product-card {
+                width: 100% !important;
+                margin: 10px 0 !important;
+            }
+            .mobile-loader {
+                padding: 20px;
+                text-align: center;
+                font-size: 16px;
+                color: #333;
+            }
+        }
+    </style>
 </head>
-<!-- Product Lightbox Modal -->
-<div id="product-modal" class="modal">
-    <span class="close-modal">&times;</span>
-    <img class="modal-content" id="modal-image">
-    <div id="modal-caption"></div>
-</div>
 <body>
+    <!-- Product Lightbox Modal -->
+    <div id="product-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-image">
+        <div id="modal-caption"></div>
+    </div>
+    
     <div id="header"></div>
 
     <nav>
@@ -38,73 +79,133 @@
         </ul>
     </nav>
 
-    <div class="products-container">
-        <aside class="filters">
-            <div class="filter-group">
-                <h3>Kategoriler</h3>
-                <div class="filter-options">
-                    <label class="checkbox-container">
-                        <input type="checkbox" name="category" value="seramik">
-                        <span class="checkmark"></span>
-                        Seramik
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" name="category" value="banyo">
-                        <span class="checkmark"></span>
-                        Banyo Bataryaları
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" name="category" value="mutfak">
-                        <span class="checkmark"></span>
-                        Mutfak Bataryaları
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" name="category" value="klozet">
-                        <span class="checkmark"></span>
-                        Klozet
-                    </label>
+    <div class="container">
+        <button class="filter-toggle" id="filter-toggle">
+            <i class="fas fa-filter"></i> Filtreler <i class="fas fa-chevron-down"></i>
+        </button>
+        
+        <div class="products-container">
+            <aside class="filters" id="filters-section">
+                <div class="filter-group">
+                    <h3>Kategoriler</h3>
+                    <div class="filter-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="category" value="seramik">
+                            <span class="checkmark"></span>
+                            Seramik
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="category" value="banyo">
+                            <span class="checkmark"></span>
+                            Banyo Bataryaları
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="category" value="mutfak">
+                            <span class="checkmark"></span>
+                            Mutfak Bataryaları
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="category" value="klozet">
+                            <span class="checkmark"></span>
+                            Klozet
+                        </label>
+                    </div>
                 </div>
+
+                <div class="filter-group">
+                    <h3>Fiyat Aralığı</h3>
+                    <div class="price-filter">
+                        <div class="min-container">
+                            <input type="number" placeholder="Min" class="price-input" id="min-price">
+                        </div>
+                        <div class="max-btn-container">
+                            <input type="number" placeholder="Max" class="price-input" id="max-price">
+                            <button class="filter-btn">Uygula</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Sıralama</h3>
+                    <select class="sort-select">
+                        <option value="popular">En Popüler</option>
+                        <option value="price-low">En Düşük Fiyat</option>
+                        <option value="price-high">En Yüksek Fiyat</option>
+                        <option value="new">En Yeniler</option>
+                    </select>
+                </div>
+            </aside>
+
+            <div class="products-grid">
+                <div class="mobile-loader">Ürünler yükleniyor...</div>
+                
+                <!-- Ürünler JavaScript ile yüklenecek. Javacsript yüklenmezse aşağıdaki ürünler görünecek -->
+                <noscript>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/statuariogoya.png" alt="Seramik">
+                        </div>
+                        <div class="product-info">
+                            <h3>Statiuario Goya Yer Seramiği</h3>
+                            <div class="product-price">450.00 TL</div>
+                            <button class="btn add-to-cart-btn">Sepete Ekle</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/gildolavabogumus.jpg" alt="Batarya">
+                        </div>
+                        <div class="product-info">
+                            <h3>Gildo Lavabo Bataryası</h3>
+                            <div class="product-price">2149.00 TL</div>
+                            <button class="btn add-to-cart-btn">Sepete Ekle</button>
+                        </div>
+                    </div>
+                </noscript>
             </div>
-
-            <div class="filter-group">
-    <h3>Fiyat Aralığı</h3>
-    <div class="price-filter">
-        <div class="min-container">
-            <input type="text" placeholder="Min" class="price-input" id="min-price">
         </div>
-        <div class="max-btn-container">
-            <input type="text" placeholder="Max" class="price-input" id="max-price">
-            <button class="filter-btn">Uygula</button>
+
+        <div class="pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">...</button>
+            <button class="pagination-btn">10</button>
         </div>
-    </div>
-</div>
-
-            <div class="filter-group">
-                <h3>Sıralama</h3>
-                <select class="sort-select">
-                    <option value="popular">En Popüler</option>
-                    <option value="price-low">En Düşük Fiyat</option>
-                    <option value="price-high">En Yüksek Fiyat</option>
-                    <option value="new">En Yeniler</option>
-                </select>
-            </div>
-        </aside>
-
-        <main class="products-grid">
-           
-            <!-- Additional product cards with same structure -->
-        </main>
-    </div>
-
-    <div class="pagination">
-        <button class="pagination-btn active">1</button>
-        <button class="pagination-btn">2</button>
-        <button class="pagination-btn">3</button>
-        <button class="pagination-btn">...</button>
-        <button class="pagination-btn">10</button>
     </div>
 
     <div id="footer"></div>
+    
+    <script>
+        // Filtre Toggle (mobil için)
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.getElementById('filter-toggle');
+            const filtersSection = document.getElementById('filters-section');
+            
+            if (filterToggle && filtersSection) {
+                // Mobilde ilk başta filtreleri gizle
+                if (window.innerWidth < 768) {
+                    filtersSection.style.display = 'none';
+                }
+                
+                filterToggle.addEventListener('click', function() {
+                    if (filtersSection.style.display === 'none') {
+                        filtersSection.style.display = 'block';
+                        filterToggle.innerHTML = '<i class="fas fa-filter"></i> Filtreler <i class="fas fa-chevron-up"></i>';
+                    } else {
+                        filtersSection.style.display = 'none';
+                        filterToggle.innerHTML = '<i class="fas fa-filter"></i> Filtreler <i class="fas fa-chevron-down"></i>';
+                    }
+                });
+            }
+            
+            // Ekstra debug bilgisi
+            console.log('Ürünler sayfası yükleniyor');
+            console.log('products-grid elementi var mı:', !!document.querySelector('.products-grid'));
+        });
+    </script>
+    
     <script src="scripts.js"></script>
 </body>
 </html>
