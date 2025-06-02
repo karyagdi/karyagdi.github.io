@@ -471,16 +471,21 @@ function setupSortingFilter() {
     });
 }
 
-// Ürünleri yükleme fonksiyonu - admin panel olmadan
+// Mobil cihazda güvenilir çalışacak ürün yükleme fonksiyonu
 function loadProductsFromAdmin() {
+    console.log("Ürünler yükleniyor...");
     const productsGrid = document.querySelector('.products-grid');
-    if (!productsGrid) return;
     
-    // Yükleniyor göstergesi
-    productsGrid.innerHTML = '<div class="loading" style="text-align:center; padding:30px;">Ürünler yükleniyor...</div>';
+    if (!productsGrid) {
+        console.error("Ürün grid bulunamadı");
+        return;
+    }
     
-    // Sabit ürün verileri (admin.js dosyasından kopyalandı)
-    const products = [
+    // Yükleniyor göstergesi ekle
+    productsGrid.innerHTML = '<div class="loading" style="text-align:center; padding:30px; font-size:18px;">Ürünler yükleniyor...</div>';
+    
+    // Temel ürün verileri - her cihazda çalışacak kadar basit
+    const basicProducts = [
   // Seramik ürünleri
         {
             id: 101,
@@ -857,40 +862,34 @@ function loadProductsFromAdmin() {
 
         // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
     ];
+  // Gecikmeyle ekle - mobil cihazlarda daha güvenilir
+    setTimeout(() => {
+        try {
+            productsGrid.innerHTML = ''; // Temizle
             
-   // Yükleniyor mesajını temizle
-    productsGrid.innerHTML = '';
-    
-    // Sayfaya ürün kartlarını ekle (basit yapıda)
-    for (let i = 0; i < products.length; i++) {
-        const product = products[i];
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
-            </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <div class="product-price">${product.price.toFixed(2)} TL</div>
-                <button class="btn add-to-cart-btn" 
-                        data-id="${product.id}" 
-                        data-name="${product.name}" 
-                        data-price="${product.price}" 
-                        data-image="${product.image}">
-                    Sepete Ekle
-                </button>
-            </div>
-        `;
-        productsGrid.appendChild(card);
-    }
-    
-    // Sepete ekle butonlarına olay dinleyicileri ekle
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            alert('Ürün sepete eklendi: ' + this.dataset.name);
-        });
-    });
+            // Basit kart yapısı oluştur - kategori ve filtre olmadan
+            basicProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <div class="product-price">${product.price.toFixed(2)} TL</div>
+                        <button class="btn add-to-cart-btn">Sepete Ekle</button>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+            
+            console.log("Ürünler başarıyla yüklendi");
+        } catch (error) {
+            console.error("Ürün yükleme hatası:", error);
+            productsGrid.innerHTML = '<div class="error" style="text-align:center; padding:20px; color:red;">Hata oluştu. Sayfayı yenileyin.</div>';
+        }
+    }, 500);
 }
             
  
@@ -1060,7 +1059,25 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Template yükleme hatası:', error);
         showNotification('Sayfa içerikleri yüklenirken hata oluştu', 'error');
     });
+     // Mobil debug
+    console.log("Sayfa yüklendi");
     
+    // Doğrudan ürünleri yükle
+    const productsGrid = document.querySelector('.products-grid');
+    if (productsGrid) {
+        console.log("Ürün grid bulundu, yükleme başlıyor");
+        
+        // Basit HTML ekleyelim
+        productsGrid.innerHTML = `
+            <div class="product-card" style="padding: 20px; border: 1px solid #ccc; margin: 10px;">
+                <h3>Test Ürünü</h3>
+                <p>Bu test ürünü mobil cihazlarda çalışıyor mu görmek içindir.</p>
+                <div>750 TL</div>
+            </div>
+        `;
+    } else {
+        console.error("HATA: Ürün grid bulunamadı!");
+    }
     // Öne çıkan ürünleri göster
     function displayFeaturedProducts() {
         const featuredProductsContainer = document.querySelector('.featured-products .fixed-grid-3');
