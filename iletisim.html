@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Kesin hata mesajı gizleme - tüm mesaj tipleri için */
+.error-message, 
+.alert-error, 
+.load-error, 
+div[class*="error"],
+div[id*="error"],
+div[class*="Error"],
+div[id*="Error"],
+p[class*="error"],
+p[id*="error"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Body etiketi içindeki direkt text nodlarını kontrol et */
+body > div:not(#header):not(nav):not(main):not(#footer):not(#map-container):not(.container):not(.contact-page) {
+    display: none !important;
+}
         /* Harita kontrol butonları için stil */
         .map-controls {
             position: absolute;
