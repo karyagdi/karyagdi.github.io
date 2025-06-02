@@ -89,7 +89,46 @@ function initSlider() {
     // Başlangıçta slider'ı başlat
     startSlideInterval();
 }
-
+// Mobil menü için gerekli fonksiyonlar
+function setupMobileMenu() {
+    const hamburgerBtn = document.getElementById('hamburger-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const closeBtn = document.getElementById('close-overlay');
+    
+    if (!hamburgerBtn || !overlay || !closeBtn) return;
+    
+    // Hamburger menüye tıklama
+    hamburgerBtn.addEventListener('click', function() {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Kaydırmayı devre dışı bırak
+    });
+    
+    // Kapatma butonuna tıklama
+    closeBtn.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Kaydırmayı etkinleştir
+    });
+    
+    // Sepet sayısını mobil menüde de güncelle
+    const cartCount = document.getElementById('cart-count');
+    const cartCountMobile = document.getElementById('cart-count-mobile');
+    
+    if (cartCount && cartCountMobile) {
+        // İlk yükleme
+        cartCountMobile.textContent = cartCount.textContent;
+        
+        // Sepet sayısı değiştiğinde güncelleme
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                    cartCountMobile.textContent = cartCount.textContent;
+                }
+            });
+        });
+        
+        observer.observe(cartCount, { characterData: true, childList: true, subtree: true });
+    }
+}
 // Ürün Hızlı Bakış Modal Fonksiyonu
 function initProductModal() {
     // Modal elemanlarını al
@@ -144,7 +183,68 @@ function initProductModal() {
         document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aktif et
     }
 }
-
+    // Fiyat filtre işlemi
+    const filterBtn = document.querySelector('.filter-btn');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', function() {
+            // Kullanıcı girdilerini al
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || 999999;
+            
+            console.log('Fiyat filtresi çalıştı:', minPrice, '-', maxPrice);
+            
+            // Tüm ürün kartlarını seç
+            const productCards = document.querySelectorAll('.product-card');
+            
+            // Ürün bulundu/bulunamadı durumunu kontrol etmek için
+            let productsFound = false;
+            
+            // Her ürün kartını kontrol et
+            productCards.forEach(card => {
+                // Fiyatı al ve sayıya çevir
+                let priceText = card.querySelector('.product-price').innerText;
+                // TL, ₺, . ve , gibi karakterleri temizle
+                priceText = priceText.replace(/[^\d]/g, '');
+                
+                // Fiyatı sayıya çevir (kuruş varsa dikkate alarak)
+                let price = parseInt(priceText) / 100;
+                if (isNaN(price)) {
+                    price = parseInt(priceText);
+                }
+                
+                console.log('Ürün fiyatı:', price);
+                
+                // Fiyat aralığı kontrolü
+                if (price >= minPrice && (maxPrice === 0 || price <= maxPrice)) {
+                    card.style.display = 'block';
+                    productsFound = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Eğer hiçbir ürün bulunamadıysa mesaj göster
+            const noResultsMessage = document.querySelector('.no-results-message') || 
+                                     document.createElement('div');
+            if (!productsFound) {
+                noResultsMessage.className = 'no-results-message';
+                noResultsMessage.textContent = 'Bu fiyat aralığında ürün bulunamadı.';
+                
+                const productsGrid = document.querySelector('.products-grid');
+                if (productsGrid) {
+                    // Mesajı ekle (eğer zaten eklenmemişse)
+                    if (!document.querySelector('.no-results-message')) {
+                        productsGrid.appendChild(noResultsMessage);
+                    }
+                }
+            } else {
+                // Sonuç bulunduysa, mesajı kaldır (eğer varsa)
+                if (document.contains(noResultsMessage)) {
+                    noResultsMessage.remove();
+                }
+            }
+        });
+    }
 // Fiyat filtreleme işlevi - mobil uyumlu güncellenmiş versiyon
 function setupPriceFilter() {
     const filterBtn = document.querySelector('.filter-btn');
@@ -163,7 +263,28 @@ function setupPriceFilter() {
         });
     });
     
-    // Fiyat filtresini uygulayan fonksiyon - geliştirilmiş versiyon
+    // Enter tuşuna basıldığında da filtrelesin (mobil klavye için önemli)
+    priceInputs.forEach(input => {
+        if (!input) return;
+        
+        input.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                applyPriceFilter();
+            }
+        });
+        
+        // Mobil klavyeler için input olayını da dinle
+        input.addEventListener('input', function() {
+            // Gereksiz yeniden yüklemeyi önlemek için debounce uygula
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                applyPriceFilter();
+            }, 1000); // 1 saniye bekle
+        });
+    });
+}
+
+// Fiyat filtresini uygulayan fonksiyon - geliştirilmiş versiyon
 function applyPriceFilter() {
     try {
         // Ürün kartlarını seç ve kontrol et
@@ -203,7 +324,7 @@ function applyPriceFilter() {
             }
             
             // Fiyat aralığına göre ürünü göster/gizle
-            const isVisible = price >= minPrice && price <= maxPrice;
+            const isVisible = price >= minPrice && (maxPrice === Infinity || price <= maxPrice);
             card.style.display = isVisible ? 'block' : 'none';
             
             // Görünür ürün sayacını güncelle
@@ -243,14 +364,18 @@ function applyPriceFilter() {
         }
         
         // Filtreleme durumunu kaydet
-        saveFilterState();
+        if (typeof saveFilterState === 'function') {
+            saveFilterState();
+        }
         
         // Sonuçları animasyonla göster
         animateFilterResults();
         
     } catch (error) {
         console.error('Fiyat filtreleme hatası:', error);
-        showNotification('Filtreleme yapılırken bir hata oluştu', 'error');
+        if (typeof showNotification === 'function') {
+            showNotification('Filtreleme yapılırken bir hata oluştu', 'error');
+        }
     }
 }
 
@@ -268,27 +393,6 @@ function animateFilterResults() {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
         }, index * 50); // Her kart için 50ms gecikme
-    });
-}
-    
-    // Enter tuşuna basıldığında da filtrelesin (mobil klavye için önemli)
-    priceInputs.forEach(input => {
-        if (!input) return;
-        
-        input.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                applyPriceFilter();
-            }
-        });
-        
-        // Mobil klavyeler için input olayını da dinle
-        input.addEventListener('input', function() {
-            // Gereksiz yeniden yüklemeyi önlemek için debounce uygula
-            clearTimeout(this.debounceTimer);
-            this.debounceTimer = setTimeout(() => {
-                applyPriceFilter();
-            }, 1000); // 1 saniye bekle
-        });
     });
 }
 
@@ -382,7 +486,49 @@ function initMap() {
     `;
     document.head.appendChild(style);
     
+    // Tam ekran modunu aç/kapat
+    window.toggleFullscreen = function() {
+    const mapContainer = document.getElementById('map-container');
     
+    if (mapContainer.classList.contains('map-fullscreen')) {
+        // Tam ekrandan çık
+        mapContainer.classList.remove('map-fullscreen');
+        document.body.style.overflow = 'auto'; // Sayfada kaydırmayı etkinleştir
+        
+        // Çıkış butonunu kaldır
+        const exitBtn = document.querySelector('.exit-fullscreen-btn');
+        if (exitBtn) exitBtn.remove();
+        
+        // Tam ekran butonunun simgesini güncelle
+        const fullscreenBtn = document.querySelector('.fullscreen-btn i');
+        if (fullscreenBtn) {
+            fullscreenBtn.className = 'fas fa-expand';
+        }
+        
+    } else {
+        // Tam ekrana geç
+        mapContainer.classList.add('map-fullscreen');
+        document.body.style.overflow = 'hidden'; // Sayfa kaydırmayı devre dışı bırak
+        
+        // Çıkış butonu ekle
+        const exitBtn = document.createElement('button');
+        exitBtn.className = 'exit-fullscreen-btn';
+        exitBtn.innerHTML = '<i class="fas fa-compress"></i> Normal Boyuta Dön';
+        exitBtn.onclick = toggleFullscreen;
+        mapContainer.appendChild(exitBtn);
+        
+        // Tam ekran butonunun simgesini güncelle
+        const fullscreenBtn = document.querySelector('.fullscreen-btn i');
+        if (fullscreenBtn) {
+            fullscreenBtn.className = 'fas fa-compress';
+        }
+    }
+    
+    // Harita boyutunu güncelle (Leaflet için gerekli)
+    setTimeout(function() {
+        map.invalidateSize();
+    }, 100);
+}
     
     // Yol tarifi butonu
     const directionsBtn = document.getElementById('directions-btn');
@@ -1078,7 +1224,8 @@ document.addEventListener('DOMContentLoaded', function () {
         loginForm: document.getElementById('loginForm'),
         themeToggle: document.getElementById('theme-toggle')
     };
-    
+     // Mobil menü kurulumu
+    setupMobileMenu();
     // Önce template'leri yükle
     Promise.all([
         loadTemplate('header'),
@@ -1125,22 +1272,7 @@ document.addEventListener('DOMContentLoaded', function () {
      // Mobil debug
     console.log("Sayfa yüklendi");
     
-    // Doğrudan ürünleri yükle
-    const productsGrid = document.querySelector('.products-grid');
-    if (productsGrid) {
-        console.log("Ürün grid bulundu, yükleme başlıyor");
-        
-        // Basit HTML ekleyelim
-        productsGrid.innerHTML = `
-            <div class="product-card" style="padding: 20px; border: 1px solid #ccc; margin: 10px;">
-                <h3>Test Ürünü</h3>
-                <p>Bu test ürünü mobil cihazlarda çalışıyor mu görmek içindir.</p>
-                <div>750 TL</div>
-            </div>
-        `;
-    } else {
-        console.error("HATA: Ürün grid bulunamadı!");
-    }
+  
     // Öne çıkan ürünleri göster
     function displayFeaturedProducts() {
         const featuredProductsContainer = document.querySelector('.featured-products .fixed-grid-3');
