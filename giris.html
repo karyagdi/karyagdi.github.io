@@ -6,32 +6,88 @@
     <title>Giriş Yap - Mağaza Adı</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+<style>
+    /* Bu stil sadece mobil cihazlarda etkili olacak */
+    @media (max-width: 768px) {
+        /* Mobile-hide sınıfına sahip tüm li elementlerini gizle */
+        nav ul li.mobile-hide {
+            display: none !important;
+        }
+        
+        /* Nav içindeki ul'yi yatay esnek kutu yap ve ortala */
+        nav ul {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: nowrap !important; /* Satır atlamayı engelle */
+            padding: 3px 0 !important;
+            width: 100% !important;
+        }
+        
+        /* Menü öğelerini daha kompakt hale getir */
+        nav ul li {
+            margin: 0 !important;
+            flex: 0 0 auto !important;
+        }
+        
+        /* Menü öğelerinin aralığını ve boyutunu küçült */
+        nav ul li a {
+            padding: 4px 4px !important;
+            font-size: 14px !important;
+            white-space: nowrap !important;
+        }
+        
+        /* Tema değiştiriciyi küçült */
+        .theme-switch {
+            transform: scale(0.8) !important;
+            margin-left: -5px !important;
+        }
+         
+    .theme-slider {
+        transition: all 0.4s ease !important;
+    }
+    
+    .slider-circle {
+        transition: transform 0.4s ease !important;
+    }
+    
+    .theme-slider-icon {
+        transition: opacity 0.3s ease, transform 0.3s ease !important;
+    }
+    }
+</style>
 </head>
 <body>
     <!-- Header buraya yüklenecek -->
     <div id="header"></div>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="kategoriler.html">Kategoriler</a></li>
-            <li><a href="urunler.html">Ürünler</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
-            <li><a href="favoriler.html">Favorilerim</a></li>
-            <li class="theme-switch-wrapper">
-                <label class="theme-switch" for="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" class="theme-checkbox">
-                    <div class="theme-slider">
-                        <div class="slider-circle">
-                            <span class="theme-slider-icon sun">☀️</span>
-                            <span class="theme-slider-icon moon">🌙</span>
-                        </div>
+     <nav>
+    <ul>
+        <!-- Sadece mobilde görünecek olanlar -->
+        <li class="always-show"><a href="index.html">Ana Sayfa</a></li>
+        <li class="always-show"><a href="kategoriler.html">Kategoriler</a></li>
+        <li class="always-show"><a href="urunler.html">Ürünler</a></li>
+        <li class="always-show"><a href="iletisim.html">İletişim</a></li>
+        
+        <!-- Mobilde gizlenecek olanlar -->
+        <li class="mobile-hide"><a href="sepet.html">Sepetim (<span id="cart-count">0</span>)</a></li>
+        <li class="mobile-hide"><a href="favoriler.html">Favorilerim</a></li>
+        
+        <!-- Tema değiştirme - her zaman göster -->
+        <li class="theme-switch-wrapper always-show">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" class="theme-checkbox">
+                <div class="theme-slider">
+                    <div class="slider-circle">
+                        <span class="theme-slider-icon sun">☀️</span>
+                        <span class="theme-slider-icon moon">🌙</span>
                     </div>
-                </label>
-            </li>
-        </ul>
-    </nav>
+                </div>
+            </label>
+        </li>
+    </ul>
+</nav>
 
     <main class="auth-page">
         <div class="auth-container">
