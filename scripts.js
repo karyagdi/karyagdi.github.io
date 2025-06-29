@@ -797,7 +797,7 @@ function loadProductsFromAdmin() {
         name: 'Gildo Tek Gövde Lavabo Bataryası',
         category: 2,
         categoryName: 'Banyo Bataryaları',
-        price: 3099.00,
+        price: 3199.00,
         description: 'Siyah Kaplama, Su Tasarruflu',
         image: 'images/gildolavabosr.jpg'
     },
@@ -821,10 +821,10 @@ function loadProductsFromAdmin() {
     },
     {
         id: 116,
-        name: 'Espina Lavabo Bataryası',
+        name: 'Espina Tek Gçövde Lavabo Bataryası',
         category: 2,
         categoryName: 'Banyo Bataryaları',
-        price: 2049.00,
+        price: 2349.00,
         description: 'Krom Kaplama, Su Tasarruflu',
         image: 'images/espinalavabo.jpg'
     },
@@ -851,7 +851,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3200.00,
+    price: 3599.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/taurolavabosiyah.jpg'
 },
@@ -860,7 +860,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Set Üstü Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 1750.00,
+    price: 4749.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/taurolavabos.jpg'
 },
@@ -869,7 +869,7 @@ function loadProductsFromAdmin() {
     name: 'Pruva Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 750.00,
+    price: 2249.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pruvalavabo.jpg'
 },
@@ -878,7 +878,7 @@ function loadProductsFromAdmin() {
     name: 'Atros Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 920.00,
+    price: 2199.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/atrosevye.jpg'
 },
@@ -887,7 +887,7 @@ function loadProductsFromAdmin() {
     name: 'Espina Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 850.00,
+    price: 2449.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/espinaevye.jpg'
 },
@@ -896,7 +896,7 @@ function loadProductsFromAdmin() {
     name: 'Felis Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 1200.00,
+    price: 2249.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/felisevye.jpg'
 },
@@ -916,7 +916,7 @@ function loadProductsFromAdmin() {
     name: 'Frezia Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1450.00,
+    price: 2699.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/freziaevye.jpg'
 },
@@ -925,7 +925,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 2200.00,
+    price: 4699.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/gpdtauroevye.jpg'
 },
@@ -934,7 +934,7 @@ function loadProductsFromAdmin() {
     name: 'Provido Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 980.00,
+    price: 5599.00,
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/providoevye.jpg'
 },
@@ -943,7 +943,7 @@ function loadProductsFromAdmin() {
     name: 'Pedra Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 3200.00,
+    price: 2999.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pedraevye.jpg'
 },
@@ -952,7 +952,7 @@ function loadProductsFromAdmin() {
     name: 'Ritmo Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1750.00,
+    price: 3299.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/ritmoevye.jpg'
 },
@@ -961,7 +961,7 @@ function loadProductsFromAdmin() {
     name: 'Solus Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1750.00,
+    price: 2199.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/solusevye.jpg'
 },
@@ -970,7 +970,7 @@ function loadProductsFromAdmin() {
     name: 'Claire Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 980.00,
+    price: 1999.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/claireevye.jpg'
 },
@@ -979,7 +979,7 @@ function loadProductsFromAdmin() {
     name: 'Spiralli Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 3200.00,
+    price: 5699.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/spirallievye.jpg'
 },
@@ -988,7 +988,7 @@ function loadProductsFromAdmin() {
     name: 'Kare Spiral Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1750.00,
+    price: 3549.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/karespiralevye.jpg'
 },
@@ -997,7 +997,7 @@ function loadProductsFromAdmin() {
     name: 'Pruva Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1750.00,
+    price: 3099.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pruvaevye.jpg'
 },
@@ -1006,7 +1006,7 @@ function loadProductsFromAdmin() {
     name: 'Atros Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3200.00,
+    price: 3399.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/atrosbanyo.jpg'
 },
@@ -1024,7 +1024,7 @@ function loadProductsFromAdmin() {
     name: 'Florus Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 1750.00,
+    price: 2799.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/florusbanyo.jpg'
 },
@@ -1033,7 +1033,7 @@ function loadProductsFromAdmin() {
     name: 'Gildo Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 980.00,
+    price: 4999.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/gildobanyosr.jpg'
 },
@@ -1042,7 +1042,7 @@ function loadProductsFromAdmin() {
     name: 'Provido Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3200.00,
+    price: 3399.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/gpdprovido.jpg'
 },
@@ -1051,7 +1051,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 1750.00,
+    price: 3999.00,
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/taurobanyoa.jpg'
 },
