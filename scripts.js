@@ -1095,6 +1095,25 @@ function loadProductsFromAdmin() {
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/taurobanyoa.jpg'
 },
+        {
+    id: 159,
+    name: 'Pietra Piyano 5 Tuşlu Akıllı Granit Evye',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: ,
+    description: 'PİYANO 5 Tuşlu Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Dijital Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası,İki Tane Yıkama Haznesi',
+    image: 'images/akillievye2.webp'
+},
+{
+    id: 160,
+    name: 'Şelale Teknolojik Mutfak Evye Seti',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: ,
+    description: 'Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası,İki Tane Yıkama Haznesi
+',
+    image: 'images/akillievye.webp'
+},
 {
     id: 142,
     name: 'Slim Line Kare Lavabo',
@@ -1250,7 +1269,7 @@ function loadProductsFromAdmin() {
     image: 'images/bocchitondo.webp'
 },
           {
-    id: 157,
+    id: 158,
     name: 'Baylan Kartlı Su Sayacı',
     category: 2,
     categoryName: 'Banyo Bataryaları',
