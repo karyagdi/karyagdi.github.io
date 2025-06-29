@@ -1101,7 +1101,7 @@ function loadProductsFromAdmin() {
     category: 2,
     categoryName: 'Banyo Bataryaları',
     price: ,
-    description: 'PİYANO 5 Tuşlu Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Dijital Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası,İki Tane Yıkama Haznesi',
+    description: 'PİYANO 5 Tuşlu Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Dijital Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası',
     image: 'images/akillievye2.webp'
 },
 {
@@ -1110,8 +1110,7 @@ function loadProductsFromAdmin() {
     category: 2,
     categoryName: 'Banyo Bataryaları',
     price: ,
-    description: 'Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası,İki Tane Yıkama Haznesi
-',
+    description: 'Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Şelale Batarya, 304 Paslanmaz Çelik, Kesme Tahtası',
     image: 'images/akillievye.webp'
 },
 {
