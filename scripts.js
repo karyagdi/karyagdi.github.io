@@ -1102,7 +1102,7 @@ image: 'images/taurobanyoa.jpg'
     categoryName: 'Banyo Bataryaları',
     price: 0,
     description: 'PİYANO 5 Tuşlu Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Dijital Şelale Batarya, Kesme Tahtası,İki Tane Yıkama Haznesi',
-    image: 'images/akillievye2.webp'
+    image: 'images/akıllıevye2.webp'
 },
 {
     id: 160,
