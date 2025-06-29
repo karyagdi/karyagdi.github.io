@@ -1104,6 +1104,151 @@ function loadProductsFromAdmin() {
     description: '38x38 cm',
     image: 'images/slimlavabo.jpg'
 },
+        {
+    id: 143,
+    name: 'Bien Dor Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 3599.00,
+    description: '',
+    image: 'images/biendor.png'
+},
+        {
+    id: 144,
+    name: 'Bien İon Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 3599.00,
+    description: '',
+    image: 'images/bienion.png'
+},
+        {
+    id: 145,
+    name: 'Bien Nicole Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 3599.00,
+    description: '',
+    image: 'images/biennicole.png'
+},
+        {
+    id: 146,
+    name: 'Bien Neptün Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 4049.00,
+    description: '',
+    image: 'images/bienneptun.png'
+},
+        {
+    id: 147,
+    name: 'Bien Vokha Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5499.00,
+    description: '',
+    image: 'images/bienvokha.png'
+},
+        {
+    id: 148,
+    name: 'Bien Harmony Gizli Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 4499.00,
+    description: 'No Rim',
+    image: 'images/bienharmony.png'
+},
+        {
+    id: 148,
+    name: 'Bien Pent Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5699.00,
+    description: 'No Rim',
+    image: 'images/bienpent.png'
+},
+        {
+    id: 149,
+    name: 'Bien Leo Asma Klozet + Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 2999.00,
+    description: 'No Rim',
+    image: 'images/taurobanyoa.jpg'
+},
+        {
+    id: 150,
+    name: 'Bien Orion Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5499.00,
+    description: '',
+    image: 'images/bienorion.png'
+},
+        {
+    id: 151,
+    name: 'Bien Capri Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5499.00,
+    description: '',
+    image: 'images/biencapri.png'
+},
+         {
+    id: 152,
+    name: 'Bien Capri Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5799.00,
+    description: 'No Rim',
+    image: 'images/biencapri.png'
+},
+        {
+    id: 153,
+    name: 'Bien Goya Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5999.00,
+    description: '',
+    image: 'images/biengoya.png'
+},
+        {
+    id: 154,
+    name: 'Bien Venüs Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 6599.00,
+    description: '',
+    image: 'images/bienvenus.png'
+},
+        {
+    id: 155,
+    name: 'Bien Milady Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 8999.00,
+    description: '',
+    image: 'images/bienmilady.png'
+},
+        
+        {
+    id: 156,
+    name: 'Bocchi Taormina Asma Klozet +  Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 6849.00,
+    description: '',
+    image: 'images/bocchitaormina.png'
+},
+        {
+    id: 157,
+    name: 'Bocchi Tondo Asma Klozet +  Slim soft Kapak',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 5999.00,
+    description: '',
+    image: 'images/bocchitondo.webp'
+},
         
 
         // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
