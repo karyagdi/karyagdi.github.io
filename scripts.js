@@ -129,58 +129,98 @@ function setupMobileMenu() {
         observer.observe(cartCount, { characterData: true, childList: true, subtree: true });
     }
 }
-// Ürün Hızlı Bakış Modal Fonksiyonu
+// Ürün modal (lightbox) fonksiyonu
 function initProductModal() {
-    // Modal elemanlarını al
+    // Modal elementleri
     const modal = document.getElementById('product-modal');
     const modalImg = document.getElementById('modal-image');
-    const captionText = document.getElementById('modal-caption');
-    const closeBtn = document.getElementsByClassName('close-modal')[0];
+    const modalCaption = document.getElementById('modal-caption');
+    const closeModal = document.querySelector('.close-modal');
     
-    if (!modal) return; // Modal yoksa fonksiyonu sonlandır
+    if (!modal || !modalImg || !closeModal) {
+        console.log('Modal elementleri bulunamadı');
+        return;
+    }
     
-    // Tüm Hızlı Bakış butonlarına tıklama olayı ekle
-    document.querySelectorAll('.quick-view').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // En yakın ürün kartını ve görseli/başlığı al
-            const productCard = this.closest('.product-card');
-            const img = productCard.querySelector('.product-image img');
-            const title = productCard.querySelector('h3').textContent;
-            
-            // Modalda göster
-            modal.style.display = 'block';
-            modalImg.src = img.src;
-            captionText.innerHTML = title;
-            
-            // Modal açıkken sayfa kaydırmayı engelle
-            document.body.style.overflow = 'hidden';
+    // Tüm ürün resimlerine tıklama olayı ekle
+    function addClickListeners() {
+        const productImages = document.querySelectorAll('.product-image img, .product-card img, .item-image');
+        
+        productImages.forEach(img => {
+            // Sadece bir kez listener eklenmesini sağla
+            if (!img.hasAttribute('data-modal-active')) {
+                img.setAttribute('data-modal-active', 'true');
+                img.style.cursor = 'pointer';
+                
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                    
+                    // Başlık bilgisini al
+                    const productCard = this.closest('.product-card, .product, .cart-item, .favorite-item');
+                    let caption = 'Ürün Görseli';
+                    
+                    if (productCard) {
+                        const titleElement = productCard.querySelector('h3, .item-title, .product-title');
+                        if (titleElement) {
+                            caption = titleElement.textContent.trim();
+                        }
+                    }
+                    
+                    modalCaption.textContent = caption;
+                    
+                    // Body scroll'unu engelle
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+        });
+    }
+    
+    // Modal kapatma fonksiyonları
+    function closeModalFunction() {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Scroll'u geri aç
+    }
+    
+    // X butonuna tıklama
+    closeModal.addEventListener('click', closeModalFunction);
+    
+    // Modal dışına tıklama
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModalFunction();
+        }
+    });
+    
+    // ESC tuşu ile kapatma
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModalFunction();
+        }
+    });
+    
+    // İlk yükleme
+    addClickListeners();
+    
+    // Dinamik içerik için observer
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                // Yeni ürün eklendiyse listener'ları güncelle
+                setTimeout(() => {
+                    addClickListeners();
+                }, 100);
+            }
         });
     });
     
-    // × butonuna tıklayınca modalı kapat
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-    }
-    
-    // Görselin dışına tıklayınca modalı kapat
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-    
-    // ESC tuşuna basınca modalı kapat
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'block') {
-            closeModal();
-        }
-    });
-    
-    function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aktif et
+    // Observer'ı başlat
+    const productsGrid = document.querySelector('.products-grid, .featured-products, .cart-items, .favorites-container');
+    if (productsGrid) {
+        observer.observe(productsGrid, {
+            childList: true,
+            subtree: true
+        });
     }
 }
     // Fiyat filtre işlemi
@@ -797,7 +837,7 @@ function loadProductsFromAdmin() {
         name: 'Gildo Tek Gövde Lavabo Bataryası',
         category: 2,
         categoryName: 'Banyo Bataryaları',
-        price: 3199.00,
+        price: 3099.00,
         description: 'Siyah Kaplama, Su Tasarruflu',
         image: 'images/gildolavabosr.jpg'
     },
@@ -821,10 +861,10 @@ function loadProductsFromAdmin() {
     },
     {
         id: 116,
-        name: 'Espina Tek Gçövde Lavabo Bataryası',
+        name: 'Espina Lavabo Bataryası',
         category: 2,
         categoryName: 'Banyo Bataryaları',
-        price: 2349.00,
+        price: 2049.00,
         description: 'Krom Kaplama, Su Tasarruflu',
         image: 'images/espinalavabo.jpg'
     },
@@ -851,7 +891,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3599.00,
+    price: 3200.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/taurolavabosiyah.jpg'
 },
@@ -860,7 +900,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Set Üstü Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 4749.00,
+    price: 1750.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/taurolavabos.jpg'
 },
@@ -869,7 +909,7 @@ function loadProductsFromAdmin() {
     name: 'Pruva Lavabo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 2249.00,
+    price: 750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pruvalavabo.jpg'
 },
@@ -878,7 +918,7 @@ function loadProductsFromAdmin() {
     name: 'Atros Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 2199.00,
+    price: 920.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/atrosevye.jpg'
 },
@@ -887,7 +927,7 @@ function loadProductsFromAdmin() {
     name: 'Espina Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 2449.00,
+    price: 850.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/espinaevye.jpg'
 },
@@ -896,7 +936,7 @@ function loadProductsFromAdmin() {
     name: 'Felis Eviye Bataryası',
     category: 1,
     categoryName: 'Mutfak Bataryaları',
-    price: 2249.00,
+    price: 1200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/felisevye.jpg'
 },
@@ -916,7 +956,7 @@ function loadProductsFromAdmin() {
     name: 'Frezia Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 2699.00,
+    price: 1450.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/freziaevye.jpg'
 },
@@ -925,7 +965,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 4699.00,
+    price: 2200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/gpdtauroevye.jpg'
 },
@@ -934,7 +974,7 @@ function loadProductsFromAdmin() {
     name: 'Provido Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 5599.00,
+    price: 980.00,
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/providoevye.jpg'
 },
@@ -943,7 +983,7 @@ function loadProductsFromAdmin() {
     name: 'Pedra Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 2999.00,
+    price: 3200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pedraevye.jpg'
 },
@@ -952,7 +992,7 @@ function loadProductsFromAdmin() {
     name: 'Ritmo Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 3299.00,
+    price: 1750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/ritmoevye.jpg'
 },
@@ -961,7 +1001,7 @@ function loadProductsFromAdmin() {
     name: 'Solus Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 2199.00,
+    price: 1750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/solusevye.jpg'
 },
@@ -970,7 +1010,7 @@ function loadProductsFromAdmin() {
     name: 'Claire Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 1999.00,
+    price: 980.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/claireevye.jpg'
 },
@@ -979,7 +1019,7 @@ function loadProductsFromAdmin() {
     name: 'Spiralli Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 5699.00,
+    price: 3200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/spirallievye.jpg'
 },
@@ -988,7 +1028,7 @@ function loadProductsFromAdmin() {
     name: 'Kare Spiral Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 3549.00,
+    price: 1750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/karespiralevye.jpg'
 },
@@ -997,7 +1037,7 @@ function loadProductsFromAdmin() {
     name: 'Pruva Eviye Bataryası',
     category: 3,
     categoryName: 'Mutfak Bataryaları',
-    price: 3099.00,
+    price: 1750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/pruvaevye.jpg'
 },
@@ -1006,7 +1046,7 @@ function loadProductsFromAdmin() {
     name: 'Atros Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3399.00,
+    price: 3200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/atrosbanyo.jpg'
 },
@@ -1024,7 +1064,7 @@ function loadProductsFromAdmin() {
     name: 'Florus Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 2799.00,
+    price: 1750.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/florusbanyo.jpg'
 },
@@ -1033,7 +1073,7 @@ function loadProductsFromAdmin() {
     name: 'Gildo Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 4999.00,
+    price: 980.00,
     description: 'Siyah Kaplama, Su Tasarruflu',
     image: 'images/gildobanyosr.jpg'
 },
@@ -1042,7 +1082,7 @@ function loadProductsFromAdmin() {
     name: 'Provido Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3399.00,
+    price: 3200.00,
     description: 'Krom Kaplama, Su Tasarruflu',
     image: 'images/gpdprovido.jpg'
 },
@@ -1051,7 +1091,7 @@ function loadProductsFromAdmin() {
     name: 'Tauro Banyo Bataryası',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 3999.00,
+    price: 1750.00,
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/taurobanyoa.jpg'
 },
