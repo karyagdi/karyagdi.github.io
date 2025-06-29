@@ -1138,7 +1138,7 @@ function loadProductsFromAdmin() {
     categoryName: 'Banyo Bataryaları',
     price: 4999.00,
     description: '',
-    image: 'images/bienneptüngizli.png'
+    image: 'images/bienneptüngizli.jpg'
 },
         {
     id: 147,
