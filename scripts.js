@@ -1100,7 +1100,7 @@ image: 'images/taurobanyoa.jpg'
     name: 'Pietra Piyano 5 Tuşlu Akıllı Granit Evye',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: ,
+    price: 0,
     description: 'PİYANO 5 Tuşlu Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Dijital Şelale Batarya, Kesme Tahtası,İki Tane Yıkama Haznesi',
     image: 'images/akillievye2.webp'
 },
@@ -1109,7 +1109,7 @@ image: 'images/taurobanyoa.jpg'
     name: 'Şelale Teknolojik Mutfak Evye Seti',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: "",
+    price: 0,
     description: 'Akıllı Evye, Şelale Evye, Bardak Yıkama, Arıtma Bataryası, Şelale Batarya, Kesme Tahtası,İki Tane Yıkama Haznesi',
     image: 'images/akillievye.webp'
 },
@@ -1273,7 +1273,7 @@ id: 158,
 name: 'Baylan Kartlı Su Sayacı',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-price: "",
+  price: 0,
 description: '',
 image: 'images/baylansayac.jpg'
 },
