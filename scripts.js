@@ -1249,6 +1249,15 @@ function loadProductsFromAdmin() {
     description: '',
     image: 'images/bocchitondo.webp'
 },
+          {
+    id: 157,
+    name: 'Baylan Kartlı Su Sayacı',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: ,
+    description: '',
+    image: 'images/baylansayac.jpg'
+},
         
 
         // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
