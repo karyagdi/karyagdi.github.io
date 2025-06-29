@@ -1192,7 +1192,7 @@ category: 2,
 categoryName: 'Banyo Bataryaları',
 price: 2999.00,
 description: 'No Rim',
-image: 'images/taurobanyoa.jpg'
+image: 'images/bienleo.png'
 },
 {
 id: 150,
