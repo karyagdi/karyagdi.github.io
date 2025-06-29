@@ -1095,6 +1095,16 @@ function loadProductsFromAdmin() {
     description: 'Gold Kaplama, Su Tasarruflu',
     image: 'images/taurobanyoa.jpg'
 },
+{
+    id: 142,
+    name: 'Slim Line Kare Lavabo',
+    category: 2,
+    categoryName: 'Banyo Bataryaları',
+    price: 4999.00,
+    description: '38x38 cm',
+    image: 'images/slimlavabo.jpg'
+},
+        
 
         // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
     ];
