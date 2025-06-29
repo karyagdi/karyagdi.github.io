@@ -1277,6 +1277,44 @@ categoryName: 'Banyo Bataryaları',
 description: '',
 image: 'images/baylansayac.jpg'
 },
+  {
+id: 161,
+name: 'Klozet + Rezervuar +D80 Drp. Soft Kapak + Çift Bas. İç Tk',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 7299.00,
+description: '',
+image: 'images/isveasentimenti.jpg'
+},
+{
+    
+id: 162,
+name: 'Asma Klozet + 44H PP Soft Kapanan Kapak',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 3299,
+description: '',
+image: 'images/isveasoluzione2.jpg'
+},
+  {
+id: 163,
+name: 'Asma Klozet + KF Drp. Soft Kapanan Kapak',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 4699.00,
+description: '',
+image: 'images/isveainfinityrimless.jpg'
+},
+{
+    
+id: 164,
+name: 'YUMURCAK KRK + Kapak + İç Takım',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 4199,
+description: '',
+image: 'images/turkuazyumurcak.png'
+},
 
 
 // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
