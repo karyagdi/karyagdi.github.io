@@ -1133,12 +1133,12 @@ function loadProductsFromAdmin() {
 },
         {
     id: 146,
-    name: 'Bien Neptün Asma Klozet + Slim soft Kapak',
+    name: 'Bien Neptün Gizli Asma Klozet + Slim soft Kapak',
     category: 2,
     categoryName: 'Banyo Bataryaları',
-    price: 4049.00,
+    price: 4999.00,
     description: '',
-    image: 'images/bienneptun.png'
+    image: 'images/bienneptungizli.png'
 },
         {
     id: 147,
@@ -1156,7 +1156,7 @@ function loadProductsFromAdmin() {
     categoryName: 'Banyo Bataryaları',
     price: 4499.00,
     description: 'No Rim',
-    image: 'images/bienharmony.png'
+    image: 'images/bienharmonygizli.png'
 },
         {
     id: 148,
@@ -1183,7 +1183,7 @@ function loadProductsFromAdmin() {
     categoryName: 'Banyo Bataryaları',
     price: 5499.00,
     description: '',
-    image: 'images/bienorion.png'
+    image: 'images/bienorion.jpg'
 },
         {
     id: 151,
