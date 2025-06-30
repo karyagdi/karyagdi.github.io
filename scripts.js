@@ -1297,7 +1297,92 @@ categoryName: 'Banyo Bataryaları',
 description: '',
 image: 'images/turkuazyumurcak.png'
 },
-
+  {
+id: 165,
+name: 'Vitra S50',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 6699.00,
+description: ' Asma Klozet +Arkitekt PP Soft Kapak',
+image: 'images/vitras50.webp'
+},
+{
+    
+id: 166,
+name: 'Vitra S60',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 9999.00,
+description: 'Smooth Flush Asma Klozet +Slim Soft Üniversal 2 Kapak',
+image: 'images/vitras60.webp'
+},
+    {
+id: 167,
+name: 'Vitra INTEGRA Square',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 10999.00,
+description: 'Asma Klozet +Shift Slim Soft Drp. Kapak',
+image: 'images/vitraintegrasquare.webp'
+},
+{
+    
+id: 168,
+name: 'Vitra INTEGRA Square Rim-Ex',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 11999.00,
+description: 'Rim-Ex Asma Klozet 54 cm +Shift Slim Soft Drp. Kapak',
+image: 'images/vitraintegrasquare.webp'
+},
+{
+    
+id: 170,
+name: 'Vitra S20',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 10999.00,
+description: 'Klozet + Rezervuar + Klz. Kapağı',
+image: 'images/vitras20.webp'
+},
+    {
+id: 171,
+name: 'Vitra Optima',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 3199.00,
+description: 'Asma Klozet +Arkitekt Ünv. U-Shape Kapak',
+image: 'images/vitraoptima.webp'
+},
+{
+    
+id: 172,
+name: 'Vitra Arkitekt',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 3299.00,
+description: 'Kanalsız Asma Klozet +Arkitekt Ünv. U-Shape Kapak',
+image: 'images/vitraarkitekt.jpg'
+},
+    {
+id: 173,
+name: 'Vitra S 20 Köşeli 48 cm',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 6399.00,
+description: '48 cm Asma Klozet +S 20 Soft NP Kapak',
+image: 'images/vitras20koseli.webp'
+},
+{
+    
+id: 174,
+name: 'Vitra S 20 Round 54 cm',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 4799.00,
+description: 'Asma Klozet +Arkitekt Ünv. U-Shape Kapak',
+image: 'images/vitras20round.webp'
+},
 
 // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
 ];
