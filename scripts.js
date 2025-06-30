@@ -1383,6 +1383,82 @@ categoryName: 'Banyo Bataryaları',
 description: 'Asma Klozet +Arkitekt Ünv. U-Shape Kapak',
 image: 'images/vitras20round.webp'
 },
+   {
+id: 175,
+name: 'Turkuaz Lila',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 2099.00,
+description: 'Asma Klozet Majestik +ABS PP Kapak',
+image: 'images/turkuazlila.png'
+},
+{
+    
+id: 176,
+name: 'Turkuaz Noura',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 3799.00,
+description: 'Rimless Asma Klozet +Noura PP Slim Soft Kapak',
+image: 'images/turkuaznoura.png'
+},
+   {
+id: 177,
+name: 'Turkuaz Aqua',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 3849.00,
+description: 'Rimless Asma Klozet +Duru PP Slim Soft Kapak',
+image: 'images/turkuazaqua.png'
+},
+{
+    
+id: 178,
+name: 'Turkuaz City',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 4399.00,
+description: 'Rimless Asma Klozet +Bella Droplast Slim Soft Kapak',
+image: 'images/turkuazcity.png'
+},
+   {
+id: 179,
+name: 'Turkuaz İbiza',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 4699.00,
+description: 'Rimless Asma Klozet +İbiza Droplast Soft Kapak',
+image: 'images/turkuazibiza.png'
+},
+{
+    
+id: 180,
+name: 'Turkuaz Hera',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 5099.00,
+description: 'Rimless Asma Klozet +İbiza Droplast Soft Kapak',
+image: 'images/turkuazhera.png'
+},
+   {
+id: 181,
+name: 'Turkuaz Bella',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+price: 7199.00,
+description: 'Rimless Klozet + Rezervuar + Lila PP Slim Soft Kapak + Damla Çift Basmalı İç Takım',
+image: 'images/turkuazbella.png'
+},
+{
+    
+id: 182,
+name: 'Turkuaz Duru',
+category: 2,
+categoryName: 'Banyo Bataryaları',
+  price: 7999.00,
+description: 'Duru Rimless Klozet + Bella Rezervuar + Duru PP Soft Kapak + Damla Çift Basmalı İç Takım',
+image: 'images/turkuazduru.png'
+},
 
 // Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
 ];
