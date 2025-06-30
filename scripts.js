@@ -924,7 +924,7 @@ image: 'images/atrosevye.jpg'
 },
 {
 id: 123,
-name: 'Espina Eviye Bataryası',
+name: 'Espina Spiralli Eviye Bataryası',
 category: 1,
 categoryName: 'Mutfak Bataryaları',
 price: 3549.00,
@@ -1016,7 +1016,7 @@ image: 'images/claireevye.jpg'
 },
 {
 id: 133,
-name: 'Spiralli Eviye Bataryası',
+name: 'Spiralli U Borulu Eviye Bataryası',
 category: 3,
 categoryName: 'Mutfak Bataryaları',
 price: 5699.00,
@@ -1064,7 +1064,7 @@ id: 138,
 name: 'Florus Banyo Bataryası',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-price: 2499.00,
+price: 2599.00,
 description: 'Krom Kaplama, Su Tasarruflu',
 image: 'images/florusbanyo.jpg'
 },
@@ -1082,7 +1082,7 @@ id: 140,
 name: 'Provido Banyo Bataryası',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-price: 3399.00,
+price: 4399.00,
 description: 'Krom Kaplama, Su Tasarruflu',
 image: 'images/gpdprovido.jpg'
 },
@@ -1226,7 +1226,7 @@ id: 153,
 name: 'Bien Goya Klozet+ Rezervuar + Slim soft Kapak + visam basmalı iç takım',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-price: 5999.00,
+price: 6099.00,
 description: '',
 image: 'images/biengoya.png'
 },
@@ -1250,24 +1250,6 @@ image: 'images/bienmilady.png'
 },
 
 {
-id: 156,
-name: 'Bocchi Taormina Asma Klozet +  Slim soft Kapak',
-category: 2,
-categoryName: 'Banyo Bataryaları',
-price: 6849.00,
-description: '',
-image: 'images/bocchitaormina.png'
-},
-{
-id: 157,
-name: 'Bocchi Tondo Asma Klozet +  Slim soft Kapak',
-category: 2,
-categoryName: 'Banyo Bataryaları',
-price: 5999.00,
-description: '',
-image: 'images/bocchitondo.webp'
-},
-{
     
 id: 158,
 name: 'Baylan Kartlı Su Sayacı',
@@ -1279,10 +1261,10 @@ image: 'images/baylansayac.jpg'
 },
   {
 id: 161,
-name: 'Isvea Klozet + Rezervuar +D80 Drp. Soft Kapak + Çift Bas. İç Tk',
+name: 'Isvea Karizma Klozet + Rezervuar +D80 Drp. Soft Kapak + Çift Bas. İç Tk',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-price: 7299.00,
+price: 4699.00,
 description: '',
 image: 'images/isveasentimenti.jpg'
 },
@@ -1298,7 +1280,7 @@ image: 'images/isveasoluziobe2.jpg'
 },
   {
 id: 163,
-name: 'Isvea Asma Klozet + KF Drp. Soft Kapanan Kapak',
+name: 'Isvea Infinity Asma Klozet + KF Drp. Soft Kapanan Kapak',
 category: 2,
 categoryName: 'Banyo Bataryaları',
 price: 4699.00,
@@ -1308,10 +1290,10 @@ image: 'images/isveainfinityrimless.jpg'
 {
     
 id: 164,
-name: 'YUMURCAK KRK + Kapak + İç Takım',
+name: 'Turkuaz YUMURCAK KRK + Kapak + İç Takım',
 category: 2,
 categoryName: 'Banyo Bataryaları',
-  price: 4199,
+  price: 5399,
 description: '',
 image: 'images/turkuazyumurcak.png'
 },
