@@ -1271,7 +1271,7 @@ image: 'images/isveasentimenti.jpg'
 {
     
 id: 162,
-name: 'Isvea Asma Klozet + 44H PP Soft Kapanan Kapak',
+name: 'Isvea Soluzione 2 Asma Klozet + 44H PP Soft Kapanan Kapak',
 category: 2,
 categoryName: 'Banyo Bataryaları',
   price: 3299,
