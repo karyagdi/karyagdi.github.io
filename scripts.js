@@ -1106,7 +1106,7 @@ image: 'images/taurobanyoa.jpg'
 },
 {
     id: 160,
-    name: 'Şelale Teknolojik Mutfak Evye Seti',
+    name: 'Pietra Şelale Teknolojik Mutfak Evye Seti',
     category: 2,
     categoryName: 'Banyo Bataryaları',
     price: 0,
