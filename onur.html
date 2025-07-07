@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Onur YILMAZ - ONUR İNŞAAT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>') repeat;
+            opacity: 0.1;
+        }
+        
+        .bio-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 95vw;
+            width: 100%;
+            max-height: 95vh;
+            height: auto;
+            text-align: center;
+            box-shadow: 
+                0 25px 50px rgba(30, 60, 114, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3b82f6;
+            margin: 0 auto 15px;
+            display: block;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .name {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #2563eb, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+        
+        .title {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .company {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .bio-text {
+            font-size: 11px;
+            color: #475569;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            padding: 12px 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 16px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.2px;
+        }
+        
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .link-btn:hover::before {
+            left: 100%;
+        }
+        
+        .link-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .whatsapp {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .website {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .phone {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        
+        .directions {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        
+        .message {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+        }
+        
+        .link-btn i {
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 15px;
+            font-size: 9px;
+            color: #94a3b8;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        /* Masaüstü optimizasyonu */
+        @media (min-width: 769px) {
+            .bio-card {
+                max-width: 400px;
+                padding: 30px;
+            }
+            
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .name {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+            
+            .title {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+            
+            .company {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            
+            .bio-text {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+            
+            .stats {
+                margin: 20px 0;
+                padding: 15px 0;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+            }
+            
+            .stat-label {
+                font-size: 11px;
+            }
+            
+            .links {
+                gap: 12px;
+            }
+            
+            .link-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                gap: 10px;
+            }
+            
+            .link-btn i {
+                font-size: 16px;
+            }
+            
+            .footer {
+                font-size: 11px;
+                margin-top: 20px;
+            }
+        }
+        
+        /* Çok küçük ekranlar */
+        @media (max-height: 600px) {
+            .bio-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .profile-photo {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 10px;
+            }
+            
+            .name {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            
+            .title {
+                font-size: 10px;
+                margin-bottom: 3px;
+            }
+            
+            .company {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            
+            .bio-text {
+                font-size: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .stats {
+                margin: 8px 0;
+                padding: 8px 0;
+            }
+            
+            .stat-number {
+                font-size: 14px;
+            }
+            
+            .stat-label {
+                font-size: 8px;
+            }
+            
+            .links {
+                gap: 6px;
+            }
+            
+            .link-btn {
+                padding: 8px 12px;
+                font-size: 10px;
+                gap: 6px;
+            }
+            
+            .link-btn i {
+                font-size: 12px;
+            }
+            
+            .footer {
+                font-size: 8px;
+                margin-top: 8px;
+            }
+        }
+        
+        /* Çok küçük genişlik */
+        @media (max-width: 320px) {
+            .bio-card {
+                padding: 12px;
+            }
+            
+            .profile-photo {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .name {
+                font-size: 16px;
+            }
+            
+            .company {
+                font-size: 13px;
+            }
+            
+            .link-btn {
+                font-size: 9px;
+                padding: 7px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bio-card">
+        <!-- Profil Fotoğrafı -->
+        <img src="images/onur-profile.jpg" alt="Onur YILMAZ" class="profile-photo">
+        
+        <!-- İsim ve Ünvan -->
+        <h1 class="name">Mustafa Karyağdı</h1>
+        <p class="title">Kurucu & Genel Müdür</p>
+        <p class="company">ONUR İNŞAAT</p>
+        
+        <!-- Kısa Bio -->
+        <p class="bio-text">
+            🏗️ 25+ Yıllık Deneyim • 🏠 Güvenilir İnşaat Çözümleri<br>
+            📱 7/24 Müşteri Desteği • 🎯 Kalite & Güven Odaklı
+        </p>
+        
+        <!-- İstatistikler -->
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Proje</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">1000+</span>
+                <span class="stat-label">Müşteri</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">25</span>
+                <span class="stat-label">Yıl</span>
+            </div>
+        </div>
+        
+        <!-- Bağlantılar -->
+        <div class="links">
+            <a href="https://wa.me/905466207994?text=Merhaba%20Onur%20Bey,%20size%20ulaşmak%20istiyorum." class="link-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp ile Mesaj Gönder
+            </a>
+            
+            <a href="https://onurinsaatyapi.com" class="link-btn website">
+                <i class="fas fa-globe"></i>
+                onurinsaatyapi.com
+            </a>
+            
+            <a href="tel:+905466207994" class="link-btn phone">
+                <i class="fas fa-phone"></i>
+                Hemen Ara
+            </a>
+            
+            <a href="#" onclick="getDirections(); return false;" class="link-btn directions">
+                <i class="fas fa-map-marker-alt"></i>
+                Yol Tarifi Al
+            </a>
+            
+            <a href="sms:+905466207994?body=Merhaba%20Onur%20Bey," class="link-btn message">
+                <i class="fas fa-comment-sms"></i>
+                SMS Gönder
+            </a>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            © 2024 Onur İnşaat
+        </div>
+    </div>
+
+    <script>
+        // Yol tarifi fonksiyonu
+        function getDirections() {
+            const lat = 38.70760;
+            const lng = 31.03403;
+            const locationName = "Onur İnşaat - Afyonkarahisar";
+            
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            let url;
+            
+            if (isIOS) {
+                url = `https://maps.apple.com/?q=${encodeURIComponent(locationName)}&ll=${lat},${lng}&dirflg=d`;
+            } else if (isMobile) {
+                url = `google.navigation:q=${lat},${lng}&mode=d`;
+                setTimeout(() => {
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`, '_blank');
+                }, 1000);
+            } else {
+                url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+            }
+            
+            try {
+                if (isMobile && !isIOS) {
+                    window.location.href = url;
+                } else {
+                    window.open(url, '_blank');
+                }
+            } catch (error) {
+                window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+            }
+        }
+        
+        // Sayfa yüklendiğinde animasyon efekti
+        document.addEventListener('DOMContentLoaded', function() {
+            const bioCard = document.querySelector('.bio-card');
+            bioCard.style.opacity = '0';
+            bioCard.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                bioCard.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                bioCard.style.opacity = '1';
+                bioCard.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
