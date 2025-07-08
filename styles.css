@@ -2836,7 +2836,27 @@ body.admin-page {
 .table-actions button.delete:hover {
     color: var(--admin-accent);
 }
+/* SEO ve Breadcrumb stilleri */
+.breadcrumb {
+    background: transparent;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
 
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #666;
+}
 /* Admin Responsive */
 @media (max-width: 992px) {
     .admin-sidebar {
