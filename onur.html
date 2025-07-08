@@ -76,15 +76,16 @@
             transform: scale(1.05);
         }
         
-        .name {
-            font-size: 22px;
+       .name {
+            font-size: 16px !important; /* !important ekledik ve daha da küçülttük */
             font-weight: 800;
             background: linear-gradient(135deg, #1e3c72, #2563eb, #3b82f6);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.5px; /* Daha da sıklaştırdık */
+            line-height: 1.1 !important; /* Satır aralığını daha da küçülttük */
         }
         
         .title {
@@ -228,7 +229,17 @@
             font-weight: 500;
             opacity: 0.8;
         }
+         .phone-ali {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
         
+        .phone-mustafa {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+        }
         /* Masaüstü optimizasyonu */
         @media (min-width: 769px) {
             .bio-card {
@@ -241,10 +252,14 @@
                 height: 100px;
             }
             
+            /* Masaüstü optimizasyonu */
+        @media (min-width: 769px) {
             .name {
-                font-size: 28px;
+                font-size: 20px !important; /* 28px'den 20px'e düşürdük */
                 margin-bottom: 8px;
+                letter-spacing: -0.3px;
             }
+        }
             
             .title {
                 font-size: 14px;
@@ -307,10 +322,14 @@
                 margin-bottom: 10px;
             }
             
+            /* Çok küçük ekranlar */
+        @media (max-height: 600px) {
             .name {
-                font-size: 18px;
+                font-size: 14px !important; /* 18px'den 14px'e düşürdük */
                 margin-bottom: 4px;
+                line-height: 1.0 !important;
             }
+        }
             
             .title {
                 font-size: 10px;
@@ -371,9 +390,14 @@
                 height: 55px;
             }
             
+                    /* Çok küçük genişlik */
+        @media (max-width: 320px) {
             .name {
-                font-size: 16px;
+                font-size: 12px !important; /* 16px'den 12px'e düşürdük */
+                letter-spacing: -0.8px;
+                line-height: 0.9 !important;
             }
+        }
             
             .company {
                 font-size: 13px;
@@ -392,7 +416,7 @@
         <img src="images/onurins.jpg" alt="Onur YILMAZ" class="profile-photo">
         
         <!-- İsim ve Ünvan -->
-        <h1 class="name">Mustafa Karyağdı</h1>
+        <h1 class="name">Ali Karyağdı & Mustafa Karyağdı</h1>
         <p class="title">Kurucu & Genel Müdür</p>
         <p class="company">ONUR İNŞAAT</p>
         
@@ -417,10 +441,9 @@
                 <span class="stat-label">Yıl</span>
             </div>
         </div>
-        
         <!-- Bağlantılar -->
         <div class="links">
-            <a href="https://wa.me/905466207994?text=Merhaba%20Onur%20Bey,%20size%20ulaşmak%20istiyorum." class="link-btn whatsapp">
+            <a href="https://wa.me/905466207994?text=Merhaba%20Mustafa%20Bey,%20size%20ulaşmak%20istiyorum." class="link-btn whatsapp">
                 <i class="fab fa-whatsapp"></i>
                 WhatsApp ile Mesaj Gönder
             </a>
@@ -430,9 +453,16 @@
                 onurinsaatyapi.com
             </a>
             
-            <a href="tel:+905466207994" class="link-btn phone">
+            <!-- Ali Karyağdı Arama Butonu -->
+            <a href="tel:+905426182663" class="link-btn phone-ali">
                 <i class="fas fa-phone"></i>
-                Hemen Ara
+                Hemen Ara - Ali Karyağdı
+            </a>
+            
+            <!-- Mustafa Karyağdı Arama Butonu -->
+            <a href="tel:+905466207994" class="link-btn phone-mustafa">
+                <i class="fas fa-phone"></i>
+                Hemen Ara - Mustafa Karyağdı
             </a>
             
             <a href="#" onclick="getDirections(); return false;" class="link-btn directions">
@@ -440,7 +470,7 @@
                 Yol Tarifi Al
             </a>
             
-            <a href="sms:+905466207994?body=Merhaba%20Onur%20Bey," class="link-btn message">
+            <a href="sms:+905466207994?body=Merhaba%20Mustafa%20Bey," class="link-btn message">
                 <i class="fas fa-comment-sms"></i>
                 SMS Gönder
             </a>
