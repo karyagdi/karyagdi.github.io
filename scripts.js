@@ -1,3 +1,41 @@
+// SEO ve sayfa ayarları
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    
+    const seoConfigs = {
+        'index': {
+            title: 'Onur İnşaat - Afyonkarahisar İnşaat Malzemeleri | Ana Sayfa',
+            description: '25+ yıllık deneyimle Afyonkarahisar\'da kaliteli inşaat malzemeleri. Seramik, banyo, mutfak bataryaları ve daha fazlası.',
+            keywords: 'onur inşaat, afyonkarahisar inşaat, seramik, banyo bataryası, mutfak bataryası'
+        },
+        'kategoriler': {
+            title: 'Kategoriler - Onur İnşaat | Afyonkarahisar İnşaat Malzemeleri',
+            description: 'Seramik, banyo bataryaları, mutfak bataryaları, klozet ve lavabo kategorilerinde kaliteli ürünler.',
+            keywords: 'onur inşaat kategoriler, seramik afyon, banyo bataryası, mutfak bataryası, klozet'
+        },
+        'urunler': {
+            title: 'Ürünler - Onur İnşaat | Afyonkarahisar İnşaat Malzemeleri',
+            description: 'Binlerce çeşit kaliteli inşaat malzemesi. Uygun fiyatlar, hızlı teslimat, garanti.',
+            keywords: 'inşaat malzemeleri, seramik çeşitleri, banyo ürünleri, mutfak bataryası'
+        },
+        'iletisim': {
+            title: 'İletişim - Onur İnşaat | Afyonkarahisar',
+            description: 'Onur İnşaat iletişim bilgileri, adres, telefon, harita. Afyonkarahisar\'da 25 yıldır hizmetinizdeyiz.',
+            keywords: 'onur inşaat iletişim, afyonkarahisar adres, telefon'
+        }
+    };
+    
+    if (seoConfigs[currentPage]) {
+        setSEOMeta(seoConfigs[currentPage]);
+    }
+    
+    if (currentPage !== 'index') {
+        const main = document.querySelector('main');
+        if (main) {
+            main.insertAdjacentHTML('afterbegin', createBreadcrumb());
+        }
+    }
+});
 // Hero Slider Functionality
 function initSlider() {
 const slides = document.querySelectorAll('.slide');
