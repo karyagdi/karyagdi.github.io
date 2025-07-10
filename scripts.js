@@ -1,7 +1,5 @@
-// SEO ve sayfa ayarları
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
-    
     const seoConfigs = {
         'index': {
             title: 'Onur İnşaat - Afyonkarahisar İnşaat Malzemeleri | Ana Sayfa',
@@ -24,11 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
             keywords: 'onur inşaat iletişim, afyonkarahisar adres, telefon'
         }
     };
-    
     if (seoConfigs[currentPage]) {
         setSEOMeta(seoConfigs[currentPage]);
     }
-    
     if (currentPage !== 'index') {
         const main = document.querySelector('main');
         if (main) {
@@ -36,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-// Hero Slider Functionality
 function initSlider() {
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
@@ -44,15 +39,11 @@ const prevBtn = document.querySelector('.prev-slide');
 const nextBtn = document.querySelector('.next-slide');
 let currentSlide = 0;
 let slideInterval;
-
-// Otomatik Slider
 function startSlideInterval() {
 slideInterval = setInterval(() => {
 goToNextSlide();
-}, 5000); // 5 saniyede bir değiştir
+}, 5000);
 }
-
-// Slider fonksiyonları
 function goToSlide(n) {
 slides[currentSlide].classList.remove('active');
 dots[currentSlide].classList.remove('active');
@@ -60,30 +51,24 @@ currentSlide = (n + slides.length) % slides.length;
 slides[currentSlide].classList.add('active');
 dots[currentSlide].classList.add('active');
 }
-
 function goToNextSlide() {
 goToSlide(currentSlide + 1);
 }
-
 function goToPrevSlide() {
 goToSlide(currentSlide - 1);
 }
-
-// Event listeners
 if (prevBtn && nextBtn) {
 prevBtn.addEventListener('click', () => {
 clearInterval(slideInterval);
 goToPrevSlide();
 startSlideInterval();
 });
-
 nextBtn.addEventListener('click', () => {
 clearInterval(slideInterval);
 goToNextSlide();
 startSlideInterval();
 });
 }
-
 dots.forEach((dot, index) => {
 dot.addEventListener('click', () => {
 clearInterval(slideInterval);
@@ -91,8 +76,6 @@ goToSlide(index);
 startSlideInterval();
 });
 });
-
-// Touch swipe support for mobile
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -110,52 +93,39 @@ handleSwipe();
 
 function handleSwipe() {
 if (touchStartX - touchEndX > 50) {
-// Swipe left
 clearInterval(slideInterval);
 goToNextSlide();
 startSlideInterval();
 }
 
 if (touchEndX - touchStartX > 50) {
-// Swipe right
 clearInterval(slideInterval);
 goToPrevSlide();
 startSlideInterval();
 }
 }
-
-// Başlangıçta slider'ı başlat
 startSlideInterval();
 }
-// Mobil menü için gerekli fonksiyonlar
 function setupMobileMenu() {
 const hamburgerBtn = document.getElementById('hamburger-menu');
 const overlay = document.getElementById('mobile-menu-overlay');
 const closeBtn = document.getElementById('close-overlay');
 
 if (!hamburgerBtn || !overlay || !closeBtn) return;
-
-// Hamburger menüye tıklama
 hamburgerBtn.addEventListener('click', function() {
 overlay.classList.add('active');
-document.body.style.overflow = 'hidden'; // Kaydırmayı devre dışı bırak
+document.body.style.overflow = 'hidden';
 });
-
-// Kapatma butonuna tıklama
 closeBtn.addEventListener('click', function() {
 overlay.classList.remove('active');
-document.body.style.overflow = ''; // Kaydırmayı etkinleştir
+document.body.style.overflow = '';
 });
-
-// Sepet sayısını mobil menüde de güncelle
 const cartCount = document.getElementById('cart-count');
 const cartCountMobile = document.getElementById('cart-count-mobile');
 
 if (cartCount && cartCountMobile) {
-// İlk yükleme
 cartCountMobile.textContent = cartCount.textContent;
 
-// Sepet sayısı değiştiğinde güncelleme
 const observer = new MutationObserver(function(mutations) {
 mutations.forEach(function(mutation) {
 if (mutation.type === 'characterData' || mutation.type === 'childList') {
@@ -167,9 +137,9 @@ cartCountMobile.textContent = cartCount.textContent;
 observer.observe(cartCount, { characterData: true, childList: true, subtree: true });
 }
 }
-// Ürün modal (lightbox) fonksiyonu
+
 function initProductModal() {
-// Modal elementleri
+
 const modal = document.getElementById('product-modal');
 const modalImg = document.getElementById('modal-image');
 const modalCaption = document.getElementById('modal-caption');
@@ -180,12 +150,12 @@ console.log('Modal elementleri bulunamadı');
 return;
 }
 
-// Tüm ürün resimlerine tıklama olayı ekle
+
 function addClickListeners() {
 const productImages = document.querySelectorAll('.product-image img, .product-card img, .item-image');
 
 productImages.forEach(img => {
-// Sadece bir kez listener eklenmesini sağla
+
 if (!img.hasAttribute('data-modal-active')) {
 img.setAttribute('data-modal-active', 'true');
 img.style.cursor = 'pointer';
@@ -194,7 +164,7 @@ img.addEventListener('click', function() {
 modal.style.display = 'block';
 modalImg.src = this.src;
 
-// Başlık bilgisini al
+
 const productCard = this.closest('.product-card, .product, .cart-item, .favorite-item');
 let caption = 'Ürün Görseli';
 
@@ -206,45 +176,37 @@ caption = titleElement.textContent.trim();
 }
 
 modalCaption.textContent = caption;
-
-// Body scroll'unu engelle
 document.body.style.overflow = 'hidden';
 });
 }
 });
 }
 
-// Modal kapatma fonksiyonları
 function closeModalFunction() {
 modal.style.display = 'none';
-document.body.style.overflow = ''; // Scroll'u geri aç
+document.body.style.overflow = '';
 }
 
-// X butonuna tıklama
 closeModal.addEventListener('click', closeModalFunction);
 
-// Modal dışına tıklama
 modal.addEventListener('click', function(e) {
 if (e.target === modal) {
 closeModalFunction();
 }
 });
 
-// ESC tuşu ile kapatma
 document.addEventListener('keydown', function(e) {
 if (e.key === 'Escape' && modal.style.display === 'block') {
 closeModalFunction();
 }
 });
 
-// İlk yükleme
 addClickListeners();
 
-// Dinamik içerik için observer
 const observer = new MutationObserver(function(mutations) {
 mutations.forEach(function(mutation) {
 if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-// Yeni ürün eklendiyse listener'ları güncelle
+
 setTimeout(() => {
 addClickListeners();
 }, 100);
@@ -252,7 +214,6 @@ addClickListeners();
 });
 });
 
-// Observer'ı başlat
 const productsGrid = document.querySelector('.products-grid, .featured-products, .cart-items, .favorites-container');
 if (productsGrid) {
 observer.observe(productsGrid, {
@@ -261,30 +222,27 @@ subtree: true
 });
 }
 }
-// Fiyat filtre işlemi
+
 const filterBtn = document.querySelector('.filter-btn');
 if (filterBtn) {
 filterBtn.addEventListener('click', function() {
-// Kullanıcı girdilerini al
+
 const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
 const maxPrice = parseFloat(document.getElementById('max-price').value) || 999999;
 
 console.log('Fiyat filtresi çalıştı:', minPrice, '-', maxPrice);
 
-// Tüm ürün kartlarını seç
 const productCards = document.querySelectorAll('.product-card');
 
-// Ürün bulundu/bulunamadı durumunu kontrol etmek için
+
 let productsFound = false;
 
-// Her ürün kartını kontrol et
 productCards.forEach(card => {
-// Fiyatı al ve sayıya çevir
+
 let priceText = card.querySelector('.product-price').innerText;
-// TL, ₺, . ve , gibi karakterleri temizle
+
 priceText = priceText.replace(/[^\d]/g, '');
 
-// Fiyatı sayıya çevir (kuruş varsa dikkate alarak)
 let price = parseInt(priceText) / 100;
 if (isNaN(price)) {
 price = parseInt(priceText);
@@ -292,7 +250,6 @@ price = parseInt(priceText);
 
 console.log('Ürün fiyatı:', price);
 
-// Fiyat aralığı kontrolü
 if (price >= minPrice && (maxPrice === 0 || price <= maxPrice)) {
 card.style.display = 'block';
 productsFound = true;
@@ -301,7 +258,6 @@ card.style.display = 'none';
 }
 });
 
-// Eğer hiçbir ürün bulunamadıysa mesaj göster
 const noResultsMessage = document.querySelector('.no-results-message') || 
 document.createElement('div');
 if (!productsFound) {
@@ -310,38 +266,36 @@ noResultsMessage.textContent = 'Bu fiyat aralığında ürün bulunamadı.';
 
 const productsGrid = document.querySelector('.products-grid');
 if (productsGrid) {
-// Mesajı ekle (eğer zaten eklenmemişse)
 if (!document.querySelector('.no-results-message')) {
 productsGrid.appendChild(noResultsMessage);
 }
 }
 } else {
-// Sonuç bulunduysa, mesajı kaldır (eğer varsa)
+
 if (document.contains(noResultsMessage)) {
 noResultsMessage.remove();
 }
 }
 });
 }
-// Fiyat filtreleme işlevi - mobil uyumlu güncellenmiş versiyon
+
 function setupPriceFilter() {
 const filterBtn = document.querySelector('.filter-btn');
 const priceInputs = document.querySelectorAll('.price-input');
 
-if (!filterBtn) return; // Buton yoksa işlemi sonlandır
+if (!filterBtn) return;
 
-// Hem click hem de touchend olaylarını ekle
+
 ['click', 'touchend'].forEach(eventType => {
 filterBtn.addEventListener(eventType, function(e) {
 if (eventType === 'touchend') {
-e.preventDefault(); // Varsayılan dokunma davranışını engelle
+e.preventDefault();
 }
 
 applyPriceFilter();
 });
 });
 
-// Enter tuşuna basıldığında da filtrelesin (mobil klavye için önemli)
 priceInputs.forEach(input => {
 if (!input) return;
 
@@ -351,72 +305,62 @@ applyPriceFilter();
 }
 });
 
-// Mobil klavyeler için input olayını da dinle
 input.addEventListener('input', function() {
-// Gereksiz yeniden yüklemeyi önlemek için debounce uygula
+
 clearTimeout(this.debounceTimer);
 this.debounceTimer = setTimeout(() => {
 applyPriceFilter();
-}, 1000); // 1 saniye bekle
+}, 1000);
 });
 });
 }
 
-// Fiyat filtresini uygulayan fonksiyon - geliştirilmiş versiyon
 function applyPriceFilter() {
 try {
-// Ürün kartlarını seç ve kontrol et
+
 const productCards = document.querySelectorAll('.product-card');
 if (!productCards.length) {
 console.log('Ürün kartları bulunamadı');
 return;
 }
 
-// Fiyat inputlarından değerleri al
 const minInput = document.getElementById('min-price');
 const maxInput = document.getElementById('max-price');
 
-// Değerleri parse et (geçersiz değerler için varsayılanları kullan)
 const minPrice = minInput && !isNaN(minInput.value) ? parseFloat(minInput.value) : 0;
 const maxPrice = maxInput && !isNaN(maxInput.value) ? parseFloat(maxInput.value) : Infinity;
 
 console.log(`Fiyat filtresi uygulanıyor: ${minPrice} - ${maxPrice}`);
 
-// Görünür ürün sayacı
 let visibleCount = 0;
 
-// Her bir ürün kartı için filtreleme işlemi yap
 productCards.forEach(card => {
-// Ürün fiyatını al
+
 const priceElement = card.querySelector('.product-price');
 if (!priceElement) return;
 
-// Fiyat metnini temizle ve sadece sayısal değeri al
 const priceText = priceElement.textContent;
 const price = parseFloat(priceText.replace(/[^0-9.,]/g, '').replace(',', '.'));
 
-// Fiyat geçerli mi kontrol et
 if (isNaN(price)) {
 console.warn('Geçersiz fiyat:', priceText);
 return;
 }
 
-// Fiyat aralığına göre ürünü göster/gizle
+
 const isVisible = price >= minPrice && (maxPrice === Infinity || price <= maxPrice);
 card.style.display = isVisible ? 'block' : 'none';
 
-// Görünür ürün sayacını güncelle
+
 if (isVisible) visibleCount++;
 });
 
-// "Ürün bulunamadı" mesajını göster/gizle
 const productsGrid = document.querySelector('.products-grid');
 if (productsGrid) {
-// Önceki mesajı varsa temizle
+
 const existingMessage = productsGrid.querySelector('.no-filtered-products');
 if (existingMessage) existingMessage.remove();
 
-// Eğer hiç görünür ürün yoksa mesaj göster
 if (visibleCount === 0) {
 const noProductsMessage = document.createElement('div');
 noProductsMessage.className = 'no-filtered-products';
@@ -429,24 +373,23 @@ noProductsMessage.innerHTML = `
                `;
 productsGrid.appendChild(noProductsMessage);
 
-// Filtre temizleme butonuna olay dinleyicisi ekle
+
 const resetBtn = noProductsMessage.querySelector('.reset-filter-btn');
 if (resetBtn) {
 resetBtn.addEventListener('click', function() {
 if (minInput) minInput.value = '';
 if (maxInput) maxInput.value = '';
-applyPriceFilter(); // Filtreyi tekrar uygula
+applyPriceFilter();
 });
 }
 }
 }
 
-// Filtreleme durumunu kaydet
 if (typeof saveFilterState === 'function') {
 saveFilterState();
 }
 
-// Sonuçları animasyonla göster
+
 animateFilterResults();
 
 } catch (error) {
@@ -457,12 +400,12 @@ showNotification('Filtreleme yapılırken bir hata oluştu', 'error');
 }
 }
 
-// Filtreleme sonuçlarını animasyonla göster
+
 function animateFilterResults() {
 const visibleCards = document.querySelectorAll('.product-card[style="display: block;"]');
 
 visibleCards.forEach((card, index) => {
-// Kart görünürlüğünü gecikmeli olarak ayarla
+
 card.style.opacity = '0';
 card.style.transform = 'translateY(20px)';
 
@@ -470,11 +413,10 @@ setTimeout(() => {
 card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
 card.style.opacity = '1';
 card.style.transform = 'translateY(0)';
-}, index * 50); // Her kart için 50ms gecikme
+}, index * 50);
 });
 }
 
-// Filtre durumunu kaydetme
 function saveFilterState() {
 const minValue = document.querySelectorAll('.price-input')[0].value;
 const maxValue = document.querySelectorAll('.price-input')[1].value;
@@ -485,7 +427,6 @@ sessionStorage.setItem('maxPrice', maxValue);
 }
 }
 
-// Kaydedilen filtre durumunu yükleme
 function loadFilterState() {
 const minPrice = sessionStorage.getItem('minPrice');
 const maxPrice = sessionStorage.getItem('maxPrice');
@@ -499,46 +440,40 @@ if (maxPrice && priceInputs.length > 1) {
 priceInputs[1].value = maxPrice;
 }
 
-// Eğer değerler varsa, filtreyi uygula
+
 if ((minPrice || maxPrice) && document.querySelector('.filter-btn')) {
 document.querySelector('.filter-btn').click();
 }
 }
 
 function initMap() {
-// Harita konteynerini kontrol et
+
 const mapContainer = document.getElementById('map');
 if (!mapContainer) return;
 
 console.log("Harita başlatılıyor...");
 
-// Haritayı başlat 
 const map = L.map('map', {
 attributionControl: false,
 maxZoom: 19,
 zoomControl: true
 }).setView([38.70760, 31.03403], 13);
 
-// Standart harita katmanı
 const standardMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 attribution: '',
 maxZoom: 19
 });
 
-// ESRI uydu görüntüleri - daha güvenilir
 const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 attribution: '',
 maxZoom: 19
 });
 
-// Varsayılan olarak uydu haritasını ekle
 satelliteMap.addTo(map);
 
-// İşaretleyici ekle
 const marker = L.marker([38.70760, 31.03403]).addTo(map);
 marker.bindPopup('Onur İnşaat Burada!').openPopup();
 
-// Global fonksiyonlar
 window.switchToSatellite = function() {
 map.removeLayer(standardMap);
 map.addLayer(satelliteMap);
@@ -549,7 +484,6 @@ map.removeLayer(satelliteMap);
 map.addLayer(standardMap);
 };
 
-// CSS ekle - hata mesajlarını ve fazla logoları gizlemek için
 const style = document.createElement('style');
 style.textContent = `
        .leaflet-container .leaflet-control-attribution {
@@ -564,51 +498,45 @@ style.textContent = `
    `;
 document.head.appendChild(style);
 
-// Tam ekran modunu aç/kapat
 window.toggleFullscreen = function() {
 const mapContainer = document.getElementById('map-container');
 
 if (mapContainer.classList.contains('map-fullscreen')) {
-// Tam ekrandan çık
-mapContainer.classList.remove('map-fullscreen');
-document.body.style.overflow = 'auto'; // Sayfada kaydırmayı etkinleştir
 
-// Çıkış butonunu kaldır
+mapContainer.classList.remove('map-fullscreen');
+document.body.style.overflow = 'auto';
+
+
 const exitBtn = document.querySelector('.exit-fullscreen-btn');
 if (exitBtn) exitBtn.remove();
 
-// Tam ekran butonunun simgesini güncelle
 const fullscreenBtn = document.querySelector('.fullscreen-btn i');
 if (fullscreenBtn) {
 fullscreenBtn.className = 'fas fa-expand';
 }
 
 } else {
-// Tam ekrana geç
-mapContainer.classList.add('map-fullscreen');
-document.body.style.overflow = 'hidden'; // Sayfa kaydırmayı devre dışı bırak
 
-// Çıkış butonu ekle
+mapContainer.classList.add('map-fullscreen');
+document.body.style.overflow = 'hidden';
+
 const exitBtn = document.createElement('button');
 exitBtn.className = 'exit-fullscreen-btn';
 exitBtn.innerHTML = '<i class="fas fa-compress"></i> Normal Boyuta Dön';
 exitBtn.onclick = toggleFullscreen;
 mapContainer.appendChild(exitBtn);
 
-// Tam ekran butonunun simgesini güncelle
 const fullscreenBtn = document.querySelector('.fullscreen-btn i');
 if (fullscreenBtn) {
 fullscreenBtn.className = 'fas fa-compress';
 }
 }
 
-// Harita boyutunu güncelle (Leaflet için gerekli)
 setTimeout(function() {
 map.invalidateSize();
 }, 100);
 }
 
-// Yol tarifi butonu
 const directionsBtn = document.getElementById('directions-btn');
 if (directionsBtn) {
 directionsBtn.addEventListener('click', function() {
@@ -616,7 +544,6 @@ const lat = 38.70760;
 const lng = 31.03403;
 const locationName = encodeURIComponent("Onur İnşaat");
 
-// Cihaz kontrolü
 const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 let url;
@@ -630,14 +557,12 @@ window.open(url, '_blank');
 });
 }
 
-// Harita yüklenince bir kez tekrar görüntüleri yükle (bazen bu gereklidir)
 map.whenReady(function() {
 setTimeout(function() {
 map.invalidateSize();
 }, 100);
 });
 
-// Zoom seviyesi değiştiğinde hata mesajlarını temizle
 map.on('zoomend', function() {
 if (map.getZoom() > 17) {
 map.setZoom(17);
@@ -645,13 +570,11 @@ map.setZoom(17);
 });
 }
 
-// Kategori filtreleme için dokunma olayları ekleyin
 function setupCategoryFilter() {
 const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
 if (!categoryCheckboxes.length) return;
 
 categoryCheckboxes.forEach(checkbox => {
-// Hem click hem touchend olaylarını ekleyin
 ['change', 'touchend'].forEach(eventType => {
 checkbox.addEventListener(eventType, function(e) {
 if (eventType === 'touchend') {
@@ -673,7 +596,6 @@ const products = document.querySelectorAll('.product-card');
 products.forEach(product => {
 const category = product.dataset.category;
 
-// Hiçbir kategori seçilmemişse veya ürün seçilen kategorilerden birindeyse göster
 if (selectedCategories.length === 0 || selectedCategories.includes(category)) {
 product.style.display = 'block';
 } else {
@@ -681,14 +603,12 @@ product.style.display = 'none';
 }
 });
 
-// Fiyat filtresi de uygulandıysa, onu da dikkate al
 if (document.querySelector('.price-input')) {
 applyPriceFilter();
 }
 }
 }
 
-// Fiyat filtresini uygula
 function applyPriceFilter() {
 const minPrice = parseFloat(document.querySelectorAll('.price-input')[0].value) || 0;
 const maxPrice = parseFloat(document.querySelectorAll('.price-input')[1].value) || Infinity;
@@ -696,11 +616,10 @@ const maxPrice = parseFloat(document.querySelectorAll('.price-input')[1].value) 
 const products = document.querySelectorAll('.product-card');
 
 products.forEach(product => {
-// Eğer kategori filtresinden dolayı zaten gizliyse, fiyat filtresini atla
 if (product.style.display === 'none') return;
 
 const priceText = product.querySelector('.product-price').textContent;
-const price = parseFloat(priceText.replace(/[^\d.]/g, '')); // TL gibi karakterleri kaldır
+const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
 
 if (price >= minPrice && price <= maxPrice) {
 product.style.display = 'block';
@@ -710,7 +629,6 @@ product.style.display = 'none';
 });
 }
 
-// Sıralama filtresi
 function setupSortingFilter() {
 const sortSelect = document.querySelector('.sort-select');
 if (!sortSelect) return;
@@ -720,7 +638,6 @@ const sortBy = this.value;
 const products = Array.from(document.querySelectorAll('.product-card'));
 const productsGrid = document.querySelector('.products-grid');
 
-// Ürünleri seçilen kritere göre sırala
 products.sort((a, b) => {
 if (sortBy === 'price-low') {
 const priceA = parseFloat(a.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
@@ -732,7 +649,6 @@ const priceA = parseFloat(a.querySelector('.product-price').textContent.replace(
 const priceB = parseFloat(b.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
 return priceB - priceA;
 }
-// Diğer sıralama kriterleri için (popular, new) şimdilik ID'ye göre sırala
 else {
 const idA = a.querySelector('.add-to-cart-btn').dataset.id;
 const idB = b.querySelector('.add-to-cart-btn').dataset.id;
@@ -740,12 +656,10 @@ return idA - idB;
 }
 });
 
-// Sıralanmış ürünleri DOM'a ekle
 products.forEach(product => productsGrid.appendChild(product));
 });
 }
 
-// Mobil cihazda güvenilir çalışacak ürün yükleme fonksiyonu
 function loadProductsFromAdmin() {
 console.log("Ürünler yükleniyor...");
 const productsGrid = document.querySelector('.products-grid');
@@ -755,12 +669,9 @@ console.error("Ürün grid bulunamadı");
 return;
 }
 
-// Yükleniyor göstergesi ekle
 productsGrid.innerHTML = '<div class="loading" style="text-align:center; padding:30px; font-size:18px;">Ürünler yükleniyor...</div>';
 
-// Temel ürün verileri - her cihazda çalışacak kadar basit
 const basicProducts = [
-// Seramik ürünleri
 {
 id: 101,
 name: 'Statiuario Goya Yer Seramiği',
@@ -1498,23 +1409,22 @@ description: 'Duru Rimless Klozet + Bella Rezervuar + Duru PP Soft Kapak + Damla
 image: 'images/turkuazduru.png'
 },
 
-// Daha fazla ürünü elleriyle ekleyin veya otomatik oluşturun
+
 ];
-// Gecikmeyle ekle - mobil cihazlarda daha güvenilir
+
 setTimeout(() => {
 try {
-productsGrid.innerHTML = ''; // Temizle
+productsGrid.innerHTML = ''; 
 
 basicProducts.forEach(product => {
 const card = document.createElement('div');
 card.className = 'product-card';
 
-// Kategori adını ekleyin (filtre için gerekli)
+
 card.setAttribute('data-category', product.categoryName.toLowerCase().includes('seramik') ? 'seramik' : 
 product.categoryName.toLowerCase().includes('banyo') ? 'banyo' :
 product.categoryName.toLowerCase().includes('mutfak') ? 'mutfak' : 'diger');
 
-// Daha basit, hızlı yüklenen kart yapısı
 card.innerHTML = `
        <div class="product-image">
            <img src="${product.image}" alt="${product.name}" loading="lazy">
@@ -1543,8 +1453,6 @@ productsGrid.innerHTML = '<div class="error" style="text-align:center; padding:2
 }, 500);
 }
 
-
-// Hızlı bakış açma fonksiyonu
 function openQuickView(button) {
 const productCard = button.closest('.product-card');
 const modal = document.getElementById('product-modal');
@@ -1564,36 +1472,34 @@ document.body.style.overflow = 'hidden';
 }
 }
 }
-// Filtre görünürlüğünü kontrol et
 function checkFilterVisibility() {
 const filterSection = document.querySelector('.filter-section');
 const productsGrid = document.querySelector('.products-grid');
 
 if (!filterSection || !productsGrid) return;
 
-// Mobil cihazlarda filtre bölümü görünürlüğünü kontrol et
 const isMobile = window.innerWidth <= 768;
 
 if (isMobile) {
 console.log('Mobil cihaz: Filtreler kontrol ediliyor');
-// Filtre bölümünün görünür olduğunu doğrula
+
 filterSection.style.display = 'block';
-// Genişliğini ayarla
+
 filterSection.style.width = '100%';
 }
 }
-// Ürün kartlarının yüksekliklerini eşitle
+
 function normalizeProductCardHeights() {
-// Tüm ürün kartlarını seç
+
 const productCards = document.querySelectorAll('.product-card');
 if (!productCards.length) return;
 
-// Önce tüm yükseklikleri sıfırla
+
 productCards.forEach(card => {
 card.style.height = 'auto';
 });
 
-// Satır bazında grupla ve yükseklikleri eşitle
+
 const grid = document.querySelector('.products-grid');
 if (!grid) return;
 
@@ -1603,7 +1509,7 @@ const cardWidth = productCards[0].offsetWidth;
 const gridWidth = grid.clientWidth;
 const cardsPerRow = Math.floor(gridWidth / (cardWidth + gap));
 
-// Her satırı grupla ve yükseklikleri eşitle
+
 for (let i = 0; i < productCards.length; i += cardsPerRow) {
 const rowCards = Array.from(productCards).slice(i, i + cardsPerRow);
 const maxHeight = Math.max(...rowCards.map(card => card.scrollHeight));
@@ -1614,7 +1520,6 @@ card.style.height = `${maxHeight}px`;
 }
 }
 
-// Ürünleri yükleme fonksiyonu - bu fonksiyonu bulun ve güncelleyin
 function loadProducts(products, container) {
 container.innerHTML = '';
 
@@ -1627,7 +1532,6 @@ products.forEach(product => {
 const productCard = document.createElement('div');
 productCard.classList.add('product-card');
 
-// BU KISMI DEĞİŞTİRİN - İncele butonu ekleyin
 productCard.innerHTML = `
            <div class="product-image">
                <img src="${product.image}" alt="${product.name}">
@@ -1645,7 +1549,6 @@ productCard.innerHTML = `
 container.appendChild(productCard);
 });
 
-// Event listener'ları ekleyin
 document.querySelectorAll('.add-to-cart-btn').forEach(button => {
 button.addEventListener('click', function() {
 const productId = parseInt(this.dataset.id);
@@ -1655,7 +1558,7 @@ addToCart(productId);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-// Elements
+
 const elements = {
 addToCartButtons: document.querySelectorAll('.add-to-cart-btn'),
 cartCount: document.getElementById('cart-count'),
@@ -1666,42 +1569,41 @@ contactForm: document.getElementById('contactForm'),
 loginForm: document.getElementById('loginForm'),
 themeToggle: document.getElementById('theme-toggle')
 };
-// Mobil menü kurulumu
+
 setupMobileMenu();
-// Önce template'leri yükle
+
 Promise.all([
 loadTemplate('header'),
 loadTemplate('footer')
 ]).then(() => {
-// Tema kontrolü ve sepet sayısı güncelleme
+
 updateCartCount();
 initTheme();
 
-// Sayfa türüne göre gerekli fonksiyonları çağır
+
 if (document.querySelector('.products-grid')) {
-// Ürünler sayfası
+
 loadProductsFromAdmin();
 
-// Ürünler yüklendikten sonra çalışacak fonksiyonlar
 setTimeout(() => {
 setupCategoryFilter();
 setupPriceFilter();
 setupSortingFilter();
 initProductModal();
 normalizeProductCardHeights();
-}, 300); // Ürünlerin yüklenmesi için biraz daha uzun süre bekleyin
+}, 300);
 } 
 else if (document.querySelector('.hero-slider')) {
-// Ana sayfa
+
 initSlider();
 displayFeaturedProducts();
 } 
 else if (document.querySelector('.product-detail-page')) {
-// Ürün detay sayfası
+
 loadProductDetails();
 }
 
-// Harita varsa haritayı yükle
+
 if (document.getElementById('map')) {
 initMap();
 }
@@ -1711,21 +1613,19 @@ initMap();
 console.error('Template yükleme hatası:', error);
 showNotification('Sayfa içerikleri yüklenirken hata oluştu', 'error');
 });
-// Mobil debug
+
 console.log("Sayfa yüklendi");
 
 
-// Öne çıkan ürünleri göster
+
 function displayFeaturedProducts() {
 const featuredProductsContainer = document.querySelector('.featured-products .fixed-grid-3');
 if (!featuredProductsContainer) return;
 
 const products = JSON.parse(localStorage.getItem('products')) || [];
 
-// Son eklenen 3-6 ürünü göster
 let featuredProducts = products.slice(-6).reverse();
 
-// Eğer localStorage'da ürün yoksa, varsayılan ürünleri kullan
 if (featuredProducts.length === 0) {
 featuredProducts = [
 {
@@ -1781,7 +1681,6 @@ featuredProductsContainer.innerHTML = featuredProducts.map(product => `
                </div>
            `).join('');
 
-// Yeni eklenen sepete ekle butonlarına dinleyiciler ekle
 featuredProductsContainer.querySelectorAll('.add-to-cart-btn').forEach(button => {
 button.addEventListener('click', function() {
 addToCart(this);
@@ -1791,7 +1690,6 @@ addToCart(this);
 }
 
 
-// Bildirim gösterme fonksiyonu
 function showNotification(message, type = 'info') {
 const notification = document.createElement('div');
 notification.className = `notification ${type}`;
@@ -1799,12 +1697,12 @@ notification.textContent = message;
 
 document.body.appendChild(notification);
 
-// Görünür yap
+
 setTimeout(() => {
 notification.classList.add('show');
 }, 10);
 
-// Kaldır
+
 setTimeout(() => {
 notification.classList.remove('show');
 setTimeout(() => {
@@ -1813,11 +1711,6 @@ notification.remove();
 }, 3000);
 }
 
-
-
-
-
-// Cart Functions
 function updateCartCount() {
 try {
 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -2011,16 +1904,14 @@ showNotification(`${templateName} yüklenemedi`, 'error');
 }
 }
 
-// DOMContentLoaded event dinleyici içinde:
 Promise.all([
 loadTemplate('header'),
 loadTemplate('footer')
 ]).then(() => {
 updateCartCount();
 
-// Önce sayfanın türünü kontrol edin
 if (document.querySelector('.products-grid')) {
-// Sadece ürünler sayfasındaysak bu fonksiyonları çağırın
+
 loadProductsFromAdmin();
 setTimeout(() => {
 setupCategoryFilter();
@@ -2030,14 +1921,13 @@ initProductModal();
 normalizeProductCardHeights();
 }, 100);
 } else if (document.querySelector('.hero-slider')) {
-// Ana sayfadaysak slider'ı başlatın
+
 initSlider();
 }
 }).catch(() => {
 showNotification('Şablon yükleme hatası', 'error');
 });
 
-// Event Binding
 elements.addToCartButtons.forEach(button =>
 button.addEventListener('click', () => addToCart(button))
 );
