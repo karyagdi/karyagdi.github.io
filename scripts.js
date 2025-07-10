@@ -1,27 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
     const seoConfigs = {
-        'index': {
-            title: 'Onur İnşaat - Afyonkarahisar İnşaat Malzemeleri | Ana Sayfa',
-            description: '25+ yıllık deneyimle Afyonkarahisar\'da kaliteli inşaat malzemeleri. Seramik, banyo, mutfak bataryaları ve daha fazlası.',
-            keywords: 'onur inşaat, afyonkarahisar inşaat, seramik, banyo bataryası, mutfak bataryası'
-        },
-        'kategoriler': {
-            title: 'Kategoriler - Onur İnşaat | Afyonkarahisar İnşaat Malzemeleri',
-            description: 'Seramik, banyo bataryaları, mutfak bataryaları, klozet ve lavabo kategorilerinde kaliteli ürünler.',
-            keywords: 'onur inşaat kategoriler, seramik afyon, banyo bataryası, mutfak bataryası, klozet'
-        },
-        'urunler': {
-            title: 'Ürünler - Onur İnşaat | Afyonkarahisar İnşaat Malzemeleri',
-            description: 'Binlerce çeşit kaliteli inşaat malzemesi. Uygun fiyatlar, hızlı teslimat, garanti.',
-            keywords: 'inşaat malzemeleri, seramik çeşitleri, banyo ürünleri, mutfak bataryası'
-        },
-        'iletisim': {
-            title: 'İletişim - Onur İnşaat | Afyonkarahisar',
-            description: 'Onur İnşaat iletişim bilgileri, adres, telefon, harita. Afyonkarahisar\'da 25 yıldır hizmetinizdeyiz.',
-            keywords: 'onur inşaat iletişim, afyonkarahisar adres, telefon'
-        }
-    };
+    'index': {
+        title: 'Onur İnşaat - Afyonkarahisar İnşaat Malzemeleri | 25 Yıllık Deneyim',
+        description: '25+ yıllık deneyimle Afyonkarahisar\'da kaliteli inşaat malzemeleri. Onur İnşaat güvencesiyle seramik, banyo, mutfak bataryaları.',
+        keywords: 'onur inşaat, afyonkarahisar inşaat, seramik, banyo bataryası, mutfak bataryası'
+    },
+    'kategoriler': {
+        title: 'Kategoriler - Onur İnşaat | Afyonkarahisar Seramik Banyo Mutfak',
+        description: 'Onur İnşaat kategoriler: Seramik, banyo bataryaları, mutfak bataryaları, klozet ve lavabo. 25 yıldır Afyonkarahisar.',
+        keywords: 'onur inşaat kategoriler, seramik afyon, banyo bataryası, mutfak bataryası, klozet'
+    },
+    'urunler': {
+        title: 'Ürünler - Onur İnşaat | Afyonkarahisar İnşaat Malzemeleri Kataloğu',
+        description: 'Onur İnşaat ürün kataloğu. Binlerce çeşit kaliteli inşaat malzemesi. Uygun fiyatlar, 25 yıllık güven.',
+        keywords: 'onur inşaat ürünler, inşaat malzemeleri, seramik çeşitleri, banyo ürünleri'
+    },
+    'iletisim': {
+        title: 'İletişim - Onur İnşaat | Afyonkarahisar Adres Telefon Harita',
+        description: 'Onur İnşaat iletişim bilgileri: Ali & Mustafa Karyağdı. Afyonkarahisar adres, telefon, harita. 25 yıldır hizmetinizde.',
+        keywords: 'onur inşaat iletişim, afyonkarahisar adres, ali karyağdı, mustafa karyağdı'
+    },
+    'sepet': {
+        title: 'Sepetim - Onur İnşaat | Afyonkarahisar Alışveriş Sepeti',
+        description: 'Onur İnşaat alışveriş sepetiniz. Seçtiğiniz ürünleri görüntüleyin, sipariş verin. Güvenli alışveriş.',
+        keywords: 'onur inşaat sepet, alışveriş, sipariş, afyonkarahisar'
+    },
+    'favoriler': {
+        title: 'Favorilerim - Onur İnşaat | Afyonkarahisar Beğenilen Ürünler',
+        description: 'Onur İnşaat favori ürünleriniz. Beğendiğiniz ürünleri takip edin. 25 yıllık kalite güvencesi.',
+        keywords: 'onur inşaat favoriler, beğenilen ürünler, afyonkarahisar'
+    },
+    'onur': {
+        title: 'Ali & Mustafa Karyağdı - Onur İnşaat | Kurucular İletişim',
+        description: 'Onur İnşaat kurucuları Ali ve Mustafa Karyağdı. 25 yıllık deneyim, iletişim bilgileri, telefon numaraları.',
+        keywords: 'ali karyağdı, mustafa karyağdı, onur inşaat kurucular, afyonkarahisar'
+    }
+};
     if (seoConfigs[currentPage]) {
         setSEOMeta(seoConfigs[currentPage]);
     }
